@@ -37,7 +37,7 @@ int main(void)
     glewExperimental = GL_TRUE;
 
     if(glewInit() != GLEW_OK){
-        std::cout << "Glew init error" << std::endl;
+        throw std::runtime_error("Error while initializing glew");
     }
 
     std::cout << glGetString(GL_VERSION) << std::endl;

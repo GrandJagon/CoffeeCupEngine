@@ -70,7 +70,6 @@ void Renderer::init(unsigned int quadNumbers)
     }
 
     _shader->setUniformArrayInt("uTextures", 32, samplers);
-
 }
     
 

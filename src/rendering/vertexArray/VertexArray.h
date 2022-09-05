@@ -1,6 +1,5 @@
 #pragma once
 #include "../../utils/utilities.h"
-#include "../vertexBuffer/VertexBuffer.h"
 #include "../vertexBuffer/DynamicVertexBuffer.h"
 #include "../vertexBufferLayout/VertexBufferLayout.h"
 
