@@ -127,6 +127,7 @@ void Renderer::setMVP(glm::mat4 mvp)
 
 void Renderer::render()
 {   
+    GlCall(glClear(GL_COLOR_BUFFER_BIT));
 
     for(int i = 0; i < _textureSlots; i++)
     {

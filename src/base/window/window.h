@@ -16,7 +16,7 @@ class Window
         void setKeyCallBack(void (*keyCallBack) (GLFWwindow*, int, int, int, int));
         void update();
         void resize(int width, int height);
-        void close();
+        void destroy();
 
         
         GLFWwindow* getWindow() {return _window;};       

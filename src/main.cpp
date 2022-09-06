@@ -9,6 +9,8 @@
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
 
+
+
 int main(void)
 {   
 
@@ -124,3 +126,4 @@ int main(void)
     glfwTerminate();
     return 0;
 }
+

@@ -8,6 +8,7 @@
 #include <sstream>
 #include <array>
 #include <vector>
+#include <map>
 #include "../vendors/glm/glm.hpp"
 #include "../vendors/glm/gtc/matrix_transform.hpp"
 #include "../vendors/glm/gtc/type_ptr.hpp"

@@ -34,10 +34,12 @@ void Window::update()
 {
     if(glfwWindowShouldClose(_window))
     {
-        this->close();
+        this->destroy();
     }
 
     glfwSwapBuffers(_window);
+
+    glfwPollEvents();
 }
 
 void Window::resize(int width, int height)
@@ -45,7 +47,7 @@ void Window::resize(int width, int height)
     glfwSetWindowSize(_window, width, height);
 }
 
-void Window::close()
+void Window::destroy()
 {
     glfwTerminate();
     glfwDestroyWindow(_window);

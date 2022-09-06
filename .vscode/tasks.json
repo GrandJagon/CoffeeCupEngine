@@ -7,7 +7,8 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/src/main.cpp",             
+                "${workspaceFolder}/src/main.cpp",
+                "${workspaceFolder}/src/sandbox.cpp",             
                 "${workspaceFolder}/src/utils/*.cpp",
                 "${workspaceFolder}/src/rendering/geometry/*.cpp",
                 "${workspaceFolder}/src/rendering/vertexBuffer/*.cpp",
@@ -22,7 +23,7 @@
                 "${workspaceFolder}/src/vendors/stb_image/*.cpp",
                 "${workspaceFolder}/src/vendors/imgui/*.cpp",             
                 "${workspaceFolder}/src/base/window/*.cpp",
-                "${workspaceFolder}/src/game/game/*.cpp",
+                "${workspaceFolder}/src/game/*.cpp",
                 "${workspaceFolder}/src/game/gameObject/*.cpp",
                 "${workspaceFolder}/src/game/sprite/*.cpp",
                 "${workspaceFolder}/src/game/event/*.cpp",
