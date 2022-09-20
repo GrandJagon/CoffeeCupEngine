@@ -1,5 +1,8 @@
 #pragma once
+
 #include "../../utils/utilities.h"
+#include "../rendering/renderer/Renderer.h"
+#include "../game/ECS/components/spriteComponent.h"
 
 
 class Window
@@ -14,10 +17,11 @@ class Window
     public:
         void init(std::string title, int width, int height, bool fullScreen);
         void setKeyCallBack(void (*keyCallBack) (GLFWwindow*, int, int, int, int));
-        void update();
+        void endFrame();
         void resize(int width, int height);
         void destroy();
-
+        void draw(SpriteComponent &sprite);
+        void render();
         
         GLFWwindow* getWindow() {return _window;};       
         int getWidth () {return _width;};

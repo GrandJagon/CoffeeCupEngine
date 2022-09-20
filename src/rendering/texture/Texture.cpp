@@ -1,9 +1,6 @@
 #include "../../vendors/stb_image/stb_image.h"
 #include "Texture.h"
 
-unsigned int Texture::_slot = 0;
-
-
 Texture::Texture(const std::string &path) :
     m_id(0), m_filePath(path), m_buffer(nullptr), m_width(0), m_height(0), m_bitsPerPixel(0)
 {   

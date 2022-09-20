@@ -20,20 +20,7 @@ std::vector<int> defaultValidKeys = {GLFW_KEY_SPACE, GLFW_KEY_ESCAPE, GLFW_KEY_R
 int inputKey;
 
 class Game
-{
-    private:
-        // Core data members
-        std::string _title;
-        Window _window;
-        GameState _state;
-
-        // Input data members
-        std::vector<int> _validKeys;
-        std::map<int, bool> _inputKeys;
-        
-        // Ingame data members
-        std::vector<GameObject> _gameObjects;
-       
+{     
     public:
         Game(std::string title) : _title(title) {};
         ~Game();
@@ -49,11 +36,22 @@ class Game
 
         // Will probably need to be overriden as events will be different given the game
         void processEvents();
-        void update();
+        void update(float dt);
+
+        // Updates to be made once we sure the first ones are done
+        void lateUpdate();
         void render();
         void pause();
         void shutDown();
 
         // Getters
         Window getWindow() {return _window;};
+
+
+    private:
+        // Core data members
+        std::string _title;
+        Window _window;
+        GameState _state;
+        float deltaTime;
 };

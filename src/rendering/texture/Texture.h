@@ -8,7 +8,7 @@ class Texture
         std::string m_filePath;
         int m_width, m_height, m_bitsPerPixel;
         unsigned char* m_buffer;
-        static unsigned int _slot;
+        unsigned int _slotIndex;
 
     public:
         Texture() = default;

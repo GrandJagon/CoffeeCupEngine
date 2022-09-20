@@ -30,7 +30,12 @@ void Window::setKeyCallBack(void (*callback) (GLFWwindow*, int, int, int, int))
     glfwSetKeyCallback(_window, *callback);
 }
 
-void Window::update()
+void Window::draw(SpriteComponent &sprite)
+{
+    // Call renderer to draw texture here
+}
+
+void Window::endFrame()
 {
     if(glfwWindowShouldClose(_window))
     {
