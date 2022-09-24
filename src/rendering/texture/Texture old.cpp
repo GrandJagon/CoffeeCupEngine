@@ -35,7 +35,7 @@ Texture::Texture(const std::string &path) :
     // Assigning buffer data to texture
     GlCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_buffer));
 
-    // Since it is now created the texture can be unbinded for future use
+    // Since it is now create the texture can be unbinded for future use
     GlCall(glBindTexture(GL_TEXTURE_2D, 0));
 
     // Clearing the buffer
@@ -92,7 +92,7 @@ Texture::~Texture()
 
 // Binds to default texture 0
 // Most GPU have 32 slots
-// Slot value must be set accordingly in shader
+// Slot value must then be set accordingly in shader
 void Texture::bind(unsigned int slot)
 {
     GlCall(glActiveTexture(GL_TEXTURE0 + slot));

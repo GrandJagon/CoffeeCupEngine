@@ -7,7 +7,7 @@ class Scene
     private:
     
     public :
-        virtual void onCreate() = 0;
+        virtual void onCreate() = 0; 
         virtual void onUpdate(float dt) = {};
         virtual void onLateUpdate() = {};
         virtual void onDestroy() = {};
