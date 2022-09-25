@@ -1,11 +1,19 @@
 #pragma once
+
+#include "gameConstants.h"
+
 #include "../utils/utilities.h"
 #include "../base/window/window.h"
-#include "gameObject/gameObject.h"
-#include "gameConstants.h"
+
 #include "../rendering/renderer/Renderer.h"
+#include "../rendering/textureManager/textureManager.h"
 #include "../rendering/renderingConstants.h"
 
+#include "input/inputHandler.h"
+#include "scenes/sceneManager.h"
+
+// Defined in inputHandler.h
+struct Key;
 
 enum GameState
 {
@@ -14,28 +22,35 @@ enum GameState
     menu
 };
 
-std::vector<int> defaultValidKeys = {GLFW_KEY_SPACE, GLFW_KEY_ESCAPE, GLFW_KEY_RIGHT, GLFW_KEY_LEFT, GLFW_KEY_UP, GLFW_KEY_DOWN};
-
-// BEST WAY BEFORE FINDIND BETTER
-int inputKey;
-
 class Game
 {     
+    private:
+        // Singeton as it make global acces to some below data members easier t
+        static Game* _instance;
+
+        // Core data members
+        std::string _title;
+        GameState _state;
+        float _deltaTime;
+        SceneManager _sceneManager;
+
+        // Globally accessible core data members
+        Window _window;
+        InputHandler _inputHandler;
+        TextureManager _textureManager;
+        
+    
     public:
-        Game(std::string title) : _title(title) {};
+        Game();
         ~Game();
-        void init(int width, int height, std::vector<int> validKeys = defaultValidKeys);
+
+        void init(title, int width, int height);
 
         // To be used later when instantiating game class according to desired game
-        void setValidKeys(std::vector<int> validKeys) {_validKeys = validKeys;};
-        
-        // Need to find a way to pass desired events and the related way to process them
-        void setInputs();
+        void setValidKeys(std::vector<Key>);
         
         void start();
 
-        // Will probably need to be overriden as events will be different given the game
-        void processEvents();
         void update(float dt);
 
         // Updates to be made once we sure the first ones are done
@@ -44,14 +59,17 @@ class Game
         void pause();
         void shutDown();
 
+        // Singleton instance getter
+        static Game* instance() {
+            if(_instance == NULL) _instance = new Game();
+            return *_instance;
+        };
+        
         // Getters
         Window getWindow() {return _window;};
+        InputHandler getInputHandler() {return _inputHandler;};
+        TextureManager getTextureManager() {return _textureManager;};
 
 
-    private:
-        // Core data members
-        std::string _title;
-        Window _window;
-        GameState _state;
-        float deltaTime;
+    
 };

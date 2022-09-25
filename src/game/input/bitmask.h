@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdint.h>
 
 // Class that represents the state of all pressed inputs, one bit represent one input
@@ -8,10 +10,12 @@ class Bitmask
     
     public:
 
-        BitMask();
+        BitMask() : _mask(0) = default;
 
         // Returns the whole mask as 32 bits integer
         uint32_t getMask() const;
+
+        inline void setMask(const uint32_t mask) {_mask = mask;};
 
         // Returns single bit at position
         bool getBit(unsigned int position);

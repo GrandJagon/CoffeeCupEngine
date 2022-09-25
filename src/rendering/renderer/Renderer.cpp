@@ -20,9 +20,9 @@ Quad* Renderer::_quads = nullptr;
 Quad* Renderer::_currentQuad = nullptr;
 
 
-void Renderer::init(unsigned int quadNumbers)
+void Renderer::init()
 {
-    _quadNumbers = quadNumbers;
+    _quadNumbers = RenderingConst::RENDERER_QUADS;
     _maxVertices = quadNumbers * 4;
     
     _vao.init();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../utils/utilities.h"
+#include "../renderingConstants.h"
 #include "../vertexBuffer/DynamicVertexBuffer.h"
 #include "../indexBuffer/DynamicIndexBuffer.h"
 #include "../vertexArray/VertexArray.h"
@@ -32,7 +33,7 @@ class Renderer
         static unsigned int _renderCalls;
 
     public:
-        static void init(unsigned int quadNumbers);
+        static void init();
 
         static void setShader(Shader &shader);
         static void setMVP(glm::mat4 mvp);
