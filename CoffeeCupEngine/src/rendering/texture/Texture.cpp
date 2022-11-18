@@ -1,4 +1,4 @@
-#include "../../vendors/stb_image/stb_image.h"
+#include "../../../vendors/stb_image/stb_image.h"
 #include "Texture.h"
 
 Texture::Texture(const std::string &path) :

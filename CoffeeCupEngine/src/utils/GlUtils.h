@@ -9,9 +9,9 @@
 #include <array>
 #include <vector>
 #include <map>
-#include "../vendors/glm/glm.hpp"
-#include "../vendors/glm/gtc/matrix_transform.hpp"
-#include "../vendors/glm/gtc/type_ptr.hpp"
+#include "../../vendors/glm/glm.hpp"
+#include "../../vendors/glm/gtc/matrix_transform.hpp"
+#include "../../vendors/glm/gtc/type_ptr.hpp"
 
 
 #define ASSERT(x) if(!x) __builtin_trap()
