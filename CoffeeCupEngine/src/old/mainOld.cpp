@@ -2,55 +2,37 @@
 #include <cstring>
 #include "rendering/shaders/Shader.h"
 #include "rendering/renderer/Renderer.h"
-#include "../vendors/imgui/imgui.h"
-#include "../vendors/imgui/imgui_impl_glfw_gl3.h"
+#include "vendors/imgui/imgui.h"
+#include "vendors/imgui/imgui_impl_glfw_gl3.h"
 #include "utils/utilities.h"
-#include <SDL2/SDL.h>
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
 
-SDL_Window* window = nullptr;
-SDL_GLContext openGlContext = nullptr;
 
-bool sdlQuit = false; // for main loop
 
 int main(void)
 {   
-    
-    // SDL initialization
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)
-    {  
-        std::cout << "SDL could not init video subsystem" << std::endl;
+
+    GLFWwindow* window;
+
+   
+    /* Initialize the library */
+    if (!glfwInit())
         return -1;
 
-    };
 
-    // Setting SDL openGL version to 4.5
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 5);
-    
-    // Deprecated features are not allowed
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
-    // Enabling double buffering with buffer size of 24 bits
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-
-
-    // Creating window
-    window = SDL_CreateWindow("Title test", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
-
-    // Creating context
-    openGlContext = SDL_GL_CreateContext(window);
-
-    if(openGlContext == nullptr)
+    /* Create a windowed mode window and its OpenGL context */
+    window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Hello World", NULL, NULL);
+    if (!window)
     {
-        std::cout << "OpenGL context could not be created" << std::endl;
+        glfwTerminate();
         return -1;
     }
 
-
+    /* Make the window's context current */
+    GlCall(glfwMakeContextCurrent(window));
+    
     // Sets the appropriate blending function for displaying
     GlCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
     
@@ -62,7 +44,17 @@ int main(void)
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    Renderer::init();
+    //ImGui variables
+    bool show_demo_window = true;
+    bool show_another_window = false;
+    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    
+    // Initiating ImGUI
+    ImGui::CreateContext();
+    ImGui_ImplGlfwGL3_Init(window, true);
+    ImGui::StyleColorsDark();
+
+    Renderer::init(1000);
     
     // Projection matrix
     glm::mat4 proj = glm::ortho(0.0f, (float) WINDOW_WIDTH, 0.0f, (float) WINDOW_HEIGHT, -1.0f, 1.0f);
@@ -72,21 +64,9 @@ int main(void)
 
 
     /* Loop until the user closes the window */
-    while (!sdlQuit)
+    while (!glfwWindowShouldClose(window))
     {   
 
-        // SDL input handling
-        SDL_Event e;
-
-        while(SDL_PollEvent(&e) != 0)
-        {
-            if(e.type == SDL_QUIT)
-            {
-                std::cout << "Application temrinated by user" << std::endl;
-                sdlQuit = true;
-            }
-        }
-        
         // Translation moves camera such as negative -> left,  positive -> right
         glm::mat4 view = glm::translate(glm::mat4(1.0f), translation);
 
@@ -99,10 +79,9 @@ int main(void)
 
         //Sets MVP
         Renderer::setMVP(mvp);
-        
 
-        // Draw
-        /*for(int i = 0; i < 20; i++)
+
+        for(int i = 0; i < 20; i++)
         {    
             for(int j = 0; j < 20; j++)
             {
@@ -117,22 +96,34 @@ int main(void)
 
         Renderer::render();
 
-        Renderer::endFrame(); */
+        Renderer::endFrame();
         
-        
-        // Swaps buffer
-        SDL_GL_SwapWindow(window);
+        ImGui_ImplGlfwGL3_NewFrame();
 
-     
+
+        // ImGui window
+         {
+            ImGui::SliderFloat3("Translation x", &translation.x, -200.0f, (float) WINDOW_WIDTH);
+            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+            ImGui::Text("Number of batches : %.1i" , Renderer::renderCalls());
+        }
+       
+        // Rendering Im Gui
+        ImGui::Render();
+        ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+        
+        /* Swap front and back buffers */
+        GlCall(glfwSwapBuffers(window));
+
+        /* Poll for and process events */
+        GlCall(glfwPollEvents());
     }
     
     // Disposing of ImGui objects
     ImGui_ImplGlfwGL3_Shutdown();
     ImGui::DestroyContext();
-    
-    // Terminating SDL
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+
+    glfwTerminate();
     return 0;
 }
 

@@ -23,7 +23,7 @@ Quad* Renderer::_currentQuad = nullptr;
 void Renderer::init()
 {
     _quadNumbers = RenderingConst::RENDERER_QUADS;
-    _maxVertices = quadNumbers * 4;
+    _maxVertices = _quadNumbers * 4;
     
     _vao.init();
     _vb.init(_maxVertices);
@@ -131,7 +131,7 @@ void Renderer::render()
 
     for(int i = 0; i < _textureSlots; i++)
     {
-        _textures[i].bind(i);
+       // _textures[i].bind(i);
     }
     
     _shader->bind();

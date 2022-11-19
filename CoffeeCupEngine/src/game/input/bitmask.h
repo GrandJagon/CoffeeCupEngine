@@ -6,16 +6,16 @@
 class Bitmask
 {
     private:
-        uint32_t _mask;
+        uint32_t _mask = 0;
     
     public:
 
-        BitMask() : _mask(0) = default;
+        Bitmask() = default;
 
         // Returns the whole mask as 32 bits integer
         uint32_t getMask() const;
 
-        inline void setMask(const uint32_t mask) {_mask = mask;};
+        inline void setMask(const Bitmask mask) {_mask = mask.getMask();};
 
         // Returns single bit at position
         bool getBit(unsigned int position);
@@ -25,4 +25,4 @@ class Bitmask
 
         // Sets the whole mask to 0
         void clear();
-}
+};

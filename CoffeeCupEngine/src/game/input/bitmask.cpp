@@ -12,7 +12,7 @@ bool Bitmask::getBit(unsigned int position)
     return (_mask & (1 << position) != 0);
 }
 
-bool Bitmask::setBit(unsigned int position, bool state)
+void Bitmask::setBit(unsigned int position, bool state)
 {
     if(state = 1)
     {

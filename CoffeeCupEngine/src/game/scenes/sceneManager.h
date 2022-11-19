@@ -7,10 +7,10 @@ class SceneManager
 {
     private:
         std::vector<Scene> _scenes;
-        Scene _currentScene;
+        Scene *_currentScene;
     
     public:
-        void addScene(Scene scene);
+        void addScene(Scene *scene);
         
         void nextScene();
         
@@ -18,4 +18,4 @@ class SceneManager
         void update();
         void lateUpdate();
         void draw(Window &window);
-}
+};

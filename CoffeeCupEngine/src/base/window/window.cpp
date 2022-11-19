@@ -33,6 +33,7 @@ void Window::setKeyCallBack(void (*callback) (GLFWwindow*, int, int, int, int))
 void Window::draw(SpriteComponent &sprite)
 {
     // Call renderer to draw texture here
+    // Pass srprite as argument to avoid circular dependency -> no method needed and can forward declare
 }
 
 void Window::endFrame()

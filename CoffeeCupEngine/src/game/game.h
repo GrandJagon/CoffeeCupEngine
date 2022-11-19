@@ -44,7 +44,7 @@ class Game
         Game();
         ~Game();
 
-        void init(title, int width, int height);
+        void init(std::string title, int width, int height);
 
         // To be used later when instantiating game class according to desired game
         void setValidKeys(std::vector<Key>);
@@ -52,6 +52,8 @@ class Game
         void start();
 
         void update(float dt);
+
+        void processEvents();
 
         // Updates to be made once we sure the first ones are done
         void lateUpdate();
@@ -62,7 +64,7 @@ class Game
         // Singleton instance getter
         static Game* instance() {
             if(_instance == NULL) _instance = new Game();
-            return *_instance;
+            return _instance;
         };
         
         // Getters

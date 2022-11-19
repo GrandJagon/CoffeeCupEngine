@@ -2,10 +2,9 @@
 #include "Texture.h"
 
 Texture::Texture(const std::string &path) :
-    m_id(0), m_filePath(path), m_buffer(nullptr), m_width(0), m_height(0), m_bitsPerPixel(0)
+    m_id(0), m_filePath(path), m_slot(-1), m_width(0), m_height(0), m_bitsPerPixel(0)
 {   
-    std::cout << "Texture created with slot " << _slot;
-    // Image loaded inverted so needs to flip it
+   /* // Image loaded inverted so needs to flip it
     stbi_set_flip_vertically_on_load(1);
 
     // Loading image as a buffer of bytes
@@ -44,14 +43,12 @@ Texture::Texture(const std::string &path) :
         stbi_image_free(m_buffer);
     }
 
-    _slot += 1;
+    _slot += 1;*/
 }
 
 Texture::Texture(void *color, int width, int height) :
-    m_id(0), m_bitsPerPixel(0), m_width(width), m_height(height)
+    m_id(0), m_slot(-1), m_bitsPerPixel(0), m_width(width), m_height(height)
 {   
-
-    std::cout << "Color texture created with slot " << _slot;
 
     // Creting texture and binding it
     GlCall(glGenTextures(1, &m_id));
@@ -79,24 +76,20 @@ Texture::Texture(void *color, int width, int height) :
 
     // Since it is now create the texture can be unbinded for future use
     GlCall(glBindTexture(GL_TEXTURE_2D, 0));
-
-    _slot += 1;
 }  
 
 Texture::~Texture()
 {
     GlCall(glDeleteTextures(1, &m_id));
-    std::cout << "Texture destroyed " << _slot << std::endl;
-    _slot -= 1;
 }
 
 // Binds to default texture 0
 // Most GPU have 32 slots
 // Slot value must be set accordingly in shader
-void Texture::bind(unsigned int slot)
+void Texture::bind()
 {
-    GlCall(glActiveTexture(GL_TEXTURE0 + slot));
-    GlCall(glBindTexture(GL_TEXTURE_2D, m_id));
+
+ 
 }
 
 

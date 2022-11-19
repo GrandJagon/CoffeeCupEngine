@@ -15,4 +15,4 @@ class Entity
         virtual void lateUpdate();
         virtual void draw(Window &window); 
  
-}
+};

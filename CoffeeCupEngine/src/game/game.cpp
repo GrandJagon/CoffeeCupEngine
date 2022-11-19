@@ -21,8 +21,10 @@ void Game::init(std::string title, int width, int height)
     std::cout << glGetString(GL_VERSION) << std::endl;
 
     _window = Window();
-    _window.init(_title, width, height, GameConstants::FULLSCREEN);
-    _window.setKeyCallBack(&_inputHandler.update);
+
+    // TO BE REMADE WITH SDL
+    //_window.init(_title, width, height, GameConstants::FULLSCREEN);
+    //_window.setKeyCallBack(&_inputHandler.update);
 
     // Initialize the renderer with the quad numbers specified in the rendering constants
     Renderer::init();
@@ -33,7 +35,7 @@ Game::~Game()
     _window.destroy();
 }
 
-void setValidKeys(std::vector<Key> keys)
+void Game::setValidKeys(std::vector<Key> keys)
 {
     _inputHandler.setValidKeys(keys);
 }

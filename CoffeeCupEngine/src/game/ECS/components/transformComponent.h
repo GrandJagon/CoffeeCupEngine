@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../utils/utilities.h"
+#include "../../../utils/utilities.h"
 
 class TransformComponent : public Component 
 {
@@ -17,4 +17,4 @@ class TransformComponent : public Component
         void addY(float y);
 
     
-}
+};

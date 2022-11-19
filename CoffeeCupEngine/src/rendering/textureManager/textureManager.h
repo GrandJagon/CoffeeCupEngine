@@ -7,10 +7,13 @@
 class TextureManager
 {
     private:
-        static std::unordered_map<int, Texture> _textures;
-        static int _slotIndex;
-
+        std::unordered_map<int, Texture> _textures;
+        int _slotIndex = 0;
+        
     public:
-        static Texture loadTexture(const &path);
-        static Texture loadTexture(void *color, int width, int height);
-}
+        Texture loadTexture(const std::string &path);
+        Texture loadTexture(void *color, int width, int height);
+        void bindTexture(unsigned int textId);
+        void unbindTexture(unsigned int textId);
+        void unbindAll();
+};

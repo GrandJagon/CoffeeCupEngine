@@ -33,4 +33,4 @@ class InputHandler
 
         // Key is pressed this frame and the previous one
         bool isKeyDown(Key key);
-}
+};

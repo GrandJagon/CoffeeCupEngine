@@ -1,9 +1,10 @@
 #pragma once
 
 #include "../../utils/utilities.h"
-#include "../rendering/renderer/Renderer.h"
-#include "../game/ECS/components/spriteComponent.h"
+#include "../../rendering/renderer/Renderer.h"
 
+// Forward declared to avoir circular dependency, no method needed
+class SpriteComponent;
 
 class Window
 { 
