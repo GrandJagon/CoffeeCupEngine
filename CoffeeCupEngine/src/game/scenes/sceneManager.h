@@ -1,16 +1,18 @@
 #pragma once
 
+#include <memory>
+
 #include "scene.h"
 #include "../../base/window/window.h"
 
 class SceneManager
 {
     private:
-        std::vector<Scene> _scenes;
-        Scene *_currentScene;
+        std::vector<std::shared_ptr<Scene>> _scenes;
+        std::shared_ptr<Scene> _currentScene;
     
     public:
-        void addScene(Scene *scene);
+        void addScene(std::shared_ptr<Scene> scene);
         
         void nextScene();
         
