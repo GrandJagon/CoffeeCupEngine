@@ -1,25 +1,5 @@
 #include "Renderer.h"
 
-// Static class members initialization
-unsigned int Renderer::_maxVertices = 0;
-unsigned int Renderer::_quadNumbers = 0;
-unsigned int Renderer::_vertexOffset = 0;
-unsigned int Renderer::_renderCalls = 0;
-
-unsigned int Renderer::_textureSlots = 0;
-std::array<Texture, 32> Renderer::_textures;
-
-unsigned int drawCalls = 0;
-
-VertexArray Renderer::_vao;
-DynamicVertexBuffer Renderer::_vb;
-DynamicIndexBuffer Renderer::_ib;
-Shader* Renderer::_shader = nullptr;
-
-Quad* Renderer::_quads = nullptr;
-Quad* Renderer::_currentQuad = nullptr;
-
-
 void Renderer::init()
 {
     _quadNumbers = RenderingConst::RENDERER_QUADS;

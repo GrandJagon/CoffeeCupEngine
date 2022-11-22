@@ -13,49 +13,55 @@
 class Renderer
 {
     private:
-        static VertexArray _vao;
-        static DynamicVertexBuffer _vb;
-        static DynamicIndexBuffer _ib;
-        static Shader* _shader;
-        static unsigned int _maxVertices;
-        static unsigned int _quadNumbers;
-        static unsigned int _vertexOffset;
+        VertexArray _vao;
+        DynamicVertexBuffer _vb;
+        DynamicIndexBuffer _ib;
+        Shader* _shader;
+        unsigned int _maxVertices;
+        unsigned int _quadNumbers;
+        unsigned int _vertexOffset;
 
         // Actual vertex data stored here before being sent to GPU
         // Needs to be stored in order to update transform for each object
-        static Quad* _quads;
-        static Quad* _currentQuad;
+        Quad* _quads;
+        Quad* _currentQuad;
         
-        static std::array<Texture, 32> _textures;
-        static unsigned int _textureSlots;
+        std::array<Texture, 32> _textures;
+        unsigned int _textureSlots;
 
         // Offset of last vertex added to buffer, should be eqauel to ib count
-        static unsigned int _renderCalls;
+        unsigned int _renderCalls;
 
     public:
-        static void init();
+        Renderer() {std::cout << "Renderer instnce created" << std::endl;};
+        ~Renderer() {};
+        
+        static Renderer* instance() {
+            static Renderer instance;
+            return &instance;
+        }
+        
+        void init();
 
-        static void setShader(Shader &shader);
-        static void setMVP(glm::mat4 mvp);
+        void setShader(Shader &shader);
+        void setMVP(glm::mat4 mvp);
 
         // Starts a new batch, should be called whenever the first one is full
-        static void newBatch();
+        void newBatch();
 
         // Renders all quads on screen
-        static void render();
+        void render();
         
         // Resets stats for new frame
-        static void endFrame();
+        void endFrame();
         
         // Free all heap memory
-        static void shutDown();
+        void shutDown();
 
-        inline static unsigned int renderCalls() { return _renderCalls;};
+        inline unsigned int renderCalls() { return _renderCalls;};
  
-        static void draw(glm::vec3 position, glm::vec2 size, float textId);
-        static void draw(glm::vec3 position, glm::vec2 size, glm::vec4 color);
-        static void draw(glm::vec2 position, glm::vec2 size, float textId);
-        static void draw(glm::vec2 position, glm::vec2 size, glm::vec4 color);
-        
-        
+        void draw(glm::vec3 position, glm::vec2 size, float textId);
+        void draw(glm::vec3 position, glm::vec2 size, glm::vec4 color);
+        void draw(glm::vec2 position, glm::vec2 size, float textId);
+        void draw(glm::vec2 position, glm::vec2 size, glm::vec4 color);        
 };

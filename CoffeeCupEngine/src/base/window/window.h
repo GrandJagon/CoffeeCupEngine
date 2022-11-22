@@ -9,7 +9,7 @@ class SpriteComponent;
 class Window
 { 
     private:
-        GLFWwindow* _window;
+        SDL_Window *_window;
         std::string _title;
         int _width;
         int _height;
@@ -17,14 +17,14 @@ class Window
 
     public:
         void init(std::string title, int width, int height, bool fullScreen);
-        void setKeyCallBack(void (*keyCallBack) (GLFWwindow*, int, int, int, int));
+        void setKeyCallBack(void (*keyCallBack) (SDL_Window*, int, int, int, int));
         void endFrame();
         void resize(int width, int height);
         void destroy();
         void draw(SpriteComponent &sprite);
         void render();
         
-        GLFWwindow* getWindow() {return _window;};       
+        SDL_Window* getWindow() {return _window;};       
         int getWidth () {return _width;};
         int getHeight () {return _height;};
         int isFullScreen () {return _fullScreen;};

@@ -91,7 +91,7 @@ unsigned int Shader::compileShader(std::string &source, unsigned int type)
 
 unsigned int Shader::createShader(std::string &vertexShader, std::string &fragmentShader)
 {
-        // Creates a new program and returns its unique uint identifier
+    // Creates a new program and returns its unique uint identifier
     GlCall(unsigned int program = glCreateProgram());
 
     // reates a shader objet for both arguments strings

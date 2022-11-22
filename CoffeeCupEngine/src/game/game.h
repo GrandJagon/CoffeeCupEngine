@@ -25,24 +25,29 @@ enum GameState
 class Game
 {     
     private:
-        // Singeton as it make global acces to some below data members easier t
-        static Game* _instance;
-
         // Core data members
         std::string _title;
         GameState _state;
         float _deltaTime;
         SceneManager _sceneManager;
 
-        // Globally accessible core data members
+        // Singletons core members
+        // Listed here for clarity but accessible globally through Class:insance()
         Window _window;
-        InputHandler _inputHandler;
-        TextureManager _textureManager;
+        InputHandler *_inputHandler;
+        TextureManager *_textureManager;
+        Renderer *_renderer;
         
     
     public:
-        Game();
+        Game() {};
         ~Game();
+
+        // Singleton instance getter
+        static Game* instance() {
+            static Game instance;
+            return &instance;
+        };
 
         void init(std::string title, int width, int height);
 
@@ -61,17 +66,8 @@ class Game
         void pause();
         void shutDown();
 
-        // Singleton instance getter
-        static Game* instance() {
-            if(_instance == NULL) _instance = new Game();
-            return _instance;
-        };
+    
         
         // Getters
         Window getWindow() {return _window;};
-        InputHandler getInputHandler() {return _inputHandler;};
-        TextureManager getTextureManager() {return _textureManager;};
-
-
-    
 };
