@@ -5,24 +5,30 @@
 class Texture
 {
     private:
-        unsigned int m_id;
+        unsigned int _id;
 
-        // SlotId assigned byt textureManager, -1 if not bound
-        int m_slot;
-        std::string m_filePath;
-        int m_width, m_height, m_bitsPerPixel;
+        // index assigned byt textureManager, -1 if not bound
+        int _index = -1;
+        std::string _filePath;
+        int _width, _height, _bitsPerPixel;
 
     public:
-        Texture() = default;
-        // Creates a texture shader from a file path
-        Texture(const std::string &path);
-        // Creates a color shader
-        Texture(void *color, int width, int height);
-        ~Texture();
-        void bind();
-        void unbind();
+        // File init
+        Texture(unsigned int &id, std::string filePath,  int width, int height, int bitsPerPixel)
+            : _id(id), _filePath(filePath), _width(width), _height(height), _bitsPerPixel(bitsPerPixel) {};
 
-        inline const int getWidth() {return m_width;}
-        inline const int getHeight() {return m_height;}
+        // Color init  
+        Texture(unsigned int id, int width, int height, int bitsPerPixel)
+            : _id(id), _filePath(filePath), _width(width), _height(height), _bitsPerPixel(bitsPerPixel) {};
+
+
+        ~Texture();
+
+        inline const int getWidth() {return _width;}
+        inline const int getHeight() {return _height;}
+        inline const unsigned int getId() {return _id;}
+
+        inline const int getIndex() {return _index;}
+        inline void setIndex(const int index) {_index = index;};
 
 };
