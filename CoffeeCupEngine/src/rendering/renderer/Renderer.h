@@ -8,32 +8,32 @@
 #include "../vertexBufferLayout/VertexBufferLayout.h"
 #include "../shaders/Shader.h"
 #include "../texture/Texture.h"
+#include "../textureManager/textureManager.h"
+
+#include <memory>
 
 
 class Renderer
 {
     private:
-        VertexArray _vao;
-        DynamicVertexBuffer _vb;
-        DynamicIndexBuffer _ib;
-        Shader* _shader;
+        std::shared_ptr<VertexArray> _vao;
+        std::shared_ptr<DynamicVertexBuffer> _vb;
+        std::shared_ptr<DynamicIndexBuffer> _ib;
+        std::shared_ptr<Shader> _shader;
         unsigned int _maxVertices;
         unsigned int _quadNumbers;
         unsigned int _vertexOffset;
 
-        // Actual vertex data stored here before being sent to GPU
+        // Actual vertex data stored here before being sent to GPU, 
         // Needs to be stored in order to update transform for each object
-        Quad* _quads;
-        Quad* _currentQuad;
-        
-        std::array<Texture, 32> _textures;
-        unsigned int _textureSlots;
+        Quad* _quads;         // array
+        Quad* _currentQuad;   // ptr
 
         // Offset of last vertex added to buffer, should be eqauel to ib count
         unsigned int _renderCalls;
 
     public:
-        Renderer() {std::cout << "Renderer instnce created" << std::endl;};
+        Renderer() {std::cout << "Renderer instance created" << std::endl;};
         ~Renderer() {};
         
         static Renderer* instance() {

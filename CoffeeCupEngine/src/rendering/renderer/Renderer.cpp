@@ -2,14 +2,18 @@
 
 void Renderer::init()
 {
+    _vao = std::make_shared<VertexArray> (VertexArray());
+    _vb = std::make_shared<DynamicVertexBuffer> (DynamicVertexBuffer());
+    _ib = std::make_shared<DynamicIndexBuffer> (DynamicIndexBuffer());
+    
     _quadNumbers = RenderingConst::RENDERER_QUADS;
     _maxVertices = _quadNumbers * 4;
     
-    _vao.init();
-    _vb.init(_maxVertices);
-    _ib.init(_quadNumbers);
+    _vao->init();
+    _vb->init(_maxVertices);
+    _ib->init(_quadNumbers);
 
-    _vao.bind();
+    _vao->bind();
     
     // Defining layout of vertex buffer data
     VertexBufferLayout layout;
@@ -24,23 +28,20 @@ void Renderer::init()
     );
     
     // Binding vertex buffer and layout to vertex array
-    _vao.addBuffer(_vb, layout);
+    _vao->addBuffer(_vb, layout);
     
-    // Initiating vertex data in the heap
+    // Initiating vertex data in the heap and ptr to first element
     _quads = new Quad[_quadNumbers];
     _currentQuad = _quads;
 
     std::string shaderPath = "../res/shaders/Texture.shader";
 
-    _shader = new Shader;
+    _shader = std::make_shared<Shader> (Shader());
     _shader->init(shaderPath);
 
     // White texture at slot 0
     uint32_t white = 0xffffffff;
-    Texture *whiteTexture = new Texture(&white, 1, 1);
-
-    _textures[0] = *whiteTexture;
-    _textureSlots = 1;
+    TextureManager::instance()->createTexture(&white, 1, 1);
 
     int32_t samplers[32];
 
@@ -72,7 +73,7 @@ void Renderer::draw(glm::vec3 position, glm::vec2 size, float textId)
 
     _currentQuad->setData(position, size, textId);
     _currentQuad++;
-    _ib.setCount(_ib.getCount() + 6);
+    _ib->setCount(_ib->getCount() + 6);
     _vertexOffset += 4;
 }
 
@@ -86,7 +87,7 @@ void Renderer::draw(glm::vec3 position, glm::vec2 size, glm::vec4 color)
 
     _currentQuad->setData(position, size, color);
     _currentQuad++;
-    _ib.setCount(_ib.getCount() + 6);
+    _ib->setCount(_ib->getCount() + 6);
     _vertexOffset += 4;
 }
 
@@ -109,7 +110,7 @@ void Renderer::render()
 {   
     GlCall(glClear(GL_COLOR_BUFFER_BIT));
 
-    for(int i = 0; i < _textureSlots; i++)
+    for(int i = 0; i < TextureManager::instance()->currIndex(); i++)
     {
        // _textures[i].bind(i);
     }
@@ -117,11 +118,11 @@ void Renderer::render()
     _shader->bind();
 
     uint32_t batchSize = (uint8_t *) _currentQuad - (uint8_t *) _quads;
-    _vb.add(_quads, batchSize);
+    _vb->add(_quads, batchSize);
 
-    _vao.bind();
-    _ib.bind();
-    GlCall(glDrawElements(GL_TRIANGLES, _ib.getCount(), GL_UNSIGNED_INT, nullptr));
+    _vao->bind();
+    _ib->bind();
+    GlCall(glDrawElements(GL_TRIANGLES, _ib->getCount(), GL_UNSIGNED_INT, nullptr));
 
     newBatch();
 }

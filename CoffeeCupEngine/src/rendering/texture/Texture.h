@@ -19,7 +19,7 @@ class Texture
 
         // Color init  
         Texture(unsigned int id, int width, int height, int bitsPerPixel)
-            : _id(id), _filePath(filePath), _width(width), _height(height), _bitsPerPixel(bitsPerPixel) {};
+            : _id(id), _width(width), _height(height), _bitsPerPixel(bitsPerPixel) {};
 
 
         ~Texture();

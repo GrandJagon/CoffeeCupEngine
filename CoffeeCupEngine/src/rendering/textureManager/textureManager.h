@@ -4,19 +4,26 @@
 #include "../texture/Texture.h"
 
 #include <unordered_map>
+#include <memory>
 
 
 class TextureManager
 {
     private:
         // Stores all texture with id as key
-        std::unordered_map<int, shared_ptr<Texture>> _textures;
+        std::unordered_map<int, std::shared_ptr<Texture>> _textures;
         int _slotIndex = 0;
         
     public:
-        shared_ptr<Texture> loadTexture(const std::string &path);
-        shared_ptr<Texture> loadTexture(void *color, int width, int height);
-        void bindTexture(unsigned int textId);
-        void unbindTexture(unsigned int textId);
+        static TextureManager* instance() {
+            static TextureManager instance;
+            return &instance;
+        }
+
+        std::shared_ptr<Texture> loadTexture(const std::string &path);
+        std::shared_ptr<Texture> createTexture(void *color, int width, int height);
+        void bindTexture(const unsigned int textId);
+        void unbindTexture(const unsigned int textId);
         void unbindAll();
+        inline int currIndex() { return _slotIndex;};
 };

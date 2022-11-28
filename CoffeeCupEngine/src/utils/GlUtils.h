@@ -13,6 +13,7 @@
 #include "../../vendors/glm/glm.hpp"
 #include "../../vendors/glm/gtc/matrix_transform.hpp"
 #include "../../vendors/glm/gtc/type_ptr.hpp"
+#include "../../vendors/stb_image/stb_image.h"
 
 
 #define ASSERT(x) if(!x) __builtin_trap()

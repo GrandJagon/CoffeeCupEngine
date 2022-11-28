@@ -23,10 +23,10 @@ void VertexArray::unbind() const
     GlCall(glBindVertexArray(0));
 }
 
-void VertexArray::addBuffer(const DynamicVertexBuffer& vb, const VertexBufferLayout& layout)
+void VertexArray::addBuffer(const std::shared_ptr<DynamicVertexBuffer>& vb, const VertexBufferLayout& layout)
 {
     bind();
-    vb.bind();
+    vb->bind();
     const auto& elements = layout.elements();
     unsigned int offset = 0;
 

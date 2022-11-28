@@ -1,13 +1,14 @@
 #include "textureManager.h"
 
-shared_ptr<Texture> TextureManager::loadTexture(const std::string &path)
+std::shared_ptr<Texture> TextureManager::loadTexture(const std::string &path)
 {
     // Image loaded inverted so needs to flip it
     stbi_set_flip_vertically_on_load(1);
 
     // Loading image as a buffer of bytes
-    unsigned char buffer;
-    int id, width, height, bitsPerPixel;
+    unsigned char *buffer;
+    unsigned int id;
+    int width, height, bitsPerPixel;
     buffer = stbi_load(path.c_str(), &width, &height, &bitsPerPixel, 4);
     
     // Generating texture id and assigning it to id + binding it
@@ -44,14 +45,15 @@ shared_ptr<Texture> TextureManager::loadTexture(const std::string &path)
     }
     
     // Storing all texture data to texture object
-    shared_ptr<Texture> texture(Texture(id, path, width, height, bitsPerPixel));
+    auto texture = std::make_shared<Texture> (Texture(id, path, width, height, bitsPerPixel));
 
     return texture;
 }
 
-shared_ptr<Texture> TextureManager::loadTexture(void *color, int width, int height) 
+std::shared_ptr<Texture> TextureManager::createTexture(void *color, int width, int height) 
 {   
-    int id, width, height, bitsPerPixel;
+    unsigned int id;
+    int bitsPerPixel;
 
     // Creting texture and binding it
     GlCall(glGenTextures(1, &id));
@@ -81,21 +83,43 @@ shared_ptr<Texture> TextureManager::loadTexture(void *color, int width, int heig
     GlCall(glBindTexture(GL_TEXTURE_2D, 0));
 
     // Storing all texture data to texture object
-    shared_ptr<Texture> texture(Texture(id, width, height, bitsPerPixel));
+    auto texture = std::make_shared<Texture> (Texture(id, width, height, bitsPerPixel));
 
     return texture;
 
 }
 
 
-void TextureManager::bindTexture(unsigned int slot)
+void TextureManager::bindTexture(const unsigned int textId)
 {
-    GlCall(glActiveTexture(GL_TEXTURE0 + slot));
-    GlCall(glBindTexture(GL_TEXTURE_2D, m_id));
+    auto value = _textures.find(textId);
+
+    if(value == _textures.end())
+    {
+        throw std::runtime_error("Texture id does not exist");
+    };
+
+    std::shared_ptr<Texture> texture = value->second;
+
+    int index;
+
+    if( (index = texture->getIndex()) != -1)
+    {
+        std::cout << "Texture already bound with index" << index << std::endl;
+        return;
+    }
+
+
+    GlCall(glActiveTexture(GL_TEXTURE0 + _slotIndex));
+    GlCall(glBindTexture(GL_TEXTURE_2D, texture->getId()));
+
+    texture->setIndex(_slotIndex);
+
+    _slotIndex++;
 }
 
 
-void TextureManager::unbindTexture()
+void TextureManager::unbindTexture(const unsigned int textId)
 {
     GlCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
