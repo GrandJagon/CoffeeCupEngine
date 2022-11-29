@@ -120,6 +120,11 @@ void TextureManager::bindTexture(const unsigned int textId)
     _slotIndex++;
 }
 
+void TextureManager::overrideTexture(const unsigned int textId, const unsigned int slotIndex)
+{
+    
+}
+
 void TextureManager::freeSlot(const unsigned int slotNumber)
 {
 
