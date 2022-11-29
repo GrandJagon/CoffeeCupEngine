@@ -86,12 +86,13 @@ std::shared_ptr<Texture> TextureManager::createTexture(void *color, int width, i
     auto texture = std::make_shared<Texture> (Texture(id, width, height, bitsPerPixel));
 
     return texture;
-
 }
 
 
 void TextureManager::bindTexture(const unsigned int textId)
 {
+    // Check if it is overriding one and call it if yes
+    
     auto value = _textures.find(textId);
 
     if(value == _textures.end())
@@ -101,13 +102,14 @@ void TextureManager::bindTexture(const unsigned int textId)
 
     std::shared_ptr<Texture> texture = value->second;
 
-    int index;
+    unsigned int index;
 
     if( (index = texture->getIndex()) != -1)
     {
         std::cout << "Texture already bound with index" << index << std::endl;
         return;
     }
+    
 
 
     GlCall(glActiveTexture(GL_TEXTURE0 + _slotIndex));
@@ -118,8 +120,49 @@ void TextureManager::bindTexture(const unsigned int textId)
     _slotIndex++;
 }
 
+void TextureManager::freeSlot(const unsigned int slotNumber)
+{
+
+    if(slotNumber < 0 || slotNumber > _maxSlot)
+    {
+        throw std::runtime_error("Invalid slot number, cannot be freed");
+    }
+
+    GlCall(glActiveTexture(GL_TEXTURE0 + slotNumber));
+    GlCall(glBindTexture(GL_TEXTURE_2D, 0));
+}
+
 
 void TextureManager::unbindTexture(const unsigned int textId)
 {
-    GlCall(glBindTexture(GL_TEXTURE_2D, 0));
+    auto value = _textures.find(textId);
+
+    if(value == _textures.end())
+    {
+        throw std::runtime_error("Texture id does not exist");
+    };
+
+    std::shared_ptr<Texture> texture = value->second;
+
+    unsigned int index;
+
+    if( (index = texture->getIndex()) == -1)
+    {
+        std::cout << "Texture " << index << "is not bound" << std::endl;
+        return;
+    }
+
+    freeSlot(index);
+
+    texture->setIndex(-1);
+}
+
+void TextureManager::unbindAll()
+{
+    for(int i = _slotIndex; i >= 0; i--)
+    {
+        freeSlot(i);
+    }
+
+    std::cout << "Unbinding successfull" << std::endl;
 }
