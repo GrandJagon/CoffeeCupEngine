@@ -16,6 +16,11 @@ class Window
         bool _fullScreen;
 
     public:
+        static Window* instance() {
+            static Window instance;
+            return &instance;
+        };
+
         void init(std::string title, int width, int height, bool fullScreen);
         void setKeyCallBack(void (*keyCallBack) (SDL_Window*, int, int, int, int));
         void endFrame();

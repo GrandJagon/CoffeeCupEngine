@@ -10,7 +10,7 @@ class DynamicVertexBuffer
     public:
         DynamicVertexBuffer() {std::cout << " Dynamic vertex buffer created " << std::endl;};
         ~DynamicVertexBuffer();
-
+        
         // Generates buffer and allocates size
         void init(unsigned int size);
         void add(const void* data, unsigned int size);

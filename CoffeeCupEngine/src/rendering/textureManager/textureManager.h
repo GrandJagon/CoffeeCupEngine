@@ -21,7 +21,6 @@ class TextureManager
         // Frees a single slot
         void freeSlot(const unsigned int slotNumber);
 
-
     public:
         static TextureManager* instance() {
             static TextureManager instance;
@@ -31,7 +30,7 @@ class TextureManager
         std::shared_ptr<Texture> loadTexture(const std::string &path);
         std::shared_ptr<Texture> createTexture(void *color, int width, int height);
         void bindTexture(const unsigned int textId);
-        void overrideTexture(const unsigned int textId, const unsigned int slot);
+        void overrideTexture(const unsigned int textId, const unsigned int slotNumber);
         void unbindAll();
         inline unsigned int currIndex() { return _slotIndex;};
 };

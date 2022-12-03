@@ -45,7 +45,10 @@ std::shared_ptr<Texture> TextureManager::loadTexture(const std::string &path)
     }
     
     // Storing all texture data to texture object
-    auto texture = std::make_shared<Texture> (Texture(id, path, width, height, bitsPerPixel));
+    auto texture = std::make_shared<Texture> (id, path, width, height, bitsPerPixel);
+    _textures.insert({id, texture});
+
+    std::cout << "Texture loaded by texture manager from path " << path << " with id " << id << std::endl;
 
     return texture;
 }
@@ -83,16 +86,17 @@ std::shared_ptr<Texture> TextureManager::createTexture(void *color, int width, i
     GlCall(glBindTexture(GL_TEXTURE_2D, 0));
 
     // Storing all texture data to texture object
-    auto texture = std::make_shared<Texture> (Texture(id, width, height, bitsPerPixel));
+    auto texture = std::make_shared<Texture> (id, width, height, bitsPerPixel);
+    _textures.insert({id, texture});
+
+    std::cout << "Texture created by texture manager with id " << id << std::endl;
 
     return texture;
 }
 
 
 void TextureManager::bindTexture(const unsigned int textId)
-{
-    // Check if it is overriding one and call it if yes
-    
+{   
     auto value = _textures.find(textId);
 
     if(value == _textures.end())
@@ -106,23 +110,40 @@ void TextureManager::bindTexture(const unsigned int textId)
 
     if( (index = texture->getIndex()) != -1)
     {
-        std::cout << "Texture already bound with index" << index << std::endl;
+        std::cout << "Texture already bound with index " << index << std::endl;
         return;
     }
     
-
-
     GlCall(glActiveTexture(GL_TEXTURE0 + _slotIndex));
     GlCall(glBindTexture(GL_TEXTURE_2D, texture->getId()));
 
     texture->setIndex(_slotIndex);
 
+    std::cout << "Texture with ID " << texture->getId() << " bound to slot " << _slotIndex << std::endl;
+
     _slotIndex++;
 }
 
-void TextureManager::overrideTexture(const unsigned int textId, const unsigned int slotIndex)
+void TextureManager::overrideTexture(const unsigned int textId, const unsigned int slotNumber)
 {
-    
+    if(slotNumber < 0 || slotNumber > _maxSlot)
+    {
+        throw std::runtime_error("Invalid slot number, cannot be overriden");
+    }
+
+    auto value = _textures.find(textId);
+
+    if(value == _textures.end())
+    {
+        throw std::runtime_error("Texture id does not exist");
+    };
+
+    std::shared_ptr<Texture> texture = value->second;
+
+    GlCall(glActiveTexture(GL_TEXTURE0 + slotNumber));
+    GlCall(glBindTexture(GL_TEXTURE_2D, texture->getId()));
+
+    texture->setIndex(_slotIndex);
 }
 
 void TextureManager::freeSlot(const unsigned int slotNumber)

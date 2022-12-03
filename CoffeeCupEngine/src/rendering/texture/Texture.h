@@ -8,7 +8,7 @@ class Texture
         unsigned int _id;
 
         // index assigned byt textureManager, -1 if not bound
-        int _index = -1;
+        unsigned int _index = -1;
         std::string _filePath;
         int _width, _height, _bitsPerPixel;
 
@@ -22,7 +22,7 @@ class Texture
             : _id(id), _width(width), _height(height), _bitsPerPixel(bitsPerPixel) {};
 
 
-        ~Texture();
+        ~Texture() = default;
 
         inline const int getWidth() {return _width;}
         inline const int getHeight() {return _height;}

@@ -2,9 +2,11 @@
 
 void Renderer::init()
 {
-    _vao = std::make_shared<VertexArray> (VertexArray());
-    _vb = std::make_shared<DynamicVertexBuffer> (DynamicVertexBuffer());
-    _ib = std::make_shared<DynamicIndexBuffer> (DynamicIndexBuffer());
+    std::cout << "_______RENDERER INIT_________" << std::endl;
+    
+    _vao = std::make_shared<VertexArray> ();
+    _vb = std::make_shared<DynamicVertexBuffer> ();
+    _ib = std::make_shared<DynamicIndexBuffer> ();
     
     _quadNumbers = RenderingConst::RENDERER_QUADS;
     _maxVertices = _quadNumbers * 4;
@@ -36,12 +38,14 @@ void Renderer::init()
 
     std::string shaderPath = "../res/shaders/Texture.shader";
 
-    _shader = std::make_shared<Shader> (Shader());
+    _shader = std::make_shared<Shader> ();
     _shader->init(shaderPath);
 
     // White texture at slot 0
     uint32_t white = 0xffffffff;
-    TextureManager::instance()->createTexture(&white, 1, 1);
+    _whiteTexture = TextureManager::instance()->createTexture(&white, 1, 1);
+
+    TextureManager::instance()->bindTexture(_whiteTexture->getId());
 
     int32_t samplers[32];
 
@@ -51,6 +55,8 @@ void Renderer::init()
     }
 
     _shader->setUniformArrayInt("uTextures", 32, samplers);
+
+    std::cout << "_____________________RENDERER INITIATED_____________________" << std::endl;
 }
     
 
@@ -59,8 +65,8 @@ void Renderer::newBatch()
     _vertexOffset = 0;
     _currentQuad = _quads;
     _renderCalls += 1;
-    _vb.reset();
-    _ib.reset();
+    _vb->reset();
+    _ib->reset();
 }
 
 void Renderer::draw(glm::vec3 position, glm::vec2 size, float textId)
@@ -108,7 +114,7 @@ void Renderer::setMVP(glm::mat4 mvp)
 
 void Renderer::render()
 {   
-    GlCall(glClear(GL_COLOR_BUFFER_BIT));
+    GlCall(glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT));
 
     for(int i = 0; i < TextureManager::instance()->currIndex(); i++)
     {

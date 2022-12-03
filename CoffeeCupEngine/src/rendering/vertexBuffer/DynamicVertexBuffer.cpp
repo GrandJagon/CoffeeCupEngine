@@ -5,11 +5,12 @@ void DynamicVertexBuffer::init(unsigned int size)
     GlCall(glGenBuffers(1, &m_id));
     GlCall(glBindBuffer(GL_ARRAY_BUFFER, m_id));
     GlCall(glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * size, nullptr, GL_DYNAMIC_DRAW));
-    std::cout << sizeof(Vertex) * size << " bytes buffer initiated " << std::endl;
+    std::cout <<  " VBO initiated with ID " << m_id << std::endl;
 }
 
 DynamicVertexBuffer::~DynamicVertexBuffer()
 {
+    std::cout << "Destroying VBO with ID " << m_id << std::endl; 
     GlCall(glDeleteBuffers(1, &m_id));
 }
 

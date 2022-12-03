@@ -4,10 +4,13 @@ void Shader::init(std::string &filePath)
 {
     ShaderObject so = parseShaderFile(filePath);
     m_id = createShader(so.vShader, so.fShader);
+
+    std::cout << "Shader at path " << filePath << " initiated with id " << m_id << std::endl;
 }
 
 Shader::~Shader()
 {
+    std::cout << "Destroying shader with id " << m_id << std::endl;
     GlCall(glDeleteProgram(m_id));
 }
 

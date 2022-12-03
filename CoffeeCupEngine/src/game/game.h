@@ -33,7 +33,7 @@ class Game
 
         // Singletons core members
         // Listed here for clarity but accessible globally through Class:insance()
-        Window _window;
+        Window *_window;
         InputHandler *_inputHandler;
         TextureManager *_textureManager;
         Renderer *_renderer;
@@ -65,9 +65,4 @@ class Game
         void render();
         void pause();
         void shutDown();
-
-    
-        
-        // Getters
-        Window getWindow() {return _window;};
 };

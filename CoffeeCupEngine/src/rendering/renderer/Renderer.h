@@ -20,6 +20,7 @@ class Renderer
         std::shared_ptr<DynamicVertexBuffer> _vb;
         std::shared_ptr<DynamicIndexBuffer> _ib;
         std::shared_ptr<Shader> _shader;
+        std::shared_ptr<Texture> _whiteTexture;
         unsigned int _maxVertices;
         unsigned int _quadNumbers;
         unsigned int _vertexOffset;

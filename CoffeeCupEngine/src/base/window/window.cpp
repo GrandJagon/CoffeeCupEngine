@@ -37,10 +37,12 @@ void Window::init(std::string title, int width, int height, bool fullScreen)
         throw std::runtime_error("OpenGL context could not be created");
     }
 
-      if(_fullScreen)
+    if(_fullScreen)
     {
         SDL_SetWindowFullscreen(_window, SDL_FALSE);
     }
+
+    glClearColor(1.0f,0.0f,0.0f,1.0f);
 }
 
 void Window::setKeyCallBack(void (*callback) (SDL_Window*, int, int, int, int))
@@ -61,9 +63,10 @@ void Window::endFrame()
         this->destroy();
     }*/
 
-    glClearColor(1.0f,0.0f,0.0f,1.0f);
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    
+    
 
+    // Swaps buffer
     SDL_GL_SwapWindow(_window);
 
     //glfwPollEvents();

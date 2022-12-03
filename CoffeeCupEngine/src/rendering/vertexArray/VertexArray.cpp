@@ -9,8 +9,8 @@ VertexArray::~VertexArray()
 
 void VertexArray::init()
 {  
-    std::cout << "Initiating VAO with id " << m_id << std::endl;
     GlCall(glGenVertexArrays(1, &m_id));
+    std::cout << "VAO initiated with ID " << m_id << std::endl;
 }
 
 void VertexArray::bind() const
