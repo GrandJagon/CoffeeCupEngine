@@ -23,6 +23,9 @@ void Game::init(std::string title, int width, int height)
     // Initialize global subsystems
     _renderer = Renderer::instance();
     _renderer->init();
+    
+    _textureManager = TextureManager::instance();
+    _textureManager->init();
 
     std::cout << "_________________________GAME INITIATED_________________" << std::endl;
 }

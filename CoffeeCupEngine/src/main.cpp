@@ -16,7 +16,9 @@ int main(void)
     Game::instance()->init("Game test", WINDOW_WIDTH, WINDOW_HEIGHT);
     
     std::shared_ptr<Texture> guyText = TextureManager::instance()->loadTexture("../res/textures/suit-guy.png");
-    TextureManager::instance()->bindTexture(guyText->getId());
+    std::shared_ptr<Texture> turtle = TextureManager::instance()->loadTexture("../res/textures/turtle.jpeg");
+    TextureManager::instance()->bindTexture(guyText);
+    TextureManager::instance()->bindTexture(turtle);
     
     // Projection matrix
     glm::mat4 proj = glm::ortho(0.0f, (float) WINDOW_WIDTH, 0.0f, (float) WINDOW_HEIGHT, -1.0f, 1.0f);
@@ -66,9 +68,9 @@ int main(void)
         Renderer::instance()->setMVP(mvp);
 
 
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < 20; i++)
         {    
-            for(int j = 0; j < 2; j++)
+            for(int j = 0; j < 20; j++)
             {
                 // Color call
                 Renderer::instance()->draw({ 0.0f + (i * 100), 0.0f + (j * 100) }, { 100.0f, 100.0f }, {0.0f, 0.0f, 1.0f, 1.0f});
@@ -78,6 +80,7 @@ int main(void)
 
         // Texture call
         Renderer::instance()->draw({ 50.0f ,50.0f }, { 100.0f, 100.0f }, 1.0f);
+        Renderer::instance()->draw({ 50.0f ,200.0f }, { 100.0f, 100.0f }, 2.0f);
 
         Renderer::instance()->render();
         Window::instance()->endFrame();

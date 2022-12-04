@@ -61,8 +61,12 @@ class Renderer
 
         inline unsigned int renderCalls() { return _renderCalls;};
  
+        void draw(glm::vec3 position, glm::vec2 size, std::shared_ptr<Texture> texture);
+        void draw(glm::vec2 position, glm::vec2 size, std::shared_ptr<Texture> texture);
+
         void draw(glm::vec3 position, glm::vec2 size, float textId);
-        void draw(glm::vec3 position, glm::vec2 size, glm::vec4 color);
         void draw(glm::vec2 position, glm::vec2 size, float textId);
+
+        void draw(glm::vec3 position, glm::vec2 size, glm::vec4 color);    
         void draw(glm::vec2 position, glm::vec2 size, glm::vec4 color);        
 };

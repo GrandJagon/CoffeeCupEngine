@@ -45,7 +45,7 @@ void Renderer::init()
     uint32_t white = 0xffffffff;
     _whiteTexture = TextureManager::instance()->createTexture(&white, 1, 1);
 
-    TextureManager::instance()->bindTexture(_whiteTexture->getId());
+    TextureManager::instance()->bindTexture(_whiteTexture);
 
     int32_t samplers[32];
 
@@ -67,6 +67,30 @@ void Renderer::newBatch()
     _renderCalls += 1;
     _vb->reset();
     _ib->reset();
+}
+
+void Renderer::draw(glm::vec3 position, glm::vec2 size, std::shared_ptr<Texture> texture)
+{
+    
+    unsigned int textureIndex;
+    
+    // Texture already bound to slot
+    if((textureIndex = texture->getIndex()) != -1)
+    {
+        draw(position, size, (float) textureIndex);   
+    }
+
+    // All slots taken
+    if(TextureManager::instance()->currIndex() >= TextureManager::instance()->maxSlot())
+    {
+        render();
+        TextureManager::instance()->unbindAll();
+        TextureManager::instance()->bindTexture(_whiteTexture);   
+    }
+
+    textureIndex = TextureManager::instance()->bindTexture(texture);
+
+    draw(position, size, (float) textureIndex);  
 }
 
 void Renderer::draw(glm::vec3 position, glm::vec2 size, float textId)
@@ -97,6 +121,11 @@ void Renderer::draw(glm::vec3 position, glm::vec2 size, glm::vec4 color)
     _vertexOffset += 4;
 }
 
+void Renderer::draw(glm::vec3 position, glm::vec2 size, std::shared_ptr<Texture> texture)
+{
+    draw({ position.x, position.y, 0.f }, size, texture);  
+}
+
 void Renderer::draw(glm::vec2 position, glm::vec2 size, float textId)
 {   
     draw({ position.x, position.y, 0.f }, size, textId);
@@ -116,10 +145,7 @@ void Renderer::render()
 {   
     GlCall(glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT));
 
-    for(int i = 0; i < TextureManager::instance()->currIndex(); i++)
-    {
-       // _textures[i].bind(i);
-    }
+    TextureManager::instance()->bindAll();
     
     _shader->bind();
 

@@ -3,34 +3,45 @@
 #include "../.././utils/utilities.h"
 #include "../texture/Texture.h"
 
-#include <unordered_map>
+#include <vector>
 #include <memory>
 
 
 class TextureManager
 {
     private:
-        // Stores all texture with id as key
-        std::unordered_map<unsigned int, std::shared_ptr<Texture>> _textures;
-        unsigned int _slotIndex = 0;
-        unsigned int _maxSlot;
+        // Stores active textures with slot index as key
+        std::vector<std::shared_ptr<Texture>> _textures;
+        int _maxSlot;
+        unsigned int _slotIndex;
 
-        // Unbinds a single texture given its ID, not sure will be used, remove if not
-        void unbindTexture(const unsigned int textId);
+        void unbindSlot(const unsigned int slotNumber);
 
-        // Frees a single slot
-        void freeSlot(const unsigned int slotNumber);
 
     public:
         static TextureManager* instance() {
             static TextureManager instance;
             return &instance;
         }
+        
+        void init();
 
+        // Creates texture from asset
         std::shared_ptr<Texture> loadTexture(const std::string &path);
+
+        // Creates texture from color
         std::shared_ptr<Texture> createTexture(void *color, int width, int height);
-        void bindTexture(const unsigned int textId);
-        void overrideTexture(const unsigned int textId, const unsigned int slotNumber);
+        
+        //  Binds a single texture to its slot and returns slot index
+        unsigned int bindTexture(std::shared_ptr<Texture> texture);
+        
+        // Loops through all textures to bind them, to be called before rendering each frame
+        void bindAll();
+        
+        // Unbind all textures and clears the vector
         void unbindAll();
+
         inline unsigned int currIndex() { return _slotIndex;};
+
+        inline int maxSlot() {return _maxSlot;};
 };

@@ -1,5 +1,14 @@
 #include "textureManager.h"
 
+void TextureManager::init()
+{
+    unsigned int maxTextureUnits;
+    GlCall(glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &_maxSlot));
+    _textures.reserve(_maxSlot);
+
+    std::cout << "Texture manager initialized with " << _maxSlot << " textures slots." << std::endl; 
+}
+
 std::shared_ptr<Texture> TextureManager::loadTexture(const std::string &path)
 {
     // Image loaded inverted so needs to flip it
@@ -46,7 +55,6 @@ std::shared_ptr<Texture> TextureManager::loadTexture(const std::string &path)
     
     // Storing all texture data to texture object
     auto texture = std::make_shared<Texture> (id, path, width, height, bitsPerPixel);
-    _textures.insert({id, texture});
 
     std::cout << "Texture loaded by texture manager from path " << path << " with id " << id << std::endl;
 
@@ -87,7 +95,6 @@ std::shared_ptr<Texture> TextureManager::createTexture(void *color, int width, i
 
     // Storing all texture data to texture object
     auto texture = std::make_shared<Texture> (id, width, height, bitsPerPixel);
-    _textures.insert({id, texture});
 
     std::cout << "Texture created by texture manager with id " << id << std::endl;
 
@@ -95,100 +102,55 @@ std::shared_ptr<Texture> TextureManager::createTexture(void *color, int width, i
 }
 
 
-void TextureManager::bindTexture(const unsigned int textId)
+unsigned int TextureManager::bindTexture(std::shared_ptr<Texture> texture)
 {   
-    auto value = _textures.find(textId);
-
-    if(value == _textures.end())
-    {
-        throw std::runtime_error("Texture id does not exist");
-    };
-
-    std::shared_ptr<Texture> texture = value->second;
-
     unsigned int index;
 
-    if( (index = texture->getIndex()) != -1)
+    // Texture bound for the first time
+    if( (index = texture->getIndex()) == -1)
     {
-        std::cout << "Texture already bound with index " << index << std::endl;
-        return;
+        std::cout << "Slot " << _slotIndex << " assigned to texture " << texture->getId() << std::endl;
+        GlCall(glActiveTexture(GL_TEXTURE0 + _slotIndex));
+        GlCall(glBindTexture(GL_TEXTURE_2D, texture->getId()));
+        texture->setIndex(_slotIndex);
+
+        _textures.push_back(texture);
+
+        _slotIndex++;
+
+        return texture->getIndex();
     }
     
-    GlCall(glActiveTexture(GL_TEXTURE0 + _slotIndex));
+    GlCall(glActiveTexture(GL_TEXTURE0 + index));
     GlCall(glBindTexture(GL_TEXTURE_2D, texture->getId()));
 
-    texture->setIndex(_slotIndex);
-
-    std::cout << "Texture with ID " << texture->getId() << " bound to slot " << _slotIndex << std::endl;
-
-    _slotIndex++;
+    return index;
 }
 
-void TextureManager::overrideTexture(const unsigned int textId, const unsigned int slotNumber)
+
+void TextureManager::bindAll()
 {
-    if(slotNumber < 0 || slotNumber > _maxSlot)
+    std::vector<std::shared_ptr<Texture>>::iterator tex = _textures.begin();
+
+    for(tex; tex < _textures.end(); tex++)
     {
-        throw std::runtime_error("Invalid slot number, cannot be overriden");
+        bindTexture(*tex);
     }
-
-    auto value = _textures.find(textId);
-
-    if(value == _textures.end())
-    {
-        throw std::runtime_error("Texture id does not exist");
-    };
-
-    std::shared_ptr<Texture> texture = value->second;
-
-    GlCall(glActiveTexture(GL_TEXTURE0 + slotNumber));
-    GlCall(glBindTexture(GL_TEXTURE_2D, texture->getId()));
-
-    texture->setIndex(_slotIndex);
 }
 
-void TextureManager::freeSlot(const unsigned int slotNumber)
+void TextureManager::unbindSlot(const unsigned int slotNumber)
 {
-
-    if(slotNumber < 0 || slotNumber > _maxSlot)
-    {
-        throw std::runtime_error("Invalid slot number, cannot be freed");
-    }
-
     GlCall(glActiveTexture(GL_TEXTURE0 + slotNumber));
     GlCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-
-void TextureManager::unbindTexture(const unsigned int textId)
-{
-    auto value = _textures.find(textId);
-
-    if(value == _textures.end())
-    {
-        throw std::runtime_error("Texture id does not exist");
-    };
-
-    std::shared_ptr<Texture> texture = value->second;
-
-    unsigned int index;
-
-    if( (index = texture->getIndex()) == -1)
-    {
-        std::cout << "Texture " << index << "is not bound" << std::endl;
-        return;
-    }
-
-    freeSlot(index);
-
-    texture->setIndex(-1);
-}
-
 void TextureManager::unbindAll()
 {
-    for(int i = _slotIndex; i >= 0; i--)
+    for(int i = 0; i <= _slotIndex; i++)
     {
-        freeSlot(i);
+        unbindSlot(_slotIndex);
     }
 
-    std::cout << "Unbinding successfull" << std::endl;
+    _textures.clear();
 }
+
