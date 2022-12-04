@@ -121,7 +121,7 @@ void Renderer::draw(glm::vec3 position, glm::vec2 size, glm::vec4 color)
     _vertexOffset += 4;
 }
 
-void Renderer::draw(glm::vec3 position, glm::vec2 size, std::shared_ptr<Texture> texture)
+void Renderer::draw(glm::vec2 position, glm::vec2 size, std::shared_ptr<Texture> texture)
 {
     draw({ position.x, position.y, 0.f }, size, texture);  
 }

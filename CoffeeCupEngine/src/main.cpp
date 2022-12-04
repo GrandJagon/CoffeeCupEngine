@@ -17,8 +17,6 @@ int main(void)
     
     std::shared_ptr<Texture> guyText = TextureManager::instance()->loadTexture("../res/textures/suit-guy.png");
     std::shared_ptr<Texture> turtle = TextureManager::instance()->loadTexture("../res/textures/turtle.jpeg");
-    TextureManager::instance()->bindTexture(guyText);
-    TextureManager::instance()->bindTexture(turtle);
     
     // Projection matrix
     glm::mat4 proj = glm::ortho(0.0f, (float) WINDOW_WIDTH, 0.0f, (float) WINDOW_HEIGHT, -1.0f, 1.0f);
@@ -79,8 +77,8 @@ int main(void)
         
 
         // Texture call
-        Renderer::instance()->draw({ 50.0f ,50.0f }, { 100.0f, 100.0f }, 1.0f);
-        Renderer::instance()->draw({ 50.0f ,200.0f }, { 100.0f, 100.0f }, 2.0f);
+        Renderer::instance()->draw({ 50.0f ,50.0f }, { 100.0f, 100.0f }, guyText);
+        Renderer::instance()->draw({ 50.0f ,200.0f }, { 100.0f, 100.0f }, turtle);
 
         Renderer::instance()->render();
         Window::instance()->endFrame();
