@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../.././utils/utilities.h"
 #include "../texture/Texture.h"
 
 #include <vector>
@@ -9,39 +8,29 @@
 
 class TextureManager
 {
-    private:
-        // Stores active textures with slot index as key
-        std::vector<std::shared_ptr<Texture>> _textures;
-        int _maxSlot;
-        unsigned int _slotIndex;
-
-        void unbindSlot(const unsigned int slotNumber);
-
-
     public:
-        static TextureManager* instance() {
-            static TextureManager instance;
-            return &instance;
-        }
+        virtual ~TextureManager() = default;
         
-        void init();
+        static std::shared_ptr<TextureManager> instance();
+        
+        virtual void init() = 0;
 
         // Creates texture from asset
-        std::shared_ptr<Texture> loadTexture(const std::string &path);
+        virtual std::shared_ptr<Texture> loadTexture(const std::string &path)= 0;
 
         // Creates texture from color
-        std::shared_ptr<Texture> createTexture(void *color, int width, int height);
+        virtual std::shared_ptr<Texture> createTexture(void *color, int width, int height)= 0;
         
         //  Binds a single texture to its slot and returns slot index
-        unsigned int bindTexture(std::shared_ptr<Texture> texture);
+        virtual unsigned int bindTexture(std::shared_ptr<Texture> texture)= 0;
         
         // Loops through all textures to bind them, to be called before rendering each frame
-        void bindAll();
+        virtual void bindAll()= 0;
         
         // Unbind all textures and clears the vector
-        void unbindAll();
+        virtual void unbindAll()= 0;
 
-        inline unsigned int currIndex() { return _slotIndex;};
+        virtual unsigned int currIndex();
 
-        inline int maxSlot() {return _maxSlot;};
+        virtual int maxSlot();
 };

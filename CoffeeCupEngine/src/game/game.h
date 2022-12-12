@@ -9,7 +9,7 @@
 #include "../rendering/textureManager/textureManager.h"
 #include "../rendering/renderingConstants.h"
 
-#include "input/inputHandler.h"
+#include "input/inputManager.h"
 #include "scenes/sceneManager.h"
 
 // Defined in inputHandler.h
@@ -34,7 +34,7 @@ class Game
         // Singletons core members
         // Listed here for clarity but accessible globally through Class:insance()
         Window *_window;
-        InputHandler *_inputHandler;
+        InputManager *_inputHandler;
         TextureManager *_textureManager;
         Renderer *_renderer;
         

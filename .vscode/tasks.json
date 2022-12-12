@@ -27,6 +27,7 @@
                 "${workspaceFolder}/CoffeeCupEngine/src/game/ECS/*.cpp",
                 "${workspaceFolder}/CoffeeCupEngine/src/game/input/*.cpp",
                 "${workspaceFolder}/CoffeeCupEngine/src/game/scenes/*.cpp",
+                "${workspaceFolder}/CoffeeCupEngine/src/platform/OpenGL/*.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-lSDL2",

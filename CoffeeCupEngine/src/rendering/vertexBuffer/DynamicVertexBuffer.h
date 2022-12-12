@@ -1,22 +1,21 @@
 #pragma once
-#include "../../utils/utilities.h"
+
+#include <memory>
 
 class DynamicVertexBuffer
 {
-    private:
-        unsigned int m_id;
-        unsigned int m_offset = 0;
-
     public:
-        DynamicVertexBuffer() {std::cout << " Dynamic vertex buffer created " << std::endl;};
-        ~DynamicVertexBuffer();
+        ~DynamicVertexBuffer() = default;
         
         // Generates buffer and allocates size
-        void init(unsigned int size);
-        void add(const void* data, unsigned int size);
-        void bind() const;
-        void unbind() const;
+        virtual void init(unsigned int size) = 0;
+        virtual void add(const void* data, unsigned int size) = 0;
+        virtual void bind() const = 0;
+        virtual void unbind() const = 0;
         // Resets vertex buffer, to be called between each frame
-        void reset();
-        unsigned int getId() {return m_id;};
+        virtual void reset() = 0;
+        unsigned int getId();
+
+        // Creates the proper subclass given the rendering API
+        static std::shared_ptr<DynamicVertexBuffer> create();
 };

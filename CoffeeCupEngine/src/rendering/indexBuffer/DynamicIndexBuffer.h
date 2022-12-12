@@ -1,25 +1,23 @@
 #pragma once
-#include "../../utils/utilities.h"
 
-#define BUFFER_OFFSET(offset) (static_cast<char*>(0) + (offset))
+#include "../../rendering/indexBuffer/DynamicIndexBuffer.h"
+
+#include <memory>
 
 class DynamicIndexBuffer
 {
-    private:
-        unsigned int m_id;
-        unsigned int m_count = 0;
-
     public:
-        DynamicIndexBuffer() {std::cout << "Creating index buffer" << std::endl;};
-        ~DynamicIndexBuffer();
+        virtual ~DynamicIndexBuffer() = default;
 
         // Generates buffer and generates size * 6 as each quad takes 6 vertices
-        void init(unsigned int size);
-        void bind() const;
-        void unbind() const;
-        void setCount(unsigned int count) {m_count = count;};
-        unsigned int getCount() const {return m_count;};
+        virtual void init(unsigned int size) = 0;
+        virtual void bind() const = 0;
+        virtual void unbind() const = 0;
+        virtual void setCount(unsigned int count) = 0;
+        virtual unsigned int getCount() const = 0;
         // Resets the count, to be called between each frame
-        void reset();
+        virtual void reset() = 0;
 
+        // Instantiate required subclass given rendering API
+        static std::shared_ptr<DynamicIndexBuffer> create();
 };
