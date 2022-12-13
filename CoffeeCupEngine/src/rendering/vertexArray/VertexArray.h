@@ -12,7 +12,7 @@ class VertexArray
     public:
         virtual ~VertexArray() = default; 
         virtual void init() = 0;
-        virtual void addBuffer(const std::shared_ptr<DynamicVertexBuffer> vb, const std::shared_ptr<VertexBufferLayout> layout) = 0;
+        virtual void addBuffer(const std::shared_ptr<DynamicVertexBuffer> vb, const std::shared_ptr<VertexBufferLayout> layout) const = 0;
         virtual void bind() const = 0;
         virtual void unbind() const = 0;
         virtual unsigned int getId() const;

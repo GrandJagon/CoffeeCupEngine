@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../geometry/quad.h"
 #include <memory>
 
 class DynamicVertexBuffer

@@ -29,16 +29,16 @@ class Game
         std::string _title;
         GameState _state;
         float _deltaTime;
-        SceneManager _sceneManager;
 
-        // Singletons core members
-        // Listed here for clarity but accessible globally through Class:insance()
-        Window *_window;
-        InputManager *_inputHandler;
-        TextureManager *_textureManager;
-        Renderer *_renderer;
+        std::shared_ptr<Window> _window;
+
+        // Subsystems
+        std::shared_ptr<Renderer> _renderer;
+        std::shared_ptr<TextureManager> _textureManager;
+        std::shared_ptr<InputManager> _inputManager;
+
+        SceneManager _sceneManager;
         
-    
     public:
         Game() {};
         ~Game();
@@ -65,4 +65,12 @@ class Game
         void render();
         void pause();
         void shutDown();
+
+        // Subsystems getters for global access
+        // TO USE IF WE GO BACK FRON SINGLETON TO REGULAR DATA MEMBERS
+        std::shared_ptr<Window> window() {return _window;};
+        std::shared_ptr<Renderer> renderer() {return _renderer;};
+        std::shared_ptr<TextureManager> textureManager() {return _textureManager;};
+        std::shared_ptr<InputManager> inputManager() {return _inputManager;};
+
 };

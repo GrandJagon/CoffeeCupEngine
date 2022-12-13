@@ -11,9 +11,6 @@
 
 #include <memory>
 
-
-
-
 class Renderer
 {
     public:

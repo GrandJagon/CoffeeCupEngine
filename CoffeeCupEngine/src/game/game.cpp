@@ -5,12 +5,9 @@ void Game::init(std::string title, int width, int height)
     std::cout << "__________INIT GAME______________ " << std::endl;
     _title = title;    
 
-    // Sets the appropriate blending function for displaying
-    GlCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-
     //std::cout << glGetString(GL_VERSION) << std::endl;
 
-    _window = Window::instance();
+    _window = Window::create();
     _window->init(_title, width, height, GameConstants::FULLSCREEN);
     //_window.setKeyCallBack(&_inputHandler.update);
 

@@ -12,10 +12,10 @@ class GLVertexArray : public VertexArray
         unsigned int m_id;
 
     public:
-        VertexArray() {std::cout << "OpenGl VAO created" << std::endl;};
-        ~VertexArray() override; 
+        GLVertexArray() {std::cout << "OpenGl VAO created" << std::endl;};
+        ~GLVertexArray() override; 
         void init() override;
-        void addBuffer(const std::shared_ptr<DynamicVertexBuffer>& vb, const VertexBufferLayout& layout) const override;
+        void addBuffer(const std::shared_ptr<DynamicVertexBuffer> vb, const std::shared_ptr<VertexBufferLayout> layout) const override;
         void bind() const override;
         void unbind() const override;
         unsigned int getId() const override {return m_id;};

@@ -60,8 +60,6 @@ int main(void)
         // For MVP multiplication order is reversed in openGL
         glm::mat4 mvp = proj * view * model;
 
-        GlCall(glClear(GL_COLOR_BUFFER_BIT));
-
         //Sets MVP
         Renderer::instance()->setMVP(mvp);
 
@@ -81,7 +79,7 @@ int main(void)
         Renderer::instance()->draw({ 50.0f ,200.0f }, { 100.0f, 100.0f }, turtle);
 
         Renderer::instance()->render();
-        Window::instance()->endFrame();
+        Renderer::instance()->endFrame();
     }
     
     return 0;

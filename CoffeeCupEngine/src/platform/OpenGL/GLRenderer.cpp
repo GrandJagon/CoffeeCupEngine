@@ -3,10 +3,13 @@
 void GLRenderer::init()
 {
     std::cout << "_______Renderer INIT_________" << std::endl;
+
+    // Sets the appropriate blending function for displaying
+    GlCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
     
-    _vao = std::make_shared<VertexArray> ();
-    _vb = std::make_shared<DynamicVertexBuffer> ();
-    _ib = std::make_shared<DynamicIndexBuffer> ();
+    _vao = VertexArray::create();
+    _vb = DynamicVertexBuffer::create();
+    _ib = DynamicIndexBuffer::create();
     
     _quadNumbers = RenderingConst::RENDERER_QUADS;
     _maxVertices = _quadNumbers * 4;
@@ -20,7 +23,7 @@ void GLRenderer::init()
     // Defining layout of vertex buffer data
     std::shared_ptr<VertexBufferLayout> layout = VertexBufferLayout::create();
 
-    layout.addElements(
+    layout->addElements(
         {
             {GL_FLOAT, 3, false}, // Position
             {GL_FLOAT, 4, false}, // Color
@@ -38,7 +41,7 @@ void GLRenderer::init()
 
     std::string shaderPath = "../res/shaders/Texture.shader";
 
-    _shader = std::make_shared<Shader> ();
+    _shader = Shader::create();
     _shader->init(shaderPath);
 
     // White texture at slot 0
@@ -143,6 +146,7 @@ void GLRenderer::setMVP(glm::mat4 mvp)
 
 void GLRenderer::render()
 {   
+    
     GlCall(glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT));
 
     TextureManager::instance()->bindAll();

@@ -3,15 +3,16 @@
 #include "GlUtils.h"
 #include "../../rendering/vertexBuffer/DynamicVertexBuffer.h"
 
-class GLDynamicIndexBuffer : public DynamicVertexBuffer
+
+class GLDynamicVertexBuffer : public DynamicVertexBuffer
 {
     private:
-        unsigned int m_id;
-        unsigned int m_offset = 0;
+        unsigned int _id;
+        unsigned int _offset = 0;
 
     public:
-        GLDynamicIndexBuffer() {std::cout << " Dynamic vertex buffer created " << std::endl;};
-        ~GLDynamicIndexBuffer();
+        GLDynamicVertexBuffer() {std::cout << " Dynamic vertex buffer created " << std::endl;};
+        ~GLDynamicVertexBuffer();
         
         // Generates buffer and allocates size
         void init(unsigned int size) override;

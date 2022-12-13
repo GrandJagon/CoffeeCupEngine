@@ -24,7 +24,7 @@ ShaderObject GLShader::parseShaderFile(std::string &filePath)
                 type = ShaderType::VERTEX;
             } else if(line.find("fragment") != std::string::npos)
             {
-                type = GLShaderType::FRAGMENT;
+                type = ShaderType::FRAGMENT;
             }
 
         } else {
@@ -37,10 +37,10 @@ ShaderObject GLShader::parseShaderFile(std::string &filePath)
     return shader;
 }
 
-std::shared_ptr<Shader> create()
+std::shared_ptr<Shader> Shader::create()
 {
     // Only openGL supported at the moment
-    return std::make_shared<Shader>();
+    return std::make_shared<GLShader>();
 }
 
  

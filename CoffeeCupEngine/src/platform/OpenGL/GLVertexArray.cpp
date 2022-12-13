@@ -1,4 +1,5 @@
 #include "GLVertexArray.h"
+#include "GLVertexBufferLayout.h"
 
 
 GLVertexArray::~GLVertexArray()
@@ -23,18 +24,18 @@ void GLVertexArray::unbind() const
     GlCall(glBindVertexArray(0));
 }
 
-void GLVertexArray::addBuffer(const std::shared_ptr<DynamicVertexBuffer>& vb, const VertexBufferLayout& layout) const
+void GLVertexArray::addBuffer(const std::shared_ptr<DynamicVertexBuffer> vb, const std::shared_ptr<VertexBufferLayout> layout) const
 {
     bind();
     vb->bind();
-    const auto& elements = layout.elements();
+    const auto& elements = layout->elements();
     unsigned int offset = 0;
 
     for(unsigned int i = 0 ; i < elements.size(); i++)
     {
         GlCall(glEnableVertexAttribArray(i));
-        GlCall(glVertexAttribPointer(i, elements[i].count, elements[i].type, elements[i].normalized, layout.getStride(), (const void*) offset));
+        GlCall(glVertexAttribPointer(i, elements[i].count, elements[i].type, elements[i].normalized, layout->getStride(), (const void*) offset));
 
-        offset += elements[i].count * GLLayoutElement::GetSizeOfType(elements[i].type);
+        offset += elements[i].count * GLVertexBufferLayout::getSizeOfType(elements[i].type);
     }
 }

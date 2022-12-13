@@ -1,38 +1,40 @@
-#include "GLDynamicIndexBuffer.h"
+#include "GLDynamicVertexBuffer.h"
 
-void GLDynamicIndexBuffer::init(unsigned int size)
+class Vertex;
+
+void GLDynamicVertexBuffer::init(unsigned int size)
 {
-    GlCall(glGenBuffers(1, &m_id));
-    GlCall(glBindBuffer(GL_ARRAY_BUFFER, m_id));
+    GlCall(glGenBuffers(1, &_id));
+    GlCall(glBindBuffer(GL_ARRAY_BUFFER, _id));
     GlCall(glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * size, nullptr, GL_DYNAMIC_DRAW));
-    std::cout <<  " VBO initiated with ID " << m_id << std::endl;
+    std::cout <<  " VBO initiated with ID " << _id << std::endl;
 }
 
-GLDynamicIndexBuffer::~GLDynamicIndexBuffer()
+GLDynamicVertexBuffer::~GLDynamicVertexBuffer()
 {
-    std::cout << "Destroying VBO with ID " << m_id << std::endl; 
-    GlCall(glDeleteBuffers(1, &m_id));
+    std::cout << "Destroying VBO with ID " << _id << std::endl; 
+    GlCall(glDeleteBuffers(1, &_id));
 }
 
-void GLDynamicIndexBuffer::bind() const
+void GLDynamicVertexBuffer::bind() const
 {
-    GlCall(glBindBuffer(GL_ARRAY_BUFFER, m_id));
+    GlCall(glBindBuffer(GL_ARRAY_BUFFER, _id));
 }
 
-void GLDynamicIndexBuffer::unbind() const
+void GLDynamicVertexBuffer::unbind() const
 {
     GlCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 }
 
-void GLDynamicIndexBuffer::add(const void *data, unsigned int size)
+void GLDynamicVertexBuffer::add(const void *data, unsigned int size)
 {   
     bind();
-    GlCall(glBufferSubData(GL_ARRAY_BUFFER, m_offset, size, data));
-    m_offset += size;
+    GlCall(glBufferSubData(GL_ARRAY_BUFFER, _offset, size, data));
+    _offset += size;
 }
 
-void GLDynamicIndexBuffer::reset()
+void GLDynamicVertexBuffer::reset()
 {
-    m_offset = 0;
+    _offset = 0;
 }
 
