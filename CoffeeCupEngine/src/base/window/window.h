@@ -22,7 +22,7 @@ class Window
         virtual void endFrame() = 0;
         virtual void resize(int width, int height) = 0;
         virtual void destroy() = 0;
-        virtual void render();
+        virtual void render() {};
         
         // Returns the proper window given the API
         static std::shared_ptr<Window> create();

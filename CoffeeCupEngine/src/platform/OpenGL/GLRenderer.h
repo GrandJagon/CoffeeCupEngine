@@ -30,7 +30,7 @@ class GLRenderer : public Renderer
         
         void init() override;
 
-        void setShader(Shader &shader) override;
+        void setShader(std::shared_ptr<Shader> shader) override;
         void setMVP(glm::mat4 mvp) override;
 
         // Starts a new batch, should be called whenever the first one is full
@@ -45,7 +45,7 @@ class GLRenderer : public Renderer
         // Free all heap memory
         void shutDown() override;
 
-        unsigned int renderCalls() override { return _renderCalls;};
+        unsigned int renderCalls() override { return _renderCalls; };
  
         void draw(glm::vec3 position, glm::vec2 size, std::shared_ptr<Texture> texture) override;
         void draw(glm::vec2 position, glm::vec2 size, std::shared_ptr<Texture> texture) override;

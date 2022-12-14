@@ -18,5 +18,4 @@ class GLVertexArray : public VertexArray
         void addBuffer(const std::shared_ptr<DynamicVertexBuffer> vb, const std::shared_ptr<VertexBufferLayout> layout) const override;
         void bind() const override;
         void unbind() const override;
-        unsigned int getId() const override {return m_id;};
 };

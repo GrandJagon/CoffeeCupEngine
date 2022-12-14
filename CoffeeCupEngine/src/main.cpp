@@ -80,6 +80,7 @@ int main(void)
 
         Renderer::instance()->render();
         Renderer::instance()->endFrame();
+        Game::instance()->window()->endFrame();
     }
     
     return 0;

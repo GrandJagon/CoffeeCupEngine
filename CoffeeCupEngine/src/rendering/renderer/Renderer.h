@@ -21,7 +21,7 @@ class Renderer
         
         virtual void init() = 0;
 
-        virtual void setShader(Shader &shader) = 0;
+        virtual void setShader(std::shared_ptr<Shader> shader) = 0;
         virtual void setMVP(glm::mat4 mvp) = 0;
 
         // Starts a new batch, should be called whenever the first one is full
@@ -36,14 +36,14 @@ class Renderer
         // Free all heap memory
         virtual void shutDown() = 0;
 
-        virtual unsigned int renderCalls();
+        virtual unsigned int renderCalls() {throw std::runtime_error("Method not implemented");};
  
-        virtual void draw(glm::vec3 position, glm::vec2 size, std::shared_ptr<Texture> texture);
-        virtual void draw(glm::vec2 position, glm::vec2 size, std::shared_ptr<Texture> texture);
+        virtual void draw(glm::vec3 position, glm::vec2 size, std::shared_ptr<Texture> texture) {};
+        virtual void draw(glm::vec2 position, glm::vec2 size, std::shared_ptr<Texture> texture) {};
 
-        virtual void draw(glm::vec3 position, glm::vec2 size, float textId);
-        virtual void draw(glm::vec2 position, glm::vec2 size, float textId);
+        virtual void draw(glm::vec3 position, glm::vec2 size, float textId) {};
+        virtual void draw(glm::vec2 position, glm::vec2 size, float textId) {};
 
-        virtual void draw(glm::vec3 position, glm::vec2 size, glm::vec4 color);    
-        virtual void draw(glm::vec2 position, glm::vec2 size, glm::vec4 color);        
+        virtual void draw(glm::vec3 position, glm::vec2 size, glm::vec4 color) {};    
+        virtual void draw(glm::vec2 position, glm::vec2 size, glm::vec4 color) {};        
 };

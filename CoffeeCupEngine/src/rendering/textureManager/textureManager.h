@@ -28,9 +28,9 @@ class TextureManager
         virtual void bindAll()= 0;
         
         // Unbind all textures and clears the vector
-        virtual void unbindAll()= 0;
+        virtual void unbindAll() = 0;
 
-        virtual unsigned int currIndex();
+        virtual unsigned int currIndex() {throw std::runtime_error("Method not implemented");};
 
-        virtual int maxSlot();
+        virtual int maxSlot() {throw std::runtime_error("Method not implemented");};
 };

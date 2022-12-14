@@ -139,6 +139,11 @@ void GLRenderer::draw(glm::vec2 position, glm::vec2 size, glm::vec4 color)
     draw({ position.x, position.y, 0.f }, size, color);
 }
 
+void GLRenderer::setShader(std::shared_ptr<Shader> shader)
+{
+    _shader = shader;
+}
+
 void GLRenderer::setMVP(glm::mat4 mvp)
 {
     _shader->setUniformMat4("uMVP", mvp);
@@ -166,4 +171,9 @@ void GLRenderer::render()
 void GLRenderer::endFrame()
 {    
     _renderCalls = 0;
+}
+
+void GLRenderer::shutDown()
+{
+    // Free memory
 }
