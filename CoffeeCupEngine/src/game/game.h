@@ -3,8 +3,9 @@
 #include "gameConstants.h"
 
 #include "../utils/utilities.h"
-#include "../base/window/window.h"
 
+
+#include "../rendering/window/window.h"
 #include "../rendering/renderer/Renderer.h"
 #include "../rendering/textureManager/textureManager.h"
 #include "../rendering/renderingConstants.h"

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../utils/utilities.h"
-#include "../../base/window/window.h"
+#include "../../rendering/window/window.h"
 
 class SDLWindow : public Window
 { 

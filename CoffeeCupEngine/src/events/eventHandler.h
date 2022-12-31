@@ -1,9 +1,11 @@
 #pragma once
 
+#include <memory>
+
 #include "event.h"
 
 class EventHandler
 {
     public:
-        virtual onEvent(const Event)
-}
+        virtual void onEvent(const std::shared_ptr<Event>) = 0;
+};

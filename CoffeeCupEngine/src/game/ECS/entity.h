@@ -1,7 +1,7 @@
 #pragma once
 
 #include "component.h"
-#include "../../base/window/window.h"
+#include "../../rendering/window/window.h"
 #include <vector>
 
 class Entity
