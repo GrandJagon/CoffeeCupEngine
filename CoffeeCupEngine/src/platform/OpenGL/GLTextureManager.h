@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GlUtils.h"
-#include "../../rendering/textureManager/textureManager.h"
+#include "../../rendering/textureManager.h"
 
 #include <vector>
 #include <memory>

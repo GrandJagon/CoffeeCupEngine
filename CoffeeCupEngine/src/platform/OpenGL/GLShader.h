@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GlUtils.h"
-#include "../../rendering/shaders/Shader.h"
+#include "../../rendering/shader.h"
 
 class GLShader : public Shader
 {

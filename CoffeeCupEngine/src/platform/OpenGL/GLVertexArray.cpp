@@ -24,7 +24,7 @@ void GLVertexArray::unbind() const
     GlCall(glBindVertexArray(0));
 }
 
-void GLVertexArray::addBuffer(const std::shared_ptr<DynamicVertexBuffer> vb, const std::shared_ptr<VertexBufferLayout> layout) const
+void GLVertexArray::addBuffer(const std::shared_ptr<VertexBuffer> vb, const std::shared_ptr<VertexBufferLayout> layout) const
 {
     bind();
     vb->bind();

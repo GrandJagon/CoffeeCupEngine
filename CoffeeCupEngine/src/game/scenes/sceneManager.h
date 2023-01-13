@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "scene.h"
-#include "../../rendering/window/window.h"
+#include "../../rendering/window.h"
 
 class SceneManager
 {

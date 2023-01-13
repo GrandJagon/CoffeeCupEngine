@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GlUtils.h"
-#include "../../rendering/vertexBufferLayout/VertexBufferLayout.h"
+#include "../../rendering/vertexBufferLayout.h"
 
 #include <vector>
 

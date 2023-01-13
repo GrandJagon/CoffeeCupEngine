@@ -2,7 +2,7 @@
 #include <cstring>
 
 #include "utils/utilities.h"
-#include "rendering/texture/Texture.h"
+#include "rendering/texture.h"
 
 #include "game/game.h"
 

@@ -1,15 +1,15 @@
 #pragma once
 
 #include "GlUtils.h"
-#include "../../rendering/renderer/Renderer.h"
+#include "../../rendering/renderer.h"
 #include "../../rendering/renderingConstants.h"
 
 class GLRenderer : public Renderer
 {
     private:
         std::shared_ptr<VertexArray> _vao;
-        std::shared_ptr<DynamicVertexBuffer> _vb;
-        std::shared_ptr<DynamicIndexBuffer> _ib;
+        std::shared_ptr<VertexBuffer> _vb;
+        std::shared_ptr<IndexBuffer> _ib;
         std::shared_ptr<Shader> _shader;
         std::shared_ptr<Texture> _whiteTexture;
         unsigned int _maxVertices;

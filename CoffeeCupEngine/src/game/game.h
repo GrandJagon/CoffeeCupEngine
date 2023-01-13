@@ -2,16 +2,17 @@
 
 #include "gameConstants.h"
 
+#include "scenes/sceneManager.h"
+
 #include "../utils/utilities.h"
 
-
-#include "../rendering/window/window.h"
-#include "../rendering/renderer/Renderer.h"
-#include "../rendering/textureManager/textureManager.h"
+#include "../rendering/window.h"
+#include "../rendering/renderer.h"
+#include "../rendering/textureManager.h"
 #include "../rendering/renderingConstants.h"
 
-#include "input/inputManager.h"
-#include "scenes/sceneManager.h"
+#include "../input/inputManager.h"
+
 
 // Defined in inputHandler.h
 struct Key;

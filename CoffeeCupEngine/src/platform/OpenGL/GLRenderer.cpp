@@ -8,8 +8,8 @@ void GLRenderer::init()
     GlCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
     
     _vao = VertexArray::create();
-    _vb = DynamicVertexBuffer::create();
-    _ib = DynamicIndexBuffer::create();
+    _vb = VertexBuffer::create();
+    _ib = IndexBuffer::create();
     
     _quadNumbers = RenderingConst::RENDERER_QUADS;
     _maxVertices = _quadNumbers * 4;

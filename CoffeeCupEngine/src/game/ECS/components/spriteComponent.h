@@ -2,8 +2,8 @@
 
 #include "../../../utils/utilities.h"
 #include "../component.h"
-#include "../../../rendering/texture/Texture.h"
-#include "../../../rendering/window/window.h"
+#include "../../../rendering/texture.h"
+#include "../../../rendering/window.h"
 
 class Window;
 

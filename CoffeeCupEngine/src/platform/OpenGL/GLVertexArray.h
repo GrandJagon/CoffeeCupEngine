@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GlUtils.h"
-#include "../../rendering/vertexArray/VertexArray.h"
+#include "../../rendering/vertexArray.h"
 
 #include <memory>
 
@@ -15,7 +15,7 @@ class GLVertexArray : public VertexArray
         GLVertexArray() {std::cout << "OpenGl VAO created" << std::endl;};
         ~GLVertexArray() override; 
         void init() override;
-        void addBuffer(const std::shared_ptr<DynamicVertexBuffer> vb, const std::shared_ptr<VertexBufferLayout> layout) const override;
+        void addBuffer(const std::shared_ptr<VertexBuffer> vb, const std::shared_ptr<VertexBufferLayout> layout) const override;
         void bind() const override;
         void unbind() const override;
 };

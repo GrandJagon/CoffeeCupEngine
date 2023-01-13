@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../rendering/window/window.h"
+#include "../../rendering/window.h"
 
 // Forward declared to avoid circular dependency, no method needed
 class Entity;
