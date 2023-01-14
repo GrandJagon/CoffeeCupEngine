@@ -43,36 +43,22 @@ class Game
         
     public:
         Game() {};
-        ~Game();
+        virtual ~Game();
 
-        // Singleton instance getter
-        static Game* instance() {
-            static Game instance;
-            return &instance;
-        };
-
-        void init(std::string title, int width, int height);
-
-        // To be used later when instantiating game class according to desired game
-        void setValidKeys(std::vector<Key>);
+        virtual void init(std::string title, int width, int height);
         
-        void start();
+        virtual void start();
+        
+        // Main game loop
+        virtual void run();
 
-        void update(float dt);
+        virtual void update(float dt);
 
-        void processEvents();
+        virtual void processEvents();
 
         // Updates to be made once we sure the first ones are done
-        void lateUpdate();
-        void render();
-        void pause();
-        void shutDown();
-
-        // Subsystems getters for global access
-        // TO USE IF WE GO BACK FRON SINGLETON TO REGULAR DATA MEMBERS
-        std::shared_ptr<Window> window() {return _window;};
-        std::shared_ptr<Renderer> renderer() {return _renderer;};
-        std::shared_ptr<TextureManager> textureManager() {return _textureManager;};
-        std::shared_ptr<InputManager> inputManager() {return _inputManager;};
-
+        virtual void lateUpdate();
+        virtual void render();
+        virtual void pause();
+        virtual void shutDown();
 };

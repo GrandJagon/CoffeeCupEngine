@@ -32,11 +32,6 @@ Game::~Game()
     _window->destroy();
 }
 
-void Game::setValidKeys(std::vector<Key> keys)
-{
-    
-}
-
 void Game::start()
 {
     _state = GameState::running;
