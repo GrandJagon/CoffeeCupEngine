@@ -42,7 +42,32 @@ void Game::processEvents()
     
 }
 
+void Game::update(float dt)
+{
+
+}
+
+void Game::lateUpdate()
+{
+
+}
+
+void Game::render()
+{
+
+}
+
+void Game::run()
+{
+
+}
+
 void Game::pause()
 {
     _state = GameState::pause;
+}
+
+void Game::shutDown()
+{
+    
 }

@@ -1,0 +1,100 @@
+# Add warning dislay to existing compile flag
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall") 
+# Setting engine library output dir to /build
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
+if(UNIX)
+    message("This is ${CMAKE_SYSTEM_NAME}")
+    add_definitions(-DCCE_PLATFORM_LINUX)
+elseif(WIN32)
+    message("This is windows")
+    add_definitions(-DCCE_PLATFORM_WINDOWS)
+endif()
+
+# Adding GLM CMakeLists
+add_subdirectory(vendors/glm)
+
+# Building SDL2 
+file(GLOB SDL2_H "vendors/SDL2/*.h")
+add_library(SDL2 SHARED ${SDL2_H})
+set_target_properties(SDL2 PROPERTIES LINKER_LANGUAGE CXX)
+
+# Building STB_IMAGE
+file(GLOB STB_IMAGE_SRC "vendors/stb_image/*.cpp")
+file(GLOB STB_IMAGE_H "vendors/stb_image/*.h")
+add_library(STB_IMAGE SHARED ${STB_IMAGE_SRC} ${STB_IMAGE_H})
+
+
+# Finding required  ---------------- TO BE TESTED ON WINDOWS
+find_package(OpenGL REQUIRED)
+find_package(glfw3 REQUIRED)
+find_package(GLUT REQUIRED)
+find_package(GLEW REQUIRED)
+
+
+# Setting lib folders as variable
+set(LIBS_DIR ${OPENGL_INCLUDE_DIRS} ${GLFW_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} )
+
+# Setting libs list as variable
+set(LIBS ${OPENGL_LIBRARIES} ${GLFW_LIBRARIES} ${GLUT_LIBRARIES} ${GLEW_LIBRARIES} SDL2 STB_IMAGE)
+
+
+
+# Building engine as shared library
+add_library(CCEngine SHARED
+    src/events/eventManager.cpp
+    src/game/scenes/scene.cpp
+    src/game/scenes/sceneManager.cpp
+    src/game/game.cpp
+    src/game/ECS/entity.cpp
+    src/game/ECS/components/spriteComponent.cpp
+    src/game/ECS/components/transformComponent.cpp
+    src/game/ECS/component.cpp
+    src/platform/OpenGL/GLIndexBuffer.cpp
+    src/platform/OpenGL/GLVertexArray.cpp
+    src/platform/OpenGL/GLShader.cpp
+    src/platform/OpenGL/GLRenderer.cpp
+    src/platform/OpenGL/GlUtils.cpp
+    src/platform/OpenGL/GLVertexBufferLayout.cpp
+    src/platform/OpenGL/GLTextureManager.cpp
+    src/platform/OpenGL/GLVertexBuffer.cpp
+    src/platform/SDL/SDLWindow.cpp
+    src/rendering/shader.cpp
+    src/rendering/quad.cpp
+    src/rendering/indexBuffer.cpp
+    src/rendering/renderer.cpp
+    src/rendering/camera.cpp
+    src/rendering/texture.cpp
+    src/rendering/window.cpp
+    src/rendering/textureManager.cpp
+    src/rendering/vertexBuffer.cpp
+    src/rendering/vertexArray.cpp
+    src/rendering/vertexBufferLayout.cpp
+    src/input/bitmask.cpp
+    src/input/inputManager.cpp    
+)
+
+target_precompile_headers(
+    CCEngine PRIVATE
+    src/pch.h
+)
+
+target_include_directories(
+    CCEngine PUBLIC
+    ${LIBS_DIR}
+    src/events/
+    src/game/
+    src/game/ECS/
+    src/game/scenes
+    src/input/
+    src/platform/OpenGL/
+    src/platform/SDL/
+    src/rendering/
+    src/utils/
+    vendors/glm
+    vendors/imgui
+    vendors/SDL2
+    vendors/stb_image
+)
+
+target_link_libraries(CCEngine ${LIBS})
