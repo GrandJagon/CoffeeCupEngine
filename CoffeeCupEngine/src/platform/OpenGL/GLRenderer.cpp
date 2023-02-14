@@ -39,10 +39,12 @@ void GLRenderer::init()
     _quads = new Quad[_quadNumbers];
     _currentQuad = _quads;
 
-    std::string shaderPath = "../res/shaders/Texture.shader";
+    std::string shaderString = 
+    #include "../../../res/shaders/Texture.shader"
+    ;
 
     _shader = Shader::create();
-    _shader->init(shaderPath);
+    _shader->init(shaderString);
 
     // White texture at slot 0
     uint32_t white = 0xffffffff;

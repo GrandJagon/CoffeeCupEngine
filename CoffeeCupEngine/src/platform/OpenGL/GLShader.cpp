@@ -1,11 +1,11 @@
 #include "GLShader.h"
 
-void GLShader::init(std::string &filePath)
-{
-    ShaderObject so = parseShaderFile(filePath);
+void GLShader::init(std::string &shaderString)
+{   
+    ShaderObject so = parseShaderString(shaderString);
     m_id = createShader(so.vShader, so.fShader);
 
-    std::cout << "Shader at path " << filePath << " initiated with id " << m_id << std::endl;
+    std::cout << "Shader initiated with id " << m_id << std::endl;
 }
 
 GLShader::~GLShader()

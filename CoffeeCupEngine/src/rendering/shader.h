@@ -1,8 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <memory>
-
+#include "../pch.h"
 #include "../utils/utilities.h"
 
 
@@ -22,10 +20,11 @@ class Shader
 {
     protected:
         ShaderObject parseShaderFile(std::string &filePath);
+        ShaderObject parseShaderString(std::string &shaderString);
     
     public:
         virtual ~Shader() = default;
-        virtual void init(std::string &filePath) = 0;
+        virtual void init(std::string &shaderString) = 0;
         virtual void bind() const = 0;
         virtual void unbind() const = 0;
         virtual int getUniformLocation(const std::string &name) {throw std::runtime_error("Method not implemented");};

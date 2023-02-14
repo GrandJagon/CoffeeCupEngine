@@ -14,11 +14,12 @@ class GLShader : public Shader
     
     protected:
         ShaderObject parseShaderFile(std::string &filePath);
+        ShaderObject parseShaderString(std::string &shaderString);
         
     public:
         GLShader() = default;
         ~GLShader();
-        void init(std::string &filePath) override;
+        void init(std::string &shaderString) override;
         void bind() const override;
         void unbind() const override;
         int getUniformLocation(const std::string &name) override;

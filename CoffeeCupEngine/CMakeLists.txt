@@ -1,7 +1,8 @@
 # Add warning dislay to existing compile flag
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall") 
-# Setting engine library output dir to /build
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+
 
 if(UNIX)
     message("This is ${CMAKE_SYSTEM_NAME}")
@@ -14,11 +15,6 @@ endif()
 # Adding GLM CMakeLists
 add_subdirectory(vendors/glm)
 
-# Building SDL2 
-file(GLOB SDL2_H "vendors/SDL2/*.h")
-add_library(SDL2 SHARED ${SDL2_H})
-set_target_properties(SDL2 PROPERTIES LINKER_LANGUAGE CXX)
-
 # Building STB_IMAGE
 file(GLOB STB_IMAGE_SRC "vendors/stb_image/*.cpp")
 file(GLOB STB_IMAGE_H "vendors/stb_image/*.h")
@@ -30,15 +26,14 @@ find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(GLEW REQUIRED)
+find_package(SDL2 REQUIRED)
 
 
 # Setting lib folders as variable
-set(LIBS_DIR ${OPENGL_INCLUDE_DIRS} ${GLFW_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} )
+set(LIBS_DIR ${OPENGL_INCLUDE_DIRS} ${GLFW_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS})
 
 # Setting libs list as variable
-set(LIBS ${OPENGL_LIBRARIES} ${GLFW_LIBRARIES} ${GLUT_LIBRARIES} ${GLEW_LIBRARIES} SDL2 STB_IMAGE)
-
-
+set(LIBS ${OPENGL_LIBRARIES} ${GLFW_LIBRARIES} ${GLUT_LIBRARIES} ${GLEW_LIBRARIES} ${SDL2_LIBRARIES} STB_IMAGE)
 
 # Building engine as shared library
 add_library(CCEngine SHARED
@@ -91,10 +86,11 @@ target_include_directories(
     src/platform/SDL/
     src/rendering/
     src/utils/
-    vendors/glm
-    vendors/imgui
-    vendors/SDL2
-    vendors/stb_image
+    vendors/SDL2/
+    vendors/glm/
+    vendors/imgui/
+    vendors/stb_image/
 )
 
-target_link_libraries(CCEngine ${LIBS})
+target_link_libraries(CCEngine PUBLIC ${LIBS})
+

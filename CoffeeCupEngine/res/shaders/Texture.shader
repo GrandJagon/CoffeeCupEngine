@@ -1,4 +1,4 @@
-#shader vertex
+R"(#shader vertex
 #version 450 core
 
 layout(location = 0) in vec3 inPosition;
@@ -35,6 +35,5 @@ uniform sampler2D uTextures[32];
 void main() 
 {   
    color = texture(uTextures[int(vTexId)], vTextCoord) * vColor;
-};
-
+};)"
 
