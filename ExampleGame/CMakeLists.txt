@@ -1,10 +1,16 @@
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-add_executable (GameExample src/gameExample.cpp)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/bin")
+add_executable (ExampleGame src/exampleGame.cpp)
 
-target_link_libraries (GameExample LINK_PUBLIC CCEngine)
+# Copy assets into build folder
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${PROJECT_SOURCE_DIR}/build)
+
+
+target_link_libraries (ExampleGame LINK_PUBLIC CCEngine)
+
+include_directories(${PROJECT_SOURCE_DIR}/CoffeeCupEngine/include)
 
 target_include_directories(
-    GameExample PUBLIC
+    ExampleGame PUBLIC
     src/
 )

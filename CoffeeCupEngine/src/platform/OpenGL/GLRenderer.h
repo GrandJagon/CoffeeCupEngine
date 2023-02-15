@@ -12,6 +12,7 @@ class GLRenderer : public Renderer
         std::shared_ptr<IndexBuffer> _ib;
         std::shared_ptr<Shader> _shader;
         std::shared_ptr<Texture> _whiteTexture;
+  
         unsigned int _maxVertices;
         unsigned int _quadNumbers;
         unsigned int _vertexOffset;

@@ -48,18 +48,9 @@ void SDLWindow::init(std::string title, int width, int height, bool fullScreen)
 
 void SDLWindow::endFrame()
 {
-   /* if(glfwWindowShouldClose(_window))
-    {
-        this->destroy();
-    }*/
-
     
-    
-
     // Swaps buffer
     SDL_GL_SwapWindow(_window);
-
-    //glfwPollEvents();
 }
 
 void SDLWindow::resize(int width, int height)

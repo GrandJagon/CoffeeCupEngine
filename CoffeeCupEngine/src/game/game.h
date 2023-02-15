@@ -26,7 +26,7 @@ enum GameState
 
 class Game
 {     
-    private:
+    protected:
         // Core data members
         std::string _title;
         GameState _state;

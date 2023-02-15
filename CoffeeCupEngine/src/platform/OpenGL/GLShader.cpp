@@ -32,7 +32,6 @@ unsigned int GLShader::compileShader(std::string &source, unsigned int type)
     // Pointer to source data
     const char* sourceCode = source.c_str();
 
-
     // Assigning source code to shader
     GlCall(glShaderSource(id, 1, &sourceCode, nullptr));
 
