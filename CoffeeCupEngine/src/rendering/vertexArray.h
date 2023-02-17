@@ -1,10 +1,8 @@
 #pragma once
 
+#include <memory>
 #include "vertexBuffer.h"
 #include "vertexBufferLayout.h"
-#include "quad.h"
-
-#include <memory>
 
 
 class VertexArray

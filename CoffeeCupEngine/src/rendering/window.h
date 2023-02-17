@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../utils/utilities.h"
 
+#include <string>
 #include <memory>
 
 class Window
@@ -25,7 +25,5 @@ class Window
         virtual void render() {};
         
         // Returns the proper window given the API
-        static std::shared_ptr<Window> create();
-
-
+        static std::unique_ptr<Window> create();
 };

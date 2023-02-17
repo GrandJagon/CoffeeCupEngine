@@ -1,4 +1,6 @@
+#include "CCEnginePrecompiled.h"
 #include "GLIndexBuffer.h"
+#include "GlUtils.h"
 
 void GLIndexBuffer::init(unsigned int size) 
 {

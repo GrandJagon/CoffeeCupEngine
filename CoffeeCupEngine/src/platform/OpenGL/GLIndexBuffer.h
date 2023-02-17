@@ -1,7 +1,6 @@
 #pragma once
 
-#include "GlUtils.h"
-#include "../../rendering/indexBuffer.h"
+#include "rendering/indexBuffer.h"
 
 
 #define BUFFER_OFFSET(offset) (static_cast<char*>(0) + (offset))

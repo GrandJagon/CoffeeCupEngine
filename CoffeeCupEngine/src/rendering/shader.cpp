@@ -1,6 +1,7 @@
+#include "CCEnginePrecompiled.h"
 #include "shader.h"
 
-#include "../platform/OpenGL/GLShader.h"
+#include "platform/OpenGL/GLShader.h"
 
 ShaderObject GLShader::parseShaderFile(std::string &filePath)
 {

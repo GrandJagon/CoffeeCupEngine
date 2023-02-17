@@ -1,9 +1,8 @@
 #pragma once
 
-#include "texture.h"
-
-#include <vector>
 #include <memory>
+
+#include "texture.h"
 
 
 class TextureManager

@@ -1,9 +1,11 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 
 #include "scene.h"
-#include "../../rendering/window.h"
+
+#include "rendering/window.h"
 
 class SceneManager
 {

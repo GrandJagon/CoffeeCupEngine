@@ -1,6 +1,7 @@
+#include "CCEnginePrecompiled.h"
 #include "GLVertexBuffer.h"
-
-class Vertex;
+#include "GlUtils.h"
+#include "rendering/quad.h"
 
 void GLVertexBuffer::init(unsigned int size)
 {

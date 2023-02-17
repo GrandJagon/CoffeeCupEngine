@@ -1,4 +1,6 @@
+#include "CCEnginePrecompiled.h"
 #include "GLShader.h"
+#include "GlUtils.h"
 
 void GLShader::init(std::string &shaderString)
 {   

@@ -1,4 +1,6 @@
+#include "CCEnginePrecompiled.h"
 #include "SDLWindow.h"
+#include <SDL2/SDL.h>
 
 void SDLWindow::init(std::string title, int width, int height, bool fullScreen)
 {   
@@ -41,8 +43,6 @@ void SDLWindow::init(std::string title, int width, int height, bool fullScreen)
     {
         SDL_SetWindowFullscreen(_window, SDL_FALSE);
     }
-
-    glClearColor(1.0f,0.0f,0.0f,1.0f);
 }
 
 

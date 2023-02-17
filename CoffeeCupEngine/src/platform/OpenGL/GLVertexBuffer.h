@@ -1,7 +1,6 @@
 #pragma once
 
-#include "GlUtils.h"
-#include "../../rendering/vertexBuffer.h"
+#include "rendering/vertexBuffer.h"
 
 
 class GLVertexBuffer : public VertexBuffer

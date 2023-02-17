@@ -1,3 +1,4 @@
+#include "CCEnginePrecompiled.h"
 #include "quad.h"
 
 void Quad::setData(glm::vec3 position, glm::vec2 size, glm::vec4 color) 

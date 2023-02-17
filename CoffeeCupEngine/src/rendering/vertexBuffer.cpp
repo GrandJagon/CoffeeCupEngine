@@ -1,5 +1,6 @@
+#include "CCEnginePrecompiled.h"
 #include "vertexBuffer.h"
-#include "../platform/OpenGL/GLVertexBuffer.h"
+#include "platform/OpenGL/GLVertexBuffer.h"
 
 std::shared_ptr<VertexBuffer> VertexBuffer::create()
 {

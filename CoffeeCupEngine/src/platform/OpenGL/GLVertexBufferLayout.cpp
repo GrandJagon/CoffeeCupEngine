@@ -1,4 +1,6 @@
+#include "CCEnginePrecompiled.h"
 #include "GLVertexBufferLayout.h"
+#include "GlUtils.h"
 
 void GLVertexBufferLayout::addElement(unsigned int type, unsigned int count, bool normalized)
 {
@@ -10,7 +12,6 @@ void GLVertexBufferLayout::addElement(unsigned int type, unsigned int count, boo
         }
     );
     m_stride += getSizeOfType(type) * count;
-    std::cout << m_stride << std::endl;
 }
 
 void GLVertexBufferLayout::addElements(std::vector<std::array<unsigned int, 3>> elements)

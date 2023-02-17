@@ -1,10 +1,6 @@
 #pragma once
 
-#include "GlUtils.h"
-#include "../../rendering/vertexArray.h"
-
-#include <memory>
-
+#include "rendering/vertexArray.h"
 
 class GLVertexArray : public VertexArray
 {

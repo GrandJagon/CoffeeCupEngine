@@ -1,7 +1,9 @@
 #pragma once
 
-#include "../../../utils/utilities.h"
-#include "../component.h"
+#include "game/ECS/component.h"
+#include "glm/vec3.hpp"
+#include "glm/vec2.hpp"
+
 
 class TransformComponent : public Component 
 {

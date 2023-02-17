@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../../../utils/utilities.h"
-#include "../component.h"
-#include "../../../rendering/texture.h"
-#include "../../../rendering/window.h"
+#include "game/ECS/component.h"
+#include "rendering/texture.h"
+#include "rendering/window.h"
+#include "glm/vec2.hpp"
+#include "glm/vec3.hpp"
 
-class Window;
 
 class SpriteComponent : public Component
 {

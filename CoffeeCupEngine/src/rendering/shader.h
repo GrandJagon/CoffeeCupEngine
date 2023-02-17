@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../pch.h"
-#include "../utils/utilities.h"
+#include <string>
+#include <memory>
 
+#include "glm/glm.hpp"
 
 //Shader Object struct
 struct ShaderObject {

@@ -1,5 +1,6 @@
+#include "CCEnginePrecompiled.h"
 #include "indexBuffer.h"
-#include "../platform/OpenGL/GLIndexBuffer.h"
+#include "platform/OpenGL/GLIndexBuffer.h"
 
 std::shared_ptr<IndexBuffer> IndexBuffer::create()
 {

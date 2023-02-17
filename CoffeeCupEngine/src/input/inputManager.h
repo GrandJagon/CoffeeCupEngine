@@ -1,13 +1,11 @@
 #pragma once
 
-#include "inputContext.h"
-#include "bitmask.h"
-#include "command.h"
-#include "../utils/utilities.h"
-
 #include <memory>
 #include <unordered_map>
 #include <string>
+
+class InputContext;
+
 
 class InputManager
 {

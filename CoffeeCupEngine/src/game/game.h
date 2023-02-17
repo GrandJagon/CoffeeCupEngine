@@ -1,17 +1,15 @@
 #pragma once
 
-#include "gameConstants.h"
+#include <memory>
+#include <iostream>
 
-#include "scenes/sceneManager.h"
 
-#include "../utils/utilities.h"
 
-#include "../rendering/window.h"
-#include "../rendering/renderer.h"
-#include "../rendering/textureManager.h"
-#include "../rendering/renderingConstants.h"
-
-#include "../input/inputManager.h"
+class Window;
+class Renderer;
+class TextureManager;
+class InputManager;
+class SceneManager;
 
 
 // Defined in inputHandler.h
@@ -32,14 +30,14 @@ class Game
         GameState _state;
         float _deltaTime;
 
-        std::shared_ptr<Window> _window;
+        std::unique_ptr<Window> _window;
 
         // Subsystems
         std::shared_ptr<Renderer> _renderer;
         std::shared_ptr<TextureManager> _textureManager;
         std::shared_ptr<InputManager> _inputManager;
 
-        SceneManager _sceneManager;
+        std::unique_ptr<SceneManager> _sceneManager;
         
     public:
         Game() {};

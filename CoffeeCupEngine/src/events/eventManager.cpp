@@ -1,3 +1,5 @@
+#include "CCEnginePrecompiled.h"
+
 #include "eventManager.h"
 
 

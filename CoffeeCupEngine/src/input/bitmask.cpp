@@ -1,3 +1,4 @@
+#include "CCEnginePrecompiled.h"
 #include "bitmask.h"
 
 uint32_t Bitmask::getMask() const

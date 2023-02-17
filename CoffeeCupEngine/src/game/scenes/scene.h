@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../rendering/window.h"
+class Window;
 
 class Scene
 {

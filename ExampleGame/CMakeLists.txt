@@ -6,11 +6,10 @@ add_executable (ExampleGame src/exampleGame.cpp)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${PROJECT_SOURCE_DIR}/build)
 
 
-target_link_libraries (ExampleGame LINK_PUBLIC CCEngine)
-
-include_directories(${PROJECT_SOURCE_DIR}/CoffeeCupEngine/include)
+target_link_libraries(ExampleGame PRIVATE CCEngine)
 
 target_include_directories(
-    ExampleGame PUBLIC
-    src/
+    ExampleGame PRIVATE
+    ${PROJECT_SOURCE_DIR}/CoffeeCupEngine/include
+    ${PROJECT_SOURCE_DIR}/CoffeeCupEngine/src
 )

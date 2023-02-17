@@ -1,5 +1,7 @@
+#include "CCEnginePrecompiled.h"
 #include "GLVertexArray.h"
 #include "GLVertexBufferLayout.h"
+#include "GlUtils.h"
 
 
 GLVertexArray::~GLVertexArray()

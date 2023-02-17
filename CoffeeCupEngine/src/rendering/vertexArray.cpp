@@ -1,5 +1,6 @@
+#include "CCEnginePrecompiled.h"
 #include "vertexArray.h"
-#include "../platform/OpenGL/GLVertexArray.h"
+#include "platform/OpenGL/GLVertexArray.h"
 
 std::shared_ptr<VertexArray> VertexArray::create()
 {

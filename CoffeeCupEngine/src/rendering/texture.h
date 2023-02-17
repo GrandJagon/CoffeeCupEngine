@@ -1,5 +1,6 @@
 #pragma once
-#include "../utils/utilities.h"
+
+#include <string>
 
 
 class Texture

@@ -2,6 +2,13 @@
 
 #include "exampleGame.h"
 
+/// TO BE ADDED TO THE CAMERA CLASS WHEN CREATED
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+/// JUST HERE TO RUN THE EXANPLE BEFORE THE GAME LOOP IS PROPERLY CODED
+#include <SDL2/SDL.h>
+
 Game* createGame()
 {
     return new ExampleGame();

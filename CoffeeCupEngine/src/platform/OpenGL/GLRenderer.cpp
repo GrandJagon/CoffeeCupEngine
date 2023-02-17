@@ -1,4 +1,8 @@
+#include "CCEnginePrecompiled.h"
 #include "GLRenderer.h"
+#include "GlUtils.h"
+
+
 
 void GLRenderer::init()
 {
@@ -60,6 +64,8 @@ void GLRenderer::init()
     }
 
     _shader->setUniformArrayInt("uTextures", 32, samplers);
+
+    glClearColor(1.0f,0.0f,0.0f,1.0f);
 
     std::cout << "_____________________RENDERER INITIATED_____________________" << std::endl;
 }

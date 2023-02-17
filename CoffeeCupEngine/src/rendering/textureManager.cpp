@@ -1,5 +1,6 @@
+#include "CCEnginePrecompiled.h"
 #include "textureManager.h"
-#include "../platform/OpenGL/GLTextureManager.h"
+#include "platform/OpenGL/GLTextureManager.h"
 
 std::shared_ptr<TextureManager> TextureManager::instance()
 {

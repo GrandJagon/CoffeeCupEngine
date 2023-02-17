@@ -1,6 +1,10 @@
 #pragma once
-#include <array>
-#include "../utils/utilities.h"
+
+#include <ostream>
+
+#include "glm/vec2.hpp"
+#include "glm/vec3.hpp"
+#include "glm/vec4.hpp"
 
 struct Vertex
 {

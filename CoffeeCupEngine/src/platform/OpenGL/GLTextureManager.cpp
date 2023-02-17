@@ -1,4 +1,8 @@
+#include "CCEnginePrecompiled.h"
 #include "GLTextureManager.h"
+#include "GlUtils.h"
+
+#include "stb_image.h"
 
 void GLTextureManager::init()
 {

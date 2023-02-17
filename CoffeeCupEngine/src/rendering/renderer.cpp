@@ -1,6 +1,7 @@
+#include "CCEnginePrecompiled.h"
 #include "renderer.h"
 
-#include "../platform/OpenGL/GLRenderer.h"
+#include "platform/OpenGL/GLRenderer.h"
 
 std::shared_ptr<Renderer> Renderer::instance()
 {

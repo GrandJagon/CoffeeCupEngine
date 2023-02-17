@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../utils/utilities.h"
+#include <SDL2/SDL_events.h>
 
 // Each command should subclassed for a given game 
 // Execute function has to be overriden

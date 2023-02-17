@@ -1,3 +1,4 @@
+#include "CCEnginePrecompiled.h"
 #include "transformComponent.h"
 
 void TransformComponent::setPosition(glm::vec3 newPosition)

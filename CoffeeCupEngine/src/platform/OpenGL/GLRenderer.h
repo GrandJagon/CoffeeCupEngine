@@ -1,8 +1,15 @@
 #pragma once
 
-#include "GlUtils.h"
-#include "../../rendering/renderer.h"
-#include "../../rendering/renderingConstants.h"
+#include "rendering/renderer.h"
+#include "rendering/textureManager.h"
+#include "rendering/vertexArray.h"
+#include "rendering/vertexBuffer.h"
+#include "rendering/indexBuffer.h"
+#include "rendering/shader.h"
+#include "rendering/texture.h"
+#include "rendering/quad.h"
+#include "rendering/renderingConstants.h"
+
 
 class GLRenderer : public Renderer
 {

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../utils/utilities.h"
-#include "../../rendering/window.h"
+#include "rendering/window.h"
 
+class SDL_Window;
 
 class SDLWindow : public Window
 { 

@@ -1,15 +1,13 @@
 #pragma once
 
-#include "renderingConstants.h"
-#include "vertexBuffer.h"
-#include "indexBuffer.h"
-#include "vertexArray.h"
-#include "vertexBufferLayout.h"
-#include "shader.h"
-#include "texture.h"
-#include "textureManager.h"
-
 #include <memory>
+
+#include "glm/glm.hpp"
+
+
+class Shader;
+class Texture;
+
 
 class Renderer
 {

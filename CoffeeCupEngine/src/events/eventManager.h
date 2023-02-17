@@ -1,12 +1,10 @@
 #pragma once
 
 #include <queue>
-#include <memory>
 #include <unordered_map>
-#include <vector>
+#include <memory>
 #include <algorithm>
 
-#include "../utils/utilities.h"
 #include "event.h"
 #include "eventHandler.h"
 

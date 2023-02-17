@@ -1,4 +1,15 @@
+#include "CCEnginePrecompiled.h"
+
+#include <GL/glew.h>
+
 #include "game.h"
+#include "rendering/window.h"
+#include "rendering/renderer.h"
+#include "rendering/textureManager.h"
+#include "input/inputManager.h"
+#include "scenes/sceneManager.h"
+#include "rendering/renderingConstants.h"
+#include "gameConstants.h"
 
 void Game::init(std::string title, int width, int height)
 {

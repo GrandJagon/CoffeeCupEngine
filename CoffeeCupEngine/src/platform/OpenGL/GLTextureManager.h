@@ -1,10 +1,7 @@
 #pragma once
 
-#include "GlUtils.h"
-#include "../../rendering/textureManager.h"
+#include "rendering/textureManager.h"
 
-#include <vector>
-#include <memory>
 
 class GLTextureManager : public TextureManager
 {

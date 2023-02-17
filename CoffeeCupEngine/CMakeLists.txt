@@ -21,19 +21,20 @@ file(GLOB STB_IMAGE_H "vendors/stb_image/*.h")
 add_library(STB_IMAGE SHARED ${STB_IMAGE_SRC} ${STB_IMAGE_H})
 
 
+
 # Finding required  ---------------- TO BE TESTED ON WINDOWS
 find_package(OpenGL REQUIRED)
-find_package(glfw3 REQUIRED)
-find_package(GLUT REQUIRED)
+#find_package(glfw3 REQUIRED)
+#find_package(GLUT REQUIRED) those are not needed anymore
 find_package(GLEW REQUIRED)
 find_package(SDL2 REQUIRED)
 
 
 # Setting lib folders as variable
-set(LIBS_DIR ${OPENGL_INCLUDE_DIRS} ${GLFW_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS})
+set(LIBS_DIR ${OPENGL_INCLUDE_DIRS}  ${GLEW_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS})
 
 # Setting libs list as variable
-set(LIBS ${OPENGL_LIBRARIES} ${GLFW_LIBRARIES} ${GLUT_LIBRARIES} ${GLEW_LIBRARIES} ${SDL2_LIBRARIES} STB_IMAGE)
+set(LIBS ${OPENGL_LIBRARIES}  ${GLEW_LIBRARIES} ${SDL2_LIBRARIES} STB_IMAGE)
 
 # Building engine as shared library
 add_library(CCEngine SHARED
@@ -70,23 +71,15 @@ add_library(CCEngine SHARED
 )
 
 target_precompile_headers(
-    CCEngine PRIVATE
-    src/pch.h
+    CCEngine PUBLIC
+    src/CCEnginePrecompiled.h
 )
 
+# Adds the following directories to the target include directories
 target_include_directories(
     CCEngine PUBLIC
     ${LIBS_DIR}
-    src/events/
-    src/game/
-    src/game/ECS/
-    src/game/scenes
-    src/input/
-    src/platform/OpenGL/
-    src/platform/SDL/
-    src/rendering/
-    src/utils/
-    vendors/SDL2/
+    src/
     vendors/glm/
     vendors/imgui/
     vendors/stb_image/
