@@ -7,12 +7,12 @@
 class Entity
 {
     private:
-        std::vector<Component> _components;
+        std::vector<Component> _components; // objects or pointer ???
     
     public:
         void addComponent(Component component);
         virtual void update(float dt);
         virtual void lateUpdate();
-        virtual void draw(Window &window); 
+        virtual void draw(); 
  
 };

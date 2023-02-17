@@ -11,6 +11,8 @@ class TransformComponent : public Component
         glm::vec3 _position;
     
     public:
+        TransformComponent(Entity *owner, glm::vec3 position = {0,0,0}) : Component(owner) {_position = position;};
+
         const glm::vec2 getPosition() {return _position;};
         void setPosition(glm::vec3 newPos);
         void setPosition(glm::vec2 newPos);
@@ -19,7 +21,5 @@ class TransformComponent : public Component
         void setX(float x);    
         void setY(float y);
         void addX(float x);
-        void addY(float y);
-
-    
+        void addY(float y);  
 };

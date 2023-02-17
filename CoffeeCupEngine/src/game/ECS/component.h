@@ -13,9 +13,9 @@ class Component
     public:
         // Pointer to the owner to be passed
         Component(Entity *owner) : _owner(owner) {};
-        ~Component();
+        virtual ~Component() = default;
         virtual void update(float dt);
         virtual void lateUpdate();
-        virtual void draw(Window &window);
+        virtual void draw();
 
 };
