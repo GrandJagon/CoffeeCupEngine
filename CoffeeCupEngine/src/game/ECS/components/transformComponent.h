@@ -4,7 +4,7 @@
 #include "glm/vec3.hpp"
 #include "glm/vec2.hpp"
 
-
+/*
 class TransformComponent : public Component 
 {
     private:
@@ -22,4 +22,4 @@ class TransformComponent : public Component
         void setY(float y);
         void addX(float x);
         void addY(float y);  
-};
+};*/

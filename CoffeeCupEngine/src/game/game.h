@@ -6,6 +6,7 @@
 
 
 class Window;
+class Camera;
 class Renderer;
 class TextureManager;
 class InputManager;
@@ -31,6 +32,7 @@ class Game
         float _deltaTime;
 
         std::unique_ptr<Window> _window;
+        std::unique_ptr<Camera> _camera;
 
         // Subsystems
         std::shared_ptr<Renderer> _renderer;
@@ -40,7 +42,7 @@ class Game
         std::unique_ptr<SceneManager> _sceneManager;
         
     public:
-        Game() {};
+        Game() {std::cout << "gam create" << std::endl;};
         virtual ~Game();
 
         virtual void init(std::string title, int width, int height);
@@ -59,4 +61,7 @@ class Game
         virtual void render();
         virtual void pause();
         virtual void shutDown();
+
+        std::unique_ptr<Camera>& getCamera() { return _camera;};
+
 };

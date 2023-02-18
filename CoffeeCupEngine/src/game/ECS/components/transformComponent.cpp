@@ -1,6 +1,6 @@
 #include "CCEnginePrecompiled.h"
 #include "transformComponent.h"
-
+/*
 void TransformComponent::setPosition(glm::vec3 newPosition)
 {
     _position = newPosition;
@@ -40,5 +40,5 @@ void TransformComponent::addY(float y)
 {
     _position = glm::vec3(_position.x, _position.y + y, 0.0f);
 }
-
+*/
 

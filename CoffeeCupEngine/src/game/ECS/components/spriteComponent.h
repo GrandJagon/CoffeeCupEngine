@@ -9,7 +9,7 @@
 
 class Texture;
 
-class SpriteComponent : public Component
+/* class SpriteComponent : public Component
 {
     private:
         std::shared_ptr<Texture> _texture;
@@ -19,7 +19,7 @@ class SpriteComponent : public Component
     public:
         
         // Position should references owners transform component position
-        SpriteComponent(Entity *owner, std::shared_ptr<Texture> texture, glm::vec3 position , glm::vec2 size)
+        SpriteComponent(Entity *owner, std::shared_ptr<Texture> texture, glm::vec3 position, glm::vec2 size)
             : Component(owner) 
         {
             _texture = texture;
@@ -34,4 +34,4 @@ class SpriteComponent : public Component
         const glm::vec3 getPosition() {return _position;};
         const Texture getTexture() {return _texture;};
         const glm::vec2 getSize() {return _size;};
-};
+};*/

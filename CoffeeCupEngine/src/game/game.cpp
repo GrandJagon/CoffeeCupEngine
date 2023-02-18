@@ -4,6 +4,7 @@
 
 #include "game.h"
 #include "rendering/window.h"
+#include "rendering/camera.h"
 #include "rendering/renderer.h"
 #include "rendering/textureManager.h"
 #include "input/inputManager.h"
@@ -20,7 +21,8 @@ void Game::init(std::string title, int width, int height)
 
     _window = Window::create();
     _window->init(_title, width, height, GameConstants::FULLSCREEN);
-    //_window.setKeyCallBack(&_inputHandler.update);
+    
+    _camera = std::make_unique<Camera>(0, width, 0, height);
 
     glewExperimental = GL_TRUE;
 
