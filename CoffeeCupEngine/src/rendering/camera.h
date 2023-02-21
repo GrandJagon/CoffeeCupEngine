@@ -9,7 +9,7 @@ class Camera
     private: 
         glm::vec3 _position;
 
-        float _speed = 3;
+        float _speed = 5;
 
         // Adjusts coordinates to screen coordinates
         glm::mat4 _projectionMatrix;

@@ -68,6 +68,7 @@ add_library(CCEngine SHARED
     src/rendering/vertexBufferLayout.cpp
     src/input/bitmask.cpp
     src/input/inputManager.cpp    
+    src/input/inputContext.cpp
 )
 
 target_precompile_headers(

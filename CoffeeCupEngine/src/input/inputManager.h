@@ -10,7 +10,7 @@ class InputContext;
 class InputManager
 {
     private:
-        std::unordered_map<std::string, std::shared_ptr<InputContext>> _contexts;
+        std::unordered_map<std::string, std::shared_ptr<InputContext>> _inputContexts;
         std::shared_ptr<InputContext> _currContext;
 
     public:
@@ -22,8 +22,10 @@ class InputManager
         }
 
         void init();
-        void addContext(std::shared_ptr<InputContext> context);
+        void addContext(std:string contextName, std::shared_ptr<InputContext> context);
+        void setCurrentContext(std::string contextName);
         std::shared_ptr<InputContext> getCurrentContext() { return _currContext;};  // move to transfer ownership
-        void update();
-
+        void processMouseInputs();
+        void processKeyboardInputs();
+        void processControllerInputs();
  };
