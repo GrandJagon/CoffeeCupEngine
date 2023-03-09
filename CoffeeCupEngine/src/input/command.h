@@ -1,14 +1,16 @@
 #pragma once
 
-#include <SDL2/SDL_scancode.h>
+
+#include <iostream>
 
 // Each command should subclassed for a given game 
 // Execute function has to be overriden
 class Command
 {
     protected:
-        Command(void* input) : _input(input) {};
-        void* _input; // can be a scancode for keyboard events
+        Command(void *input, std::string name) : _input(input), _name(name) {};
+        void *_input; // key code or range
+        std::string _name; // command string name for mapping to input at creation
     
     public:
         virtual ~Command() {};
@@ -16,5 +18,8 @@ class Command
         // Object is optional an can be typecasted to any type as a command can have different target
         virtual void execute(void *object = nullptr) = 0;
 
-        void* getInput() { return _input;};
+        // Maps to new input in case user makes new settings
+        void setInput(void *input) { _input = input; };
+
+        void *getInput() { return _input;};
 };

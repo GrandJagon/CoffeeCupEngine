@@ -1,0 +1,9 @@
+{
+    "gameContext" : {
+        "KEY_LEFT": "goLeft",
+        "KEY_RIGHT": "goRight",
+        "KEY_UP": "goLeft",
+        "KEY_DOWN": "goRight",
+        "KEY_SPACE": "jump"
+    }
+}
