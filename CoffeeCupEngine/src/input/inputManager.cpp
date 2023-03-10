@@ -24,7 +24,6 @@ InputManager::setCurrentContext(std::string contextName)
 
 InputManager::processInputs()
 {
-    _currContext->pollEvents();
-    _currContext->executeCommands();
+
 }
 

@@ -3,11 +3,13 @@
 #include <memory>
 #include "inputEvents.h"
 
+// Abstract class, generates engine event from OS raw events
 class InputHandler
 {
     public:
         virtual ~InputHandler() = default;
         static std::shared_ptr<InputHandler> instance();
-
-        void pollInputs();
+        
+        // Poll an input from the os raw events queue
+        InputEvent pollInput();
 };
