@@ -10,7 +10,7 @@ void EventManager::queue(std::shared_ptr<Event> event)
 
 void EventManager::process(std::shared_ptr<Event> event)
 {
-    SingleEventHandlers handlers = _handlers.at(event->type);
+    SingleEventHandlers handlers = _handlers.at(event->category);
 
     for(auto handler = handlers.begin(); handler != handlers.end(); ++handler)
     {

@@ -22,6 +22,7 @@ class InputManager
         }
 
         void init();
+        void loadInputMapping(); // reads JSON input mapping file and maps an input to each command given their name
         void addContext(std:string contextName, std::shared_ptr<InputContext> context);
         void setCurrentContext(std::string contextName);
         std::shared_ptr<InputContext> getCurrentContext() { return _currContext;};  // move to transfer ownership

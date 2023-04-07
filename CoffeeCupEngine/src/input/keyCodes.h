@@ -3,7 +3,6 @@
 #include <SDL2/SDL_keycode.h>
 
 // All keycodes are included from SDL2
-
 static const int KEY_LEFT = SDLK_LEFT;
 static const int KEY_UP = SDLK_UP;
 static const int KEY_RIGHT = SDLK_RIGHT;

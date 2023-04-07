@@ -12,4 +12,7 @@ class InputHandler
         
         // Poll an input from the os raw events queue
         InputEvent pollInput();
+
+        // Poll all inputs 
+        void pollInputs();
 };
