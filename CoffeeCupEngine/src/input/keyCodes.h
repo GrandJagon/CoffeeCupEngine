@@ -1,8 +1,11 @@
 #pragma once
 
 #include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_mouse.h>
 
 // All keycodes are included from SDL2
+
+// Keyboard keys
 static const int KEY_LEFT = SDLK_LEFT;
 static const int KEY_UP = SDLK_UP;
 static const int KEY_RIGHT = SDLK_RIGHT;
@@ -241,3 +244,11 @@ static const int KEY_UNDO = SDLK_UNDO;
 static const int KEY_VOLUMEDOWN = SDLK_VOLUMEDOWN;
 static const int KEY_VOLUMEUP = SDLK_VOLUMEUP;
 static const int KEY_WWW = SDLK_WWW;
+
+
+// Mouse buttons
+static const int MOUSE_BUTTON_LEFT = SDL_BUTTON_LEFT;
+static const int MOUSE_BUTTON_MIDDLE = SDL_BUTTON_MIDDLE;
+static const int MOUSE_BUTTON_RIGHT = SDL_BUTTON_RIGHT;
+static const int  MOUSE_BUTTON_X = SDL_BUTTON_X1;
+static const int MOUSE_BUTTON_X = SDL_BUTTON_X2;

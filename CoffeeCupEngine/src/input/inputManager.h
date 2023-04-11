@@ -4,14 +4,15 @@
 #include <unordered_map>
 #include <string>
 
+#include "events/eventHandler.h"
+
 class InputContext;
 
 
-class InputManager
+class InputManager : public EventHandler
 {
     private:
         std::unordered_map<std::string, std::shared_ptr<InputContext>> _inputContexts;
-        std::shared_ptr<InputContext> _currContext;
 
     public:
         InputManager();
@@ -23,10 +24,14 @@ class InputManager
 
         void init();
         void loadInputMapping(); // reads JSON input mapping file and maps an input to each command given their name
+        
         void addContext(std:string contextName, std::shared_ptr<InputContext> context);
-        void setCurrentContext(std::string contextName);
-        std::shared_ptr<InputContext> getCurrentContext() { return _currContext;};  // move to transfer ownership
+        void setContextStatus(std::string contextName, bool status);
+
         void processMouseInputs();
         void processKeyboardInputs();
         void processControllerInputs();
+        
+        // overriden from eventHandler.h
+        void onEvent(const std::shared_ptr<Event>) override;
  };
