@@ -19,13 +19,13 @@ class InputContext
         std::vector<std::shared_ptr<Command>> _commands;
 
     public:
-        bool isActive() {return _active;};
+        bool isActive() {return _status;};
         bool isBlocking() {return _blocking;};
         ContextType getType() {return _type;};
         Bitmask& getState() {return _state;};
         glm::vec2 getCursorPos() {return _cursorPos;};
 
-        void setStatus(bool active) {_active = active;};
+        void setStatus(bool active) {_status = active;};
 
         void addCommand(std::shared_ptr<Command> command);
         
