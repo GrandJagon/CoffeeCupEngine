@@ -5,10 +5,11 @@
 
 #include "command.h"
 #include "bitmask.h"
+#include "utils/linkedList.h"
 
 typedef enum ContextType {MOUSE_KEYBOARD, GAMEPAD};
 
-class InputContext
+class InputContext : public Node
 {
     private:
         bool _status; // active or not
@@ -30,5 +31,5 @@ class InputContext
         void addCommand(std::shared_ptr<Command> command);
         
         // Iterates through all commands and execute event if match
-        void processEvent(std::shared_ptr<Event> event);
+        void processInput(std::shared_ptr<Event> event);
 }

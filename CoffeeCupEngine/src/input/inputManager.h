@@ -5,6 +5,7 @@
 #include <string>
 
 #include "events/eventHandler.h"
+#include "inputContextChain.h"
 
 class InputContext;
 
@@ -12,9 +13,8 @@ class InputContext;
 class InputManager : public EventHandler
 {
     private:
-        std::unordered_map<std::string, std::shared_ptr<InputContext>> _inputContextsMap; // for activation/deactivation
-        std::vector<std::shared_ptr<InputContext> _inputContextsList; // for iteration
-
+        InputContextChain _contextChain; // Can be iterated and access with context name
+        
     public:
         InputManager();
 
