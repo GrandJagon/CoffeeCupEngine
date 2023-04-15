@@ -4,6 +4,7 @@ class Node
 {
     public: 
         Node *next = nullptr;
+        virtual ~Node() = default;
 };
 
 
@@ -22,7 +23,7 @@ class LinkedList
                 return;
             };
 
-            newNode.next = head;
+            newNode->next = head;
             head = newNode;
         };
 

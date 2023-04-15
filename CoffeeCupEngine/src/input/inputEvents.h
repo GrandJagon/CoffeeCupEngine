@@ -3,16 +3,15 @@
 #include "events/event.h"
 
 
-typedef enum INPUT_EVENT_CATEGORY {KEYBOARD_EVENT, MOUSE_EVENT, CONTROLLER_EVENT, WINDOW_EVENT};
-typedef enum ACTION {PRESSED, RELEASED};
-typedef enum MOUSE_BUTTON {MOUSE_LEFT, MOUSE_MIDDLE, MOUSE_RIGHT, MOUSE_};
-typedef enum CONTROLLER_BUTTON {BUTTON_ONE, BUTTON_TWO, BUTTON_THREE, BUTTON_FOUR, BUTTON_FIVE, BUTTON_SIX, BUTTON_SEVEN, BUTTON_EIGHT};
+enum INPUT_EVENT_CATEGORY {KEYBOARD_EVENT, MOUSE_EVENT, CONTROLLER_EVENT, WINDOW_EVENT};
+enum ACTION {PRESSED, RELEASED};
+enum CONTROLLER_BUTTON {BUTTON_ONE, BUTTON_TWO, BUTTON_THREE, BUTTON_FOUR, BUTTON_FIVE, BUTTON_SIX, BUTTON_SEVEN, BUTTON_EIGHT};
 
 struct InputEvent : Event
 {
     int timestamp;
     InputEvent(INPUT_EVENT_CATEGORY category, int time) : Event(INPUT_EVENT, category), timestamp(time) {};
-}
+};
 
 struct KeyboardEvent : InputEvent
 {
@@ -24,10 +23,10 @@ struct KeyboardEvent : InputEvent
 struct MouseButtonEvent : InputEvent
 {
     ACTION action;
-    MOUSE_BUTTON button;
+    int button;
     int x;
     int y;
-    MouseButtonEvent(ACTION actn, MOUSE_BUTTON buttn, int X, int Y, int time) : InputEvent(MOUSE_EVENT, time), action(actn), button(buttn), x(X), y(Y) {};
+    MouseButtonEvent(ACTION actn, int buttn, int X, int Y, int time) : InputEvent(MOUSE_EVENT, time), action(actn), button(buttn), x(X), y(Y) {};
 };
 
 struct MouseMotionEvent : InputEvent
@@ -60,7 +59,7 @@ struct ControllerRangeEvent : InputEvent
 
 struct WindowCloseEvent : InputEvent
 {
-    WindowCloseEvent() : InputEvent(WINDOW_EVENT) {};
+    WindowCloseEvent(int time) : InputEvent(WINDOW_EVENT, time) {};
 };
 
 struct WindowResizeEvent : InputEvent

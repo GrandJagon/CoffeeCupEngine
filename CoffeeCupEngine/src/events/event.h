@@ -1,7 +1,7 @@
 #pragma once
 
 
-typedef enum EVENT_FAMILY {INPUT_EVENT, GAME_EVENT};
+enum EVENT_FAMILY {INPUT_EVENT, GAME_EVENT};
 
 // Meant to be subclassed for input events and game events
 struct Event

@@ -9,18 +9,18 @@ std::shared_ptr<InputContext> InputContextChain::getcontext(std::string contextN
 
 void InputContextChain::processInput(std::shared_ptr<InputEvent> event)
 {
-    InputContext context = (InputContext *) head;
+    InputContext *context = dynamic_cast<InputContext*>(head);
 
     while(context != nullptr)
     {
-        if(context.isActive())
+        if(context->isActive())
         {
-            context.processInput(event);
+            context->processInput(event);
 
-            if(context.isBlocking()){
+            if(context->isBlocking()){
                 return;
             }
         }
-        context = context.next();
+        context = dynamic_cast<InputContext*>(context->next);
     }
 }

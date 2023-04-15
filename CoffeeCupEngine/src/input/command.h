@@ -12,7 +12,7 @@ class Command
     protected:
         void *_input; // key code or range
         std::string _name; // command string name for mapping to input at creation
-        ~Command() {} = default;
+        ~Command() = default;
     
     public:
         Command(void *input, std::string name) : _input(input), _name(name) {};

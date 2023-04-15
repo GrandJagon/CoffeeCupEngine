@@ -3,11 +3,13 @@
 #include <unordered_map>
 #include <memory>
 
+#include <glm/glm.hpp>
+
 #include "command.h"
 #include "bitmask.h"
 #include "utils/linkedList.h"
 
-typedef enum ContextType {MOUSE_KEYBOARD, GAMEPAD};
+enum ContextType {MOUSE_KEYBOARD, GAMEPAD};
 
 class InputContext : public Node
 {
@@ -32,4 +34,4 @@ class InputContext : public Node
         
         // Iterates through all commands and execute event if match
         void processInput(std::shared_ptr<Event> event);
-}
+};

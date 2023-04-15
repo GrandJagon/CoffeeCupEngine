@@ -38,37 +38,40 @@ set(LIBS ${OPENGL_LIBRARIES}  ${GLEW_LIBRARIES} ${SDL2_LIBRARIES} STB_IMAGE)
 
 # Building engine as shared library
 add_library(CCEngine SHARED
-    src/events/eventManager.cpp
-    src/game/scenes/scene.cpp
-    src/game/scenes/sceneManager.cpp
-    src/game/game.cpp
-    src/game/ECS/entity.cpp
-    src/game/ECS/components/spriteComponent.cpp
-    src/game/ECS/components/transformComponent.cpp
-    src/game/ECS/component.cpp
-    src/platform/OpenGL/GLIndexBuffer.cpp
-    src/platform/OpenGL/GLVertexArray.cpp
-    src/platform/OpenGL/GLShader.cpp
-    src/platform/OpenGL/GLRenderer.cpp
-    src/platform/OpenGL/GlUtils.cpp
-    src/platform/OpenGL/GLVertexBufferLayout.cpp
-    src/platform/OpenGL/GLTextureManager.cpp
-    src/platform/OpenGL/GLVertexBuffer.cpp
-    src/platform/SDL/SDLWindow.cpp
-    src/rendering/shader.cpp
-    src/rendering/quad.cpp
-    src/rendering/indexBuffer.cpp
-    src/rendering/renderer.cpp
-    src/rendering/camera.cpp
-    src/rendering/texture.cpp
-    src/rendering/window.cpp
-    src/rendering/textureManager.cpp
-    src/rendering/vertexBuffer.cpp
-    src/rendering/vertexArray.cpp
-    src/rendering/vertexBufferLayout.cpp
-    src/input/bitmask.cpp
-    src/input/inputManager.cpp    
-    src/input/inputContext.cpp
+src/events/eventManager.cpp
+src/game/scenes/scene.cpp
+src/game/scenes/sceneManager.cpp
+src/game/game.cpp
+src/game/ECS/entity.cpp
+src/game/ECS/components/spriteComponent.cpp
+src/game/ECS/components/transformComponent.cpp
+src/game/ECS/component.cpp
+src/platform/OpenGL/GLIndexBuffer.cpp
+src/platform/OpenGL/GLVertexArray.cpp
+src/platform/OpenGL/GLShader.cpp
+src/platform/OpenGL/GLRenderer.cpp
+src/platform/OpenGL/GlUtils.cpp
+src/platform/OpenGL/GLVertexBufferLayout.cpp
+src/platform/OpenGL/GLTextureManager.cpp
+src/platform/OpenGL/GLVertexBuffer.cpp
+src/platform/SDL/SDLInputHandler.cpp
+src/platform/SDL/SDLWindow.cpp
+src/rendering/shader.cpp
+src/rendering/quad.cpp
+src/rendering/indexBuffer.cpp
+src/rendering/renderer.cpp
+src/rendering/camera.cpp
+src/rendering/texture.cpp
+src/rendering/window.cpp
+src/rendering/textureManager.cpp
+src/rendering/vertexBuffer.cpp
+src/rendering/vertexArray.cpp
+src/rendering/vertexBufferLayout.cpp
+src/input/inputContextChain.cpp
+src/input/inputHandler.cpp
+src/input/keyboardInputContext.cpp
+src/input/bitmask.cpp
+src/input/inputManager.cpp
 )
 
 target_precompile_headers(
@@ -81,6 +84,7 @@ target_include_directories(
     CCEngine PUBLIC
     ${LIBS_DIR}
     src/
+    utils/
     vendors/glm/
     vendors/imgui/
     vendors/stb_image/

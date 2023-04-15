@@ -11,5 +11,5 @@ class InputHandler
         static std::shared_ptr<InputHandler> instance();
 
         // Poll all inputs 
-        void pollInputs();
+        virtual void pollInputs() = 0;
 };

@@ -251,4 +251,4 @@ static const int MOUSE_BUTTON_LEFT = SDL_BUTTON_LEFT;
 static const int MOUSE_BUTTON_MIDDLE = SDL_BUTTON_MIDDLE;
 static const int MOUSE_BUTTON_RIGHT = SDL_BUTTON_RIGHT;
 static const int  MOUSE_BUTTON_X = SDL_BUTTON_X1;
-static const int MOUSE_BUTTON_X = SDL_BUTTON_X2;
+static const int MOUSE_BUTTON_X2 = SDL_BUTTON_X2;
