@@ -9,10 +9,10 @@ void InputManager::init()
 
 void InputManager::addContext(std::string contextName, std::shared_ptr<InputContext> context)
 {
-    _inputContexts.insert({contextName, context});
+    
 }
 
-void InputManager::onEvent()
+void InputManager::onEvent(const std::shared_ptr<Event> event)
 {
 
 }

@@ -16,7 +16,7 @@ class InputManager : public EventHandler
         InputContextChain _contextChain; // Can be iterated and access with context name
         
     public:
-        InputManager();
+        InputManager() = default;
 
         static InputManager* instance() {
             static InputManager instance;
@@ -30,5 +30,5 @@ class InputManager : public EventHandler
         void setContextStatus(std::string contextName, bool status); // active/inactive
         
         // overriden from eventHandler.h
-        void onEvent(const std::shared_ptr<Event>) override;
+        void onEvent(const std::shared_ptr<Event> event) override;
  };

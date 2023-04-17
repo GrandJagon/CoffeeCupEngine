@@ -2,7 +2,7 @@
 
 #include "input/inputHandler.h"
 
-class SDLInputHandler : InputHandler
+class SDLInputHandler : public InputHandler
 {
     public:
         void pollInputs() override;

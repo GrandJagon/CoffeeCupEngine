@@ -1,8 +1,7 @@
 #include "CCEnginePrecompiled.h"
-
 #include "inputContextChain.h"
 
-std::shared_ptr<InputContext> InputContextChain::getcontext(std::string contextName)
+std::shared_ptr<InputContext> InputContextChain::getContext(std::string contextName)
 {
     return _contextMap.at(contextName);
 };
@@ -23,4 +22,4 @@ void InputContextChain::processInput(std::shared_ptr<InputEvent> event)
         }
         context = dynamic_cast<InputContext*>(context->next);
     }
-}
+};

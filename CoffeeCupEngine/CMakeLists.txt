@@ -68,8 +68,8 @@ src/rendering/vertexBuffer.cpp
 src/rendering/vertexArray.cpp
 src/rendering/vertexBufferLayout.cpp
 src/input/inputContextChain.cpp
+src/input/inputContext.cpp
 src/input/inputHandler.cpp
-src/input/keyboardInputContext.cpp
 src/input/bitmask.cpp
 src/input/inputManager.cpp
 )

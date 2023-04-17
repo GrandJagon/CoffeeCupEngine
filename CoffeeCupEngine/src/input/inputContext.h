@@ -33,5 +33,5 @@ class InputContext : public Node
         void addCommand(std::shared_ptr<Command> command);
         
         // Iterates through all commands and execute event if match
-        void processInput(std::shared_ptr<Event> event);
+        void processInput(std::shared_ptr<InputEvent> input);
 };
