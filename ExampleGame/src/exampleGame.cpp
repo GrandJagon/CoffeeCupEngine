@@ -5,6 +5,7 @@
 
 /// JUST HERE TO RUN THE EXANPLE BEFORE THE GAME LOOP IS PROPERLY CODED
 #include <SDL2/SDL.h>
+#include "utils/iniParser.h"
 
 Game* createGame()
 {
@@ -13,50 +14,10 @@ Game* createGame()
 
 void ExampleGame::run()
 {
-    bool running = true;
+    /*bool running = true;
 
     std::shared_ptr<Texture> guyText = TextureManager::instance()->loadTexture("../assets/images/suit-guy.png");
     TextureManager::instance()->bindTexture(guyText);
-
-    while(running)
-    {
-        // Basic event polling for testing purpose
-        SDL_Event event;
-        int x = 0;
-        int y = 0;
-        while(SDL_PollEvent(&event) > 0)
-        {
-            switch(event.type)
-            {
-                case SDL_KEYDOWN:
-                    switch(event.key.keysym.sym) {
-                        case SDLK_LEFT:
-                            x++;
-                            break;
-                        case SDLK_RIGHT:
-                            x--;
-                            break;
-                        case SDLK_UP:
-                            y--;
-                            break;
-                        case SDLK_DOWN:
-                            y++;
-                            break;
-                    }
-                    break;                
-                case SDL_QUIT:
-                    std::cout << "Quitting" << std::endl;
-                    running = false;
-                    break;
-
-                case SDL_WINDOWEVENT_CLOSE:
-                    std::cout << "Closing window" << std::endl;
-                    running = false;
-                    break;
-            }
-        }
-
-        _camera->move(x,y);
 
         Renderer::instance()->setMVP(_camera->getVPM());
 
@@ -77,5 +38,7 @@ void ExampleGame::run()
 
     };
     _window->destroy();
-    SDL_Quit();
+    SDL_Quit();*/
+    INIParser::INIFile file;
+    INIParser::parseFile(file, "../assets/input/inputMapping.ini");
 }

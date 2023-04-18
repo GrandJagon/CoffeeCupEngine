@@ -51,7 +51,8 @@
         "iomanip": "cpp",
         "set": "cpp",
         "chrono": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "codecvt": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
     "cmake.sourceDirectory": "${workspaceFolder}/."
