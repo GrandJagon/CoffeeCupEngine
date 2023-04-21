@@ -39,6 +39,5 @@ void ExampleGame::run()
     };
     _window->destroy();
     SDL_Quit();*/
-    INIParser::INIFile file;
-    INIParser::parseFile(file, "../assets/input/inputMapping.ini");
+    InputManager::instance()->init("../assets/input/inputMapping.ini");
 }

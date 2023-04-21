@@ -23,8 +23,8 @@ class InputManager : public EventHandler
             return &instance;
         }
 
-        void init();
-        void loadInputMapping(); // reads JSON input mapping file and maps an input to each command given their name
+        void init(const std::string inputMappingFile);
+        const void loadInputMapping(const std::string filePath); // reads JSON input mapping file and maps an input to each command given their name
         
         void addContext(std::string contextName, std::shared_ptr<InputContext> context);
         void setContextStatus(std::string contextName, bool status); // active/inactive

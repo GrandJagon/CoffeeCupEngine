@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstring>
 #include <vector>
 
 namespace INIParser
@@ -32,7 +33,7 @@ namespace INIParser
 
         if(!fileStream)
         {
-            std::cout << "Cannot open file at " << filePath << " : " << strerror(errno) << std::endl;
+            std::cout << "Cannot open file at " << filePath << " : " << std::strerror(errno) << std::endl;
             return -1;
         };
 
@@ -40,12 +41,9 @@ namespace INIParser
 
         std::string line;
 
-        Section section;
 
         while(std::getline(fileStream, line))
         {
-
-            std::cout << line << std::endl;
             if(line[0] == '#' || line.empty()) // comment
             {
                 continue;
@@ -53,16 +51,30 @@ namespace INIParser
 
             if(line[0] == '[') // section start
             {
+                Section section;
+
                 section.title = line.substr(1, (line.length() - 2));
                 file.sections.push_back(section);
-                Section newSection;
-                section = newSection;
+            ;
+             
                 continue;
-            }; 
+            };
 
+            int delimiter = line.find('=');
+
+            if(delimiter == std::string::npos)
+            {
+                std::cout << "INI file malformed" << std::endl;
+                return -1;
+            };
+
+            Section *currentSection = &file.sections[file.sections.size() - 1];
             
+            Entry entry;
+            entry.key = line.substr(0, delimiter);
+            entry.value = line.substr(delimiter + 1, line.length() - 1);
 
-
+            currentSection->entries.push_back(entry);
         };
 
         return 0;
