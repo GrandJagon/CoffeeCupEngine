@@ -6,6 +6,7 @@
 
 #include "events/eventHandler.h"
 #include "inputContextChain.h"
+#include "command.h"
 
 class InputContext;
 
@@ -14,6 +15,10 @@ class InputManager : public EventHandler
 {
     private:
         InputContextChain _contextChain; // Can be iterated and access with context name
+
+        template <typename T>
+        T getCommand() {return T();} // Use to instantiate command subclasses at runtime as user created command are not from the engine perspective
+        
         
     public:
         InputManager() = default;

@@ -14,6 +14,7 @@ enum ContextType {MOUSE_KEYBOARD, GAMEPAD};
 class InputContext : public Node
 {
     private:
+        std::string _name;
         bool _status; // active or not
         bool _blocking; // if true event does not pass to next context (useful for menus)
         ContextType _type;
@@ -30,6 +31,8 @@ class InputContext : public Node
         Bitmask& getStateLast() {return _stateLastFrame;};
         glm::vec2 getCursorPos() {return _cursorPos;};
 
+        void setName(std::string name) {_name = name;};
+        void setBlocking(bool blocking) {_blocking = blocking;};
         void setStatus(bool status) {_status = status;};
 
         void addCommand(std::shared_ptr<Command> command);

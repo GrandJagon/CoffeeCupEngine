@@ -37,8 +37,6 @@ namespace INIParser
             return -1;
         };
 
-        std::cout << "File at " << filePath << " successfully opened" << std::endl;
-
         std::string line;
 
 

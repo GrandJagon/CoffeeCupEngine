@@ -1,6 +1,13 @@
 #include "CCEnginePrecompiled.h"
 #include "inputContextChain.h"
 
+
+void InputContextChain::addContext(std::shared_ptr<InputContext> context, std::string name)
+{
+    _contextMap.insert({name, context});
+}
+
+
 std::shared_ptr<InputContext> InputContextChain::getContext(std::string contextName)
 {
     return _contextMap.at(contextName);
