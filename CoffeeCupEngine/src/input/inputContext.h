@@ -24,6 +24,7 @@ class InputContext : public Node
         std::vector<std::shared_ptr<Command>> _commands;
 
     public:
+        InputContext() {_status = false;};
         bool isActive() {return _status;};
         bool isBlocking() {return _blocking;};
         ContextType getType() {return _type;};

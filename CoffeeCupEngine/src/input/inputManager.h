@@ -6,6 +6,7 @@
 
 #include "events/eventHandler.h"
 #include "inputContextChain.h"
+#include "commandFactory.h"
 #include "command.h"
 
 class InputContext;
@@ -15,11 +16,8 @@ class InputManager : public EventHandler
 {
     private:
         InputContextChain _contextChain; // Can be iterated and access with context name
+        CommandFactory _commandFactory; // Used to map strings to subclassed commands for input mapping
 
-        template <typename T>
-        T getCommand() {return T();} // Use to instantiate command subclasses at runtime as user created command are not from the engine perspective
-        
-        
     public:
         InputManager() = default;
 
@@ -31,8 +29,13 @@ class InputManager : public EventHandler
         void init(const std::string inputMappingFile);
         const void loadInputMapping(const std::string filePath); // reads JSON input mapping file and maps an input to each command given their name
         
-        void addContext(std::string contextName, std::shared_ptr<InputContext> context);
         void setContextStatus(std::string contextName, bool status); // active/inactive
+
+        template <typename T>
+        void registerInputCommand<T>(std::string commandName) // Register a command subclass to a name, necessary to allow inputManager to map input to functions
+        {
+            _commandFactory.registerCommand<T>(commandName);
+        };
         
         // overriden from eventHandler.h
         void onEvent(const std::shared_ptr<Event> event) override;

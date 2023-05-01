@@ -15,7 +15,7 @@ class InputContextChain : public LinkedList
         std::unordered_map<std::string, std::shared_ptr<InputContext>> _contextMap; // Used for acces by name
 
     public:
-        void addContext(std::shared_ptr<InputContext> context);
+        void addContext(std::shared_ptr<InputContext> context, std::string name);
         std::shared_ptr<InputContext> getContext(std::string contextName);
         void processInput(std::shared_ptr<InputEvent> event);
 };

@@ -11,11 +11,10 @@ class Command
 {
     protected:
         void *_input; // key code or range
-        std::string _name; // command string name for mapping to input at creation
         ~Command() = default;
     
     public:
-        Command(void *input, std::string name) : _input(input), _name(name) {};
+        Command() = default;
         
         // Check for input event if command needs to be triggered or not
         virtual void check(InputEvent inputEvent) = 0;
@@ -28,5 +27,6 @@ class Command
 
         void *getInput() { return _input;};
 
-        std::string getName() { return _name;};
+        template <typename T>
+        static std::shared_ptr<Command> createCommand() { return std::make_shared<T>(); };
 };

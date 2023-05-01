@@ -1,6 +1,7 @@
 #include <CCEngineEntryPoint.h>
 
 #include "exampleGame.h"
+#include "controlCommands.h"
 
 
 /// JUST HERE TO RUN THE EXANPLE BEFORE THE GAME LOOP IS PROPERLY CODED
@@ -39,5 +40,6 @@ void ExampleGame::run()
     };
     _window->destroy();
     SDL_Quit();*/
+    InputManager::instance()->registerInputCommand<UpCommand>("goUp");
     InputManager::instance()->init("../assets/input/inputMapping.ini");
 }
