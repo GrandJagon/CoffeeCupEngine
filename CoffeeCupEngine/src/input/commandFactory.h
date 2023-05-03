@@ -13,9 +13,8 @@ class CommandFactory
         std::unordered_map<std::string, std::shared_ptr<Command>(*)()> _commandMapping; // allows input manager to properly set input mapping
 
     public:
-    
         template <typename T>
-        void registerCommand<T>(std::string key)
+        void registerCommand(std::string key)
         {
             _commandMapping[key] = &Command::createCommand<T>;
 
@@ -32,6 +31,8 @@ class CommandFactory
                 throw std::runtime_error("Could not map command");
             };
 
-            return it;
-        }
-}
+            std::shared_ptr<Command> command = it->second();
+
+            return command;
+        };
+};

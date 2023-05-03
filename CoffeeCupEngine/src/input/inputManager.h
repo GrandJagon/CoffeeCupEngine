@@ -32,7 +32,7 @@ class InputManager : public EventHandler
         void setContextStatus(std::string contextName, bool status); // active/inactive
 
         template <typename T>
-        void registerInputCommand<T>(std::string commandName) // Register a command subclass to a name, necessary to allow inputManager to map input to functions
+        void registerInputCommand(std::string commandName) // Register a command subclass to a name, necessary to allow inputManager to map input to functions
         {
             _commandFactory.registerCommand<T>(commandName);
         };

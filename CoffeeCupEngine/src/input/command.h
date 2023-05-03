@@ -11,10 +11,11 @@ class Command
 {
     protected:
         void *_input; // key code or range
-        ~Command() = default;
+        
     
     public:
-        Command() = default;
+
+        virtual ~Command() {};
         
         // Check for input event if command needs to be triggered or not
         virtual void check(InputEvent inputEvent) = 0;

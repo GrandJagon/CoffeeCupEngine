@@ -1,7 +1,7 @@
 #include <CCEngineEntryPoint.h>
 
 #include "exampleGame.h"
-#include "controlCommands.h"
+#include "input/controlCommands.h"
 
 
 /// JUST HERE TO RUN THE EXANPLE BEFORE THE GAME LOOP IS PROPERLY CODED
