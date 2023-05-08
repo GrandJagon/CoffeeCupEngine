@@ -8,6 +8,7 @@
 #include "input/command.h"
 #include "input/inputContext.h"
 #include "input/inputManager.h"
+#include "input/inputHandler.h"
 
 #include "rendering/camera.h"
 #include "rendering/renderer.h"

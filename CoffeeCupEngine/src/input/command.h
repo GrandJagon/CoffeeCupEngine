@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <iostream>
 
 #include "inputEvents.h"
@@ -14,7 +13,6 @@ class Command
         
     
     public:
-
         virtual ~Command() {};
         
         // Check for input event if command needs to be triggered or not

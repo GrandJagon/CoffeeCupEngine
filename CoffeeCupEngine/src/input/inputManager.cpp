@@ -15,6 +15,8 @@ const void InputManager::loadInputMapping(const std::string filePath)
     INIParser::INIFile iniFile;
     INIParser::parseFile(iniFile, filePath); // loads file content to file
 
+    CommandFactory factory; // STATIC ?
+
     for(int i = 0; i < iniFile.sections.size(); i++)
     {
         auto newContext = std::make_shared<InputContext>();
@@ -22,8 +24,12 @@ const void InputManager::loadInputMapping(const std::string filePath)
 
         for(int j = 0; j < iniFile.sections[i].entries.size(); j++)
         {
-            
-        }
+            auto command = factory.createCommand(iniFile.sections[i].entries[j].value);
+            command->setInput(iniFile.sections[i].entries[j].key);
+
+            newContext->addCommand(command);
+        };
+        _contextChain.addContext(newContext, newContext->getName());
     }
 }
 

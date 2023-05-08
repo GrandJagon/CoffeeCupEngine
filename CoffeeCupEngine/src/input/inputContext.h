@@ -28,6 +28,7 @@ class InputContext : public Node
         bool isActive() {return _status;};
         bool isBlocking() {return _blocking;};
         ContextType getType() {return _type;};
+        std::string getName() {return _name;};
         Bitmask& getStateCurrent() {return _stateCurrentFrame;};
         Bitmask& getStateLast() {return _stateLastFrame;};
         glm::vec2 getCursorPos() {return _cursorPos;};

@@ -42,7 +42,6 @@ class Game
         std::unique_ptr<SceneManager> _sceneManager;
         
     public:
-        Game() {std::cout << "gam create" << std::endl;};
         virtual ~Game();
 
         virtual void init(std::string title, int width, int height);

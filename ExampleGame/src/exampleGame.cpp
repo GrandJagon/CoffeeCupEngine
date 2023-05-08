@@ -13,15 +13,34 @@ Game* createGame()
     return new ExampleGame();
 }
 
+void ExampleGame::init(std::string title, int width, int height)
+{
+    Game::init(title, width, height);
+    
+    // Initiating control commands
+    InputManager::instance()->registerInputCommand<UpCommand>("goUp");
+    InputManager::instance()->registerInputCommand<DownCommand>("goDown");
+    InputManager::instance()->registerInputCommand<RightCommand>("goRight");
+    InputManager::instance()->registerInputCommand<LeftCommand>("goLeft");
+    InputManager::instance()->registerInputCommand<JumpCommand>("jump");
+
+    InputManager::instance()->init("../assets/input/inputMapping.ini");
+}
+
 void ExampleGame::run()
 {
-    /*bool running = true;
+    std::cout << "Starting to run the game" << std::endl;
+
+    bool running = true;
 
     std::shared_ptr<Texture> guyText = TextureManager::instance()->loadTexture("../assets/images/suit-guy.png");
     TextureManager::instance()->bindTexture(guyText);
 
-        Renderer::instance()->setMVP(_camera->getVPM());
+    Renderer::instance()->setMVP(_camera->getVPM());
 
+    while(running)
+    {
+        
         for(int i = 0; i < 10; i++)
         {    
             for(int j = 0; j < 10; j++)
@@ -38,8 +57,7 @@ void ExampleGame::run()
         _window->endFrame();
 
     };
+
     _window->destroy();
-    SDL_Quit();*/
-    InputManager::instance()->registerInputCommand<UpCommand>("goUp");
-    InputManager::instance()->init("../assets/input/inputMapping.ini");
+    SDL_Quit();
 }

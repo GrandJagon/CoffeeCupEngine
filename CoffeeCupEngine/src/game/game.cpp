@@ -36,8 +36,6 @@ void Game::init(std::string title, int width, int height)
     
     _textureManager = TextureManager::instance();
     _textureManager->init();
-
-    std::cout << "_________________________GAME INITIATED_________________" << std::endl;
 }
 
 Game::~Game()
