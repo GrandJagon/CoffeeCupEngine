@@ -3,3 +3,5 @@
 cd ../build/cmake
 cmake ../..
 make 
+
+pause
