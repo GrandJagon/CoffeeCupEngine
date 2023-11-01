@@ -22,7 +22,19 @@ message("Generator:   ${CMAKE_GENERATOR}")
 
 project(CoffeeCupEngine)
 
+# Set the path to the GLEW library and include directory
+set(GLEW_ROOT "${CMAKE_SOURCE_DIR}/vendors/glew-2.2.0")
+
+# Include GLEW in the CMake search path
+list(APPEND CMAKE_PREFIX_PATH ${GLEW_ROOT})
+
+# Find the GLEW package
+#find_package(GLEW REQUIRED)
+
+
+#set(GLEW_INCLUDE_DIR "/vendors/glew-2.2.0/include/")
+set(GLEW_LIBRARIES "/vendors/glew-2.2.0/lib/")
 # Adds both subdir CMakeLists.txt to the build
-add_subdirectory(vendors/glew)
+#add_subdirectory(vendors/glew-2.2.0)
 add_subdirectory(CoffeeCupEngine)
 add_subdirectory(ExampleGame)

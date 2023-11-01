@@ -19,17 +19,21 @@ file(GLOB STB_IMAGE_SRC "vendors/stb_image/*.cpp")
 file(GLOB STB_IMAGE_H "vendors/stb_image/*.h")
 add_library(STB_IMAGE SHARED ${STB_IMAGE_SRC} ${STB_IMAGE_H})
 
+# Defining SDL2 directories
+set(SDL2_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/vendors/SDL2")
+set(SDL2_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/libs/SDL2/SDL2.dll")
+
 
 # Finding required  ---------------- TO BE TESTED ON WINDOWS
 find_package(OpenGL REQUIRED)
 #find_package(glfw3 REQUIRED)
 #find_package(GLUT REQUIRED) those are not needed anymore
 find_package(GLEW REQUIRED)
-find_package(SDL2 REQUIRED)
-
+#find_package(SDL2 REQUIRED)
 
 # Setting lib folders as variable
-set(LIBS_DIR ${OPENGL_INCLUDE_DIRS}  ${GLEW_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS})
+set(INCLUDE_DIRS ${OPENGL_INCLUDE_DIRS}  ${GLEW_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS})
+
 
 # Setting libs list as variable
 set(LIBS ${OPENGL_LIBRARIES}  ${GLEW_LIBRARIES} ${SDL2_LIBRARIES} STB_IMAGE)
@@ -80,12 +84,13 @@ target_precompile_headers(
 # Adds the following directories to the target include directories
 target_include_directories(
     CCEngine PUBLIC
-    ${LIBS_DIR}
+    ${INCLUDE_DIRS}
     src/
     utils/
-    vendors/glm/
+    vendors/
     vendors/imgui/
     vendors/stb_image/
+    vendors/glew/
 )
 
 target_link_libraries(CCEngine PUBLIC ${LIBS})
