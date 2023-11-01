@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GL/glew.h"
-#include "GL/glut.h"
+#include "freeglut/glut.h"
 
 #define ASSERT(x) \
         if (!x)   \

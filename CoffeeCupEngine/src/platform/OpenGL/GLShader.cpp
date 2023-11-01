@@ -3,7 +3,7 @@
 #include "GlUtils.h"
 
 void GLShader::init(std::string &shaderString)
-{   
+{
     ShaderObject so = parseShaderString(shaderString);
     m_id = createShader(so.vShader, so.fShader);
 
@@ -17,7 +17,7 @@ GLShader::~GLShader()
 }
 
 void GLShader::bind() const
-{   
+{
     GlCall(glUseProgram(m_id));
 }
 
@@ -32,7 +32,7 @@ unsigned int GLShader::compileShader(std::string &source, unsigned int type)
     GlCall(unsigned int id = glCreateShader(type));
 
     // Pointer to source data
-    const char* sourceCode = source.c_str();
+    const char *sourceCode = source.c_str();
 
     // Assigning source code to shader
     GlCall(glShaderSource(id, 1, &sourceCode, nullptr));
@@ -43,12 +43,12 @@ unsigned int GLShader::compileShader(std::string &source, unsigned int type)
     // COMPILING ERROR CHECK
     int result;
     GlCall(glGetShaderiv(id, GL_COMPILE_STATUS, &result));
-    
-    if(result == GL_FALSE)
+
+    if (result == GL_FALSE)
     {
         int length;
         GlCall(glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length));
-        char* message = (char*) alloca(sizeof(char) * length);
+        char *message = (char *)alloca(sizeof(char) * length);
         GlCall(glGetShaderInfoLog(id, length, &length, message));
         std::cout << "Failed to compile shader " << (type == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT") << std::endl;
         std::cout << message << std::endl;
@@ -80,9 +80,9 @@ unsigned int GLShader::createShader(std::string &vertexShader, std::string &frag
     {
         int length;
         GlCall(glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length));
-        char* message = (char*) alloca(sizeof(char) * length);
+        char *message = (char *)alloca(sizeof(char) * length);
         GlCall(glGetShaderInfoLog(program, length, &length, message));
-        std::cout << "Failed to compile shader program "  << std::endl;
+        std::cout << "Failed to compile shader program " << std::endl;
         std::cout << message << std::endl;
         GlCall(glDeleteProgram(program));
         return 0;
@@ -97,14 +97,12 @@ unsigned int GLShader::createShader(std::string &vertexShader, std::string &frag
     return program;
 }
 
-
 // Retrieves an uniform location according to its name and current shader
 int GLShader::getUniformLocation(const std::string &name)
 {
     GlCall(int location = glGetUniformLocation(m_id, name.c_str()));
 
-
-    if(location == -1)
+    if (location == -1)
     {
         std::cout << "Uniform does not exists " << std::endl;
     }
@@ -114,10 +112,9 @@ int GLShader::getUniformLocation(const std::string &name)
 
 // Sets uniform value if is 4 floats
 void GLShader::setUniform4f(const std::string &name, float f1, float f2, float f3, float f4)
-{   
+{
     bind();
-    GlCall(glUniform4f(getUniformLocation(name), f1, f2, f3, f4)); 
-      
+    GlCall(glUniform4f(getUniformLocation(name), f1, f2, f3, f4));
 }
 
 // Sets uniform value if its 1 integer
@@ -128,37 +125,35 @@ void GLShader::setUniform1i(const std::string &name, int v)
 }
 
 // Sets uniform value if its array of integer
-void GLShader::setUniformArrayInt(const std::string &name, uint32_t count, int* values)
+void GLShader::setUniformArrayInt(const std::string &name, uint32_t count, int *values)
 {
     bind();
     GlCall(glUniform1iv(getUniformLocation(name), count, values));
 }
 
 // Sets uniform value if its 4x4 matrix
-void GLShader::setUniformMat4(const std::string &name,const glm::mat4 &mat)
+void GLShader::setUniformMat4(const std::string &name, const glm::mat4 &mat)
 {
     bind();
     GlCall(glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, &mat[0][0]));
 }
 
-
-
 // Retrieves the shader log, to be call after creation to be sure everything went right
-void GLShader::getShaderLog(int id) 
+void GLShader::getShaderLog(int id)
 {
     int length;
-    char* out;
+    char *out;
 
     // Assignslength acording to log length
     glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
 
     // Declaring message according to length
-    char* message = (char*) alloca(sizeof(char) * length);
+    char *message = (char *)alloca(sizeof(char) * length);
 
-    //Fetching log and assigning it to message 
+    // Fetching log and assigning it to message
     glGetShaderInfoLog(id, length, &length, message);
 
-    for(int i = 0; i < length; i++) 
+    for (int i = 0; i < length; i++)
     {
         out[i] = message[i];
     }
@@ -167,23 +162,21 @@ void GLShader::getShaderLog(int id)
 }
 
 // Retrieves the program log, to be called after linking to be sure everything went right
-void GLShader::getProgramLog(int id, char* out) 
+void GLShader::getProgramLog(int id, char *out)
 {
-     int length;
+    int length;
 
     // Assignslength acording to log length
     glGetProgramiv(id, GL_INFO_LOG_LENGTH, &length);
 
     // Declaring message according to length
-    char* message = (char*) alloca(sizeof(char) * length);
+    char *message = (char *)alloca(sizeof(char) * length);
 
-    //Fetching log and assigning it to message 
+    // Fetching log and assigning it to message
     glGetProgramInfoLog(id, length, &length, message);
 
-    for(int i = 0; i < length; i++) 
+    for (int i = 0; i < length; i++)
     {
         out[i] = message[i];
     }
 }
-
-

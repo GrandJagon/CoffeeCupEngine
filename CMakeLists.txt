@@ -35,6 +35,5 @@ list(APPEND CMAKE_PREFIX_PATH ${GLEW_ROOT})
 #set(GLEW_INCLUDE_DIR "/vendors/glew-2.2.0/include/")
 set(GLEW_LIBRARIES "/vendors/glew-2.2.0/lib/")
 # Adds both subdir CMakeLists.txt to the build
-#add_subdirectory(vendors/glew-2.2.0)
 add_subdirectory(CoffeeCupEngine)
 add_subdirectory(ExampleGame)
