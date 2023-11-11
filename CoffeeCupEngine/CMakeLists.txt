@@ -21,17 +21,29 @@ add_library(STB_IMAGE SHARED ${STB_IMAGE_SRC} ${STB_IMAGE_H})
 
 # Defining SDL2 directories
 set(SDL2_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/vendors/SDL2")
-set(SDL2_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/libs/SDL2/SDL2.dll")
+
 
 # Defining FREEGLUT directories
 set(FREEGLUT_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/vendors/freeglut")
-set(FREEGLUT_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/libs/freeglut/freeglut.dll")
+
+# Setting proper libraries according to CPU architecture
+if(WIN32)
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8) # 64 bit architecture
+        set(FREEGLUT_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/libs/freeglut/x64/freeglut.dll")
+        set(SDL2_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/libs/SDL2/SDL2.dll")
+    else() # 32 bits architecture
+        set(FREEGLUT_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/libs/freeglut/freeglut.dll")
+    endif()
+else 
+    message("A freeglut library need to be added for linux into libs/freeglut/")
+    return()
+endif()
 
 
 # Finding required  ---------------- TO BE TESTED ON WINDOWS
 find_package(OpenGL REQUIRED)
 #find_package(glfw3 REQUIRED)
-#find_package(GLUT REQUIRED) those are not needed anymore
+#find_package(FREEGLUT REQUIRED) 
 find_package(GLEW REQUIRED)
 #find_package(SDL2 REQUIRED)
 
@@ -95,7 +107,12 @@ target_include_directories(
     vendors/imgui/
     vendors/stb_image/
     vendors/glew/
+    vendors/freeglut/
 )
+
+ if(NOT GLUT_FOUND)
+        message(ERROR "GLUT not found!")
+    endif(NOT GLUT_FOUND)
 
 target_link_libraries(CCEngine PUBLIC ${LIBS})
 

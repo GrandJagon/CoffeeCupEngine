@@ -48,11 +48,12 @@ unsigned int GLShader::compileShader(std::string &source, unsigned int type)
     {
         int length;
         GlCall(glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length));
-        char *message = (char *)alloca(sizeof(char) * length);
+        char *message = (char *)malloc(sizeof(char) * length);
         GlCall(glGetShaderInfoLog(id, length, &length, message));
         std::cout << "Failed to compile shader " << (type == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT") << std::endl;
         std::cout << message << std::endl;
         GlCall(glDeleteShader(id));
+        free(message);
         return 0;
     }
     return id;
@@ -80,11 +81,12 @@ unsigned int GLShader::createShader(std::string &vertexShader, std::string &frag
     {
         int length;
         GlCall(glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length));
-        char *message = (char *)alloca(sizeof(char) * length);
+        char *message = (char *)malloc(sizeof(char) * length);
         GlCall(glGetShaderInfoLog(program, length, &length, message));
         std::cout << "Failed to compile shader program " << std::endl;
         std::cout << message << std::endl;
         GlCall(glDeleteProgram(program));
+        free(message);
         return 0;
     }
 
@@ -148,7 +150,7 @@ void GLShader::getShaderLog(int id)
     glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
 
     // Declaring message according to length
-    char *message = (char *)alloca(sizeof(char) * length);
+    char *message = (char *)malloc(sizeof(char) * length);
 
     // Fetching log and assigning it to message
     glGetShaderInfoLog(id, length, &length, message);
@@ -159,6 +161,7 @@ void GLShader::getShaderLog(int id)
     }
     std::cout << "Shader compile error" << std::endl;
     std::cout << out << std::endl;
+    free(message);
 }
 
 // Retrieves the program log, to be called after linking to be sure everything went right
@@ -170,7 +173,7 @@ void GLShader::getProgramLog(int id, char *out)
     glGetProgramiv(id, GL_INFO_LOG_LENGTH, &length);
 
     // Declaring message according to length
-    char *message = (char *)alloca(sizeof(char) * length);
+    char *message = (char *)malloc(sizeof(char) * length);
 
     // Fetching log and assigning it to message
     glGetProgramInfoLog(id, length, &length, message);
@@ -179,4 +182,6 @@ void GLShader::getProgramLog(int id, char *out)
     {
         out[i] = message[i];
     }
+
+    free(message);
 }
