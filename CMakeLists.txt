@@ -16,8 +16,7 @@ message("Generator:   ${CMAKE_GENERATOR}")
 
 project(CoffeeCupEngine CXX)
 
-# Set the path to the GLEW library and include directory
-set(GLEW_ROOT "${CMAKE_SOURCE_DIR}/vendors/glew-2.2.0")
+
 
 # Include GLEW in the CMake search path
 list(APPEND CMAKE_PREFIX_PATH ${GLEW_ROOT})

@@ -1,2 +1,3 @@
-cd ../build/bin
-./ExampleGame
+@echo off
+cd ..\build\bin
+ExampleGame.exe
