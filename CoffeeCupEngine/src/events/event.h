@@ -1,12 +1,17 @@
 #pragma once
 
-
-enum EVENT_FAMILY {INPUT_EVENT, GAME_EVENT};
+enum class EventType
+{
+    MouseEvent,
+    KeyboardEvent,
+    ControllerEvent,
+    WindowEvent,
+    ApplicationEvent
+};
 
 // Meant to be subclassed for input events and game events
 struct Event
 {
-    EVENT_FAMILY family;
-    int category;
-    Event(EVENT_FAMILY fml, int ctgr) : family(fml), category(ctgr) {};
+    EventType type;
+    Event(EventType type) : type(type){};
 };

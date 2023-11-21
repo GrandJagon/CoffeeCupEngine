@@ -2,7 +2,6 @@
 
 #include "eventManager.h"
 
-
 void EventManager::queue(std::shared_ptr<Event> event)
 {
     _eventQueue.push(event);
@@ -10,9 +9,9 @@ void EventManager::queue(std::shared_ptr<Event> event)
 
 void EventManager::process(std::shared_ptr<Event> event)
 {
-    SingleEventHandlers handlers = _handlers.at(event->category);
+    SingleEventHandlers handlers = _handlers.at(event->type);
 
-    for(auto handler = handlers.begin(); handler != handlers.end(); ++handler)
+    for (auto handler = handlers.begin(); handler != handlers.end(); ++handler)
     {
         (*handler)->onEvent(event);
     }
@@ -22,9 +21,9 @@ void EventManager::subscribe(EventType type, EventHandler *handler)
 {
     auto seh = _handlers.find(type);
 
-    if(seh == _handlers.end())
+    if (seh == _handlers.end())
     {
-        std::vector<EventHandler*> vec;
+        std::vector<EventHandler *> vec;
         vec.push_back(handler);
         _handlers[type] = vec;
         return;
@@ -37,7 +36,7 @@ void EventManager::unsubscribe(EventType type, EventHandler *handler)
 {
     auto seh = _handlers.find(type);
 
-    if(seh == _handlers.end())
+    if (seh == _handlers.end())
     {
         std::cout << "Failed unsubscription attempt, not handlers for this event type" << std::endl;
         return;
@@ -45,7 +44,7 @@ void EventManager::unsubscribe(EventType type, EventHandler *handler)
 
     auto hdlr = std::find((*seh).second.begin(), (*seh).second.end(), handler);
 
-    if(hdlr == (*seh).second.end())
+    if (hdlr == (*seh).second.end())
     {
         std::cout << "Failed unsubscription attempt, handler not found in handlers list" << std::endl;
         return;
@@ -54,12 +53,11 @@ void EventManager::unsubscribe(EventType type, EventHandler *handler)
     int index = hdlr - (*seh).second.begin();
 
     (*seh).second.erase((*seh).second.begin() + index);
-
 }
 
 void EventManager::dispatch()
 {
-    for(int i = 0; i < _eventQueue.size(); i++)
+    for (int i = 0; i < _eventQueue.size(); i++)
     {
         std::shared_ptr<Event> event = _eventQueue.front();
         process(event);

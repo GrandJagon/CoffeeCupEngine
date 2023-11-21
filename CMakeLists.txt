@@ -2,10 +2,12 @@ cmake_minimum_required(VERSION 3.16.3)
 
 
 if (WIN32)
+    add_definitions(-DCCE_PLATFORM_WINDOWS)
     # Set your Visual Studio generator
     set(CMAKE_GENERATOR "Unix Makefiles" CACHE INTERNAL "" FORCE)
     # Optionally, you can set the Visual Studio version, e.g., "Visual Studio 2019"
 else()
+    add_definitions(-DCCE_PLATFORM_LINUX)
     set(CMAKE_GENERATOR "Unix Makefiles" CACHE INTERNAL "" FORCE)
 endif()
 

@@ -2,77 +2,74 @@
 
 #include "events/event.h"
 
-
-enum INPUT_EVENT_CATEGORY {KEYBOARD_EVENT, MOUSE_EVENT, CONTROLLER_EVENT, WINDOW_EVENT};
-enum ACTION {PRESSED, RELEASED};
-enum CONTROLLER_BUTTON {BUTTON_ONE, BUTTON_TWO, BUTTON_THREE, BUTTON_FOUR, BUTTON_FIVE, BUTTON_SIX, BUTTON_SEVEN, BUTTON_EIGHT};
-
-struct InputEvent : Event
+struct KeyboardEvent : public Event
 {
-    int timestamp;
-    InputEvent(INPUT_EVENT_CATEGORY category, int time) : Event(INPUT_EVENT, category), timestamp(time) {};
-};
-
-struct KeyboardEvent : InputEvent
-{
-    ACTION action;
     int keycode;
-    KeyboardEvent(ACTION actn, int key, int time) : InputEvent(KEYBOARD_EVENT, time), action(actn), keycode(key){};
+    int time;
+    KeyboardEvent(int key, int time) : Event(EventType::KeyboardEvent), keycode(key){};
 };
 
-struct MouseButtonEvent : InputEvent
+struct MouseEvent : public Event
 {
-    ACTION action;
+    int time;
+    MouseEvent(int time) : Event(EventType::MouseEvent), time(time){};
+};
+
+struct MouseButtonEvent : public MouseEvent
+{
     int button;
     int x;
     int y;
-    MouseButtonEvent(ACTION actn, int buttn, int X, int Y, int time) : InputEvent(MOUSE_EVENT, time), action(actn), button(buttn), x(X), y(Y) {};
+    MouseButtonEvent(int buttn, int X, int Y, int time) : MouseEvent(time), button(buttn), x(X), y(Y){};
 };
 
-struct MouseMotionEvent : InputEvent
-{
-    INPUT_EVENT_CATEGORY category = MOUSE_EVENT;
-    int x;
-    int y;
-    MouseMotionEvent(int X, int Y, int time) : InputEvent(MOUSE_EVENT, time), x(X), y(Y) {};
-};
-
-struct MouseScrollEvent : InputEvent
+struct MouseMotionEvent : public MouseEvent
 {
     int x;
     int y;
-    MouseScrollEvent(int X, int Y, int time) : InputEvent(MOUSE_EVENT, time), x(X), y(Y) {};
+    MouseMotionEvent(int X, int Y, int time) : MouseEvent(time), x(X), y(Y){};
 };
 
-struct ControllerButtonEvent : InputEvent
+struct MouseScrollEvent : public MouseEvent
 {
-    CONTROLLER_BUTTON button;
-    ControllerButtonEvent(CONTROLLER_BUTTON buttn, int time) : InputEvent(CONTROLLER_EVENT, time), button(buttn) {};
+    int x;
+    int y;
+    MouseScrollEvent(int X, int Y, int time) : MouseEvent(time), x(X), y(Y){};
 };
 
-struct ControllerRangeEvent : InputEvent
+struct ControllerEvent : public Event
 {
-    INPUT_EVENT_CATEGORY category = CONTROLLER_EVENT;
+    int time;
+    ControllerEvent(int time) : Event(EventType::ControllerEvent), time(time){};
+};
+
+struct ControllerButtonEvent : public ControllerEvent
+{
+    int button;
+    ControllerButtonEvent(int button, int time) : ControllerEvent(time), button(button){};
+};
+
+struct ControllerRangeEvent : public ControllerEvent
+{
     int range;
-    ControllerRangeEvent(int rng, int time):  InputEvent(CONTROLLER_EVENT, time), range(rng) {};
+    ControllerRangeEvent(int rng, int time) : Event(time), range(rng){};
 };
 
-struct WindowCloseEvent : InputEvent
+struct WindowCloseEvent : Event
 {
-    WindowCloseEvent(int time) : InputEvent(WINDOW_EVENT, time) {};
+    WindowCloseEvent(int time) : Event(EventType::WindowEvent, time){};
 };
 
-struct WindowResizeEvent : InputEvent
+struct WindowResizeEvent : Event
 {
     int width;
     int height;
-    WindowResizeEvent(int wdth, int hght, int time) :  InputEvent(CONTROLLER_EVENT, time), width(wdth), height(hght) {};
+    WindowResizeEvent(int wdth, int hght, int time) : Event(EventType::WindowEvent, time), width(wdth), height(hght){};
 };
 
-struct WindowMoveEvent : InputEvent
+struct WindowMoveEvent : Event
 {
     int x;
     int y;
-    WindowMoveEvent(int X, int Y, int time):  InputEvent(CONTROLLER_EVENT, time), x(X), y(Y) {};
+    WindowMoveEvent(int X, int Y, int time) : Event(EventType::WindowEvent, time), x(X), y(Y){};
 };
-

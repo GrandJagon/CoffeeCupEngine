@@ -20,25 +20,25 @@ void SDLInputHandler::pollInputs()
         {
         case SDL_KEYDOWN:
         {
-            auto keyboardEvent = std::make_shared<KeyboardEvent>(PRESSED, event.key.keysym.sym, event.key.timestamp);
+            auto keyboardEvent = std::make_shared<KeyboardEvent>(KEY_ACTION::PRESSED, event.key.keysym.sym, event.key.timestamp);
             EventManager::instance()->queue(keyboardEvent);
             break;
         }
         case SDL_KEYUP:
         {
-            auto keyboardEvent = std::make_shared<KeyboardEvent>(RELEASED, event.key.keysym.sym, event.key.timestamp);
+            auto keyboardEvent = std::make_shared<KeyboardEvent>(KEY_ACTION::RELEASED, event.key.keysym.sym, event.key.timestamp);
             EventManager::instance()->queue(keyboardEvent);
             break;
         }
         case SDL_MOUSEBUTTONDOWN:
         {
-            auto mouseEvent = std::make_shared<MouseButtonEvent>(PRESSED, event.button.button, event.button.x, event.button.y, event.button.timestamp);
+            auto mouseEvent = std::make_shared<MouseButtonEvent>(KEY_ACTION::PRESSED, event.button.button, event.button.x, event.button.y, event.button.timestamp);
             EventManager::instance()->queue(mouseEvent);
             break;
         }
         case SDL_MOUSEBUTTONUP:
         {
-            auto mouseEvent = std::make_shared<MouseButtonEvent>(RELEASED, event.button.button, event.button.x, event.button.y, event.button.timestamp);
+            auto mouseEvent = std::make_shared<MouseButtonEvent>(KEY_ACTION::RELEASED, event.button.button, event.button.x, event.button.y, event.button.timestamp);
             EventManager::instance()->queue(mouseEvent);
             break;
         }
