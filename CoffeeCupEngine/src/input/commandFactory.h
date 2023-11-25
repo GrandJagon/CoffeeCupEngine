@@ -7,32 +7,38 @@
 
 // Dynamically maps string to input command
 
-class CommandFactory 
+class CommandFactory
 {
-    private:
-        std::unordered_map<std::string, std::shared_ptr<Command>(*)()> _commandMapping; // allows input manager to properly set input mapping
+private:
+    std::unordered_map<std::string, std::shared_ptr<Command> (*)()> _commandMapping; // allows input manager to properly set input mapping
 
-    public:
-        template <typename T>
-        void registerCommand(std::string key)
+public:
+    template <typename T>
+    void registerCommand(std::string key)
+    {
+        _commandMapping[key] = &Command::createCommand<T>;
+
+        std::cout << key << " successfully mapped" << std::endl;
+        std::cout << key << " Current state of command mappings is " << std::endl;
+    };
+
+    std::shared_ptr<Command> createCommand(std::string key)
+    {
+        for (const auto &pair : _commandMapping)
         {
-            _commandMapping[key] = &Command::createCommand<T>;
-
-            std::cout << key << " successfully mapped" << std::endl;
+            std::cout << "Key: " << pair.first << std::endl;
         };
 
-        std::shared_ptr<Command> createCommand(std::string key)
+        auto it = _commandMapping.find(key);
+
+        if (it == _commandMapping.end())
         {
-            auto it = _commandMapping.find(key);
-
-            if(it == _commandMapping.end())
-            {
-                std::cout << key << " not found in command mapping" << std::endl;
-                throw std::runtime_error("Could not map command");
-            };
-
-            std::shared_ptr<Command> command = it->second();
-
-            return command;
+            std::cout << key << " not found in command mapping" << std::endl;
+            throw std::runtime_error("Could not map command");
         };
+
+        std::shared_ptr<Command> command = it->second();
+
+        return command;
+    };
 };

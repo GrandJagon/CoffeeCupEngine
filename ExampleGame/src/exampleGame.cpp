@@ -17,13 +17,13 @@ void ExampleGame::init(std::string title, int width, int height)
     Game::init(title, width, height);
 
     // Initiating control commands
-    // InputManager::instance()->registerInputCommand<UpCommand>("goUp");
-    // InputManager::instance()->registerInputCommand<DownCommand>("goDown");
-    // InputManager::instance()->registerInputCommand<RightCommand>("goRight");
-    // InputManager::instance()->registerInputCommand<LeftCommand>("goLeft");
-    // InputManager::instance()->registerInputCommand<JumpCommand>("jump");
+    InputManager::instance()->registerInputCommand<UpCommand>("goUp");
+    InputManager::instance()->registerInputCommand<DownCommand>("goDown");
+    InputManager::instance()->registerInputCommand<RightCommand>("goRight");
+    InputManager::instance()->registerInputCommand<LeftCommand>("goLeft");
+    InputManager::instance()->registerInputCommand<JumpCommand>("jump");
 
-    // InputManager::instance()->init("../assets/input/inputMapping.ini");
+    InputManager::instance()->init("../assets/input/inputMapping.ini");
 }
 
 void ExampleGame::run()
