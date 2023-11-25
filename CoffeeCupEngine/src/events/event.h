@@ -12,6 +12,8 @@ enum class EventType
 // Meant to be subclassed for input events and game events
 struct Event
 {
-    EventType type;
-    Event(EventType type) : type(type){};
+    EventType _type;
+    Event(EventType type) : _type(type){};
+
+    EventType getType() { return this->_type; };
 };

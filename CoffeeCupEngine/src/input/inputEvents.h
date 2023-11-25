@@ -2,11 +2,18 @@
 
 #include "events/event.h"
 
+enum class InputKeyAction
+{
+    KeyDown,
+    KeyUp
+};
+
 struct KeyboardEvent : public Event
 {
+    InputKeyAction action;
     int keycode;
     int time;
-    KeyboardEvent(int key, int time) : Event(EventType::KeyboardEvent), keycode(key){};
+    KeyboardEvent(InputKeyAction action, int key, int time) : Event(EventType::KeyboardEvent), action(action), keycode(key){};
 };
 
 struct MouseEvent : public Event
@@ -17,10 +24,11 @@ struct MouseEvent : public Event
 
 struct MouseButtonEvent : public MouseEvent
 {
+    InputKeyAction action;
     int button;
     int x;
     int y;
-    MouseButtonEvent(int buttn, int X, int Y, int time) : MouseEvent(time), button(buttn), x(X), y(Y){};
+    MouseButtonEvent(InputKeyAction action, int buttn, int X, int Y, int time) : MouseEvent(time), button(buttn), x(X), y(Y){};
 };
 
 struct MouseMotionEvent : public MouseEvent
@@ -52,24 +60,30 @@ struct ControllerButtonEvent : public ControllerEvent
 struct ControllerRangeEvent : public ControllerEvent
 {
     int range;
-    ControllerRangeEvent(int rng, int time) : Event(time), range(rng){};
+    ControllerRangeEvent(int rng, int time) : ControllerEvent(time), range(rng){};
 };
 
-struct WindowCloseEvent : Event
+struct WindowEvent : Event
 {
-    WindowCloseEvent(int time) : Event(EventType::WindowEvent, time){};
+    int time;
+    WindowEvent(int time) : Event(EventType::WindowEvent), time(time){};
 };
 
-struct WindowResizeEvent : Event
+struct WindowCloseEvent : WindowEvent
+{
+    WindowCloseEvent(int time) : WindowEvent(time){};
+};
+
+struct WindowResizeEvent : WindowEvent
 {
     int width;
     int height;
-    WindowResizeEvent(int wdth, int hght, int time) : Event(EventType::WindowEvent, time), width(wdth), height(hght){};
+    WindowResizeEvent(int wdth, int hght, int time) : WindowEvent(time), width(wdth), height(hght){};
 };
 
-struct WindowMoveEvent : Event
+struct WindowMoveEvent : WindowEvent
 {
     int x;
     int y;
-    WindowMoveEvent(int X, int Y, int time) : Event(EventType::WindowEvent, time), x(X), y(Y){};
+    WindowMoveEvent(int X, int Y, int time) : WindowEvent(time), x(X), y(Y){};
 };
