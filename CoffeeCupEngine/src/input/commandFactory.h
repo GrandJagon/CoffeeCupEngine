@@ -17,17 +17,10 @@ public:
     void registerCommand(std::string key)
     {
         _commandMapping[key] = &Command::createCommand<T>;
-
-        std::cout << key << " successfully mapped" << std::endl;
-        std::cout << key << " Current state of command mappings is " << std::endl;
     };
 
     std::shared_ptr<Command> createCommand(std::string key)
     {
-        for (const auto &pair : _commandMapping)
-        {
-            std::cout << "Key: " << pair.first << std::endl;
-        };
 
         auto it = _commandMapping.find(key);
 

@@ -21,10 +21,10 @@ private:
 public:
     InputManager() = default;
 
-    static InputManager *instance()
+    static std::shared_ptr<InputManager> instance()
     {
-        static InputManager instance;
-        return &instance;
+        static std::shared_ptr<InputManager> instance = std::make_shared<InputManager>();
+        return instance;
     }
 
     void init(const std::string inputMappingFile);

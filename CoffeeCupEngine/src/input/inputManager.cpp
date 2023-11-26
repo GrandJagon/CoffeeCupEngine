@@ -20,7 +20,6 @@ const void InputManager::loadInputMapping(const std::string filePath)
 
         for (unsigned int j = 0; j < iniFile.sections[i].entries.size(); j++)
         {
-            std::cout << "Creating command for file entry " << iniFile.sections[i].entries[j].key << ":" << iniFile.sections[i].entries[j].value << std::endl;
             auto command = _commandFactory.createCommand(iniFile.sections[i].entries[j].value);
             // & -> NOT SAFE, TO CHANGE LATER BY IMPLEMENTING POLYMORPHISM (INPUT CAN BE OF SEVERAL TYPES BUT RIGHT NOW JUST LOADING COMMAND NAME FROM INI FILE IS FINE)
             command->setInput(&iniFile.sections[i].entries[j].key);

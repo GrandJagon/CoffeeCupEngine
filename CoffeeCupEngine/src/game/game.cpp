@@ -15,27 +15,34 @@
 void Game::init(std::string title, int width, int height)
 {
     std::cout << "__________INIT GAME______________ " << std::endl;
-    _title = title;    
+    _title = title;
 
-    //std::cout << glGetString(GL_VERSION) << std::endl;
+    // std::cout << glGetString(GL_VERSION) << std::endl;
 
     _window = Window::create();
     _window->init(_title, width, height, GameConstants::FULLSCREEN);
-    
+
     _camera = std::make_unique<Camera>(0, width, 0, height);
 
     glewExperimental = GL_TRUE;
 
-    if(glewInit() != GLEW_OK){
+    if (glewInit() != GLEW_OK)
+    {
         throw std::runtime_error("Error while initializing glew");
     }
 
     // Initialize global subsystems
     _renderer = Renderer::instance();
     _renderer->init();
-    
+
     _textureManager = TextureManager::instance();
     _textureManager->init();
+
+    _inputHandler = InputHandler::instance();
+
+    _inputManager = InputManager::instance();
+
+    _eventManager = EventManager::instance();
 }
 
 Game::~Game()
@@ -50,27 +57,22 @@ void Game::start()
 
 void Game::processEvents()
 {
-    
 }
 
 void Game::update(float dt)
 {
-
 }
 
 void Game::lateUpdate()
 {
-
 }
 
 void Game::render()
 {
-
 }
 
 void Game::run()
 {
-
 }
 
 void Game::pause()
@@ -80,5 +82,4 @@ void Game::pause()
 
 void Game::shutDown()
 {
-    
 }

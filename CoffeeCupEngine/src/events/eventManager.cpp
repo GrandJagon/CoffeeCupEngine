@@ -4,6 +4,7 @@
 
 void EventManager::queue(std::shared_ptr<Event> event)
 {
+    printf("Event manager queuing event\n");
     _eventQueue.push(event);
 }
 
@@ -57,6 +58,8 @@ void EventManager::unsubscribe(EventType type, EventHandler *handler)
 
 void EventManager::dispatch()
 {
+    printf("Event manager starting to dipatch events : %i events to dispatch\n", _eventQueue.size());
+
     for (int i = 0; i < _eventQueue.size(); i++)
     {
         std::shared_ptr<Event> event = _eventQueue.front();
