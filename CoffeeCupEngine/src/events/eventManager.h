@@ -8,7 +8,7 @@
 #include "event.h"
 #include "eventHandler.h"
 
-typedef std::vector<EventHandler *> SingleEventHandlers;
+typedef std::vector<std::shared_ptr<EventHandler>> SingleEventHandlers;
 
 class EventManager
 {
@@ -30,8 +30,8 @@ public:
     void process(std::shared_ptr<Event> event);
 
     // Called from
-    void subscribe(EventType type, EventHandler *handler);
-    void unsubscribe(EventType type, EventHandler *handler);
+    void subscribe(EventType type, std::shared_ptr<EventHandler> handler);
+    void unsubscribe(EventType type, std::shared_ptr<EventHandler> handler);
 
     // Dispatches all events from the queue
     void dispatch();

@@ -32,4 +32,5 @@ const void InputManager::loadInputMapping(const std::string filePath)
 
 void InputManager::onEvent(const std::shared_ptr<Event> event)
 {
+    printf("Event dispatched to inputManager.");
 }

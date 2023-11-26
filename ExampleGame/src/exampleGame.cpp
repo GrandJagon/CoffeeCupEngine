@@ -41,6 +41,7 @@ void ExampleGame::run()
     {
 
         _inputHandler->instance()->pollInputs();
+        _eventManager->instance()->dispatch();
 
         Renderer::instance()->setMVP(_camera->getVPM());
 

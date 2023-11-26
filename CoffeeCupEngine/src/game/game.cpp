@@ -38,11 +38,20 @@ void Game::init(std::string title, int width, int height)
     _textureManager = TextureManager::instance();
     _textureManager->init();
 
+    printf("Before initilization of input handler\n");
     _inputHandler = InputHandler::instance();
 
+    printf("Before initilization of input manager\n");
     _inputManager = InputManager::instance();
 
+    printf("Before initilization of event manager\n");
     _eventManager = EventManager::instance();
+
+    printf("Before subscriptions \n");
+    // Make required subscriptions between globan subsystems
+    _eventManager->subscribe(EventType::KeyboardEvent, _inputManager);
+    _eventManager->subscribe(EventType::MouseEvent, _inputManager);
+    _eventManager->subscribe(EventType::ControllerEvent, _inputManager);
 }
 
 Game::~Game()

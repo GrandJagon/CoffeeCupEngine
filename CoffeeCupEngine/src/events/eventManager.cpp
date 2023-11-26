@@ -4,7 +4,6 @@
 
 void EventManager::queue(std::shared_ptr<Event> event)
 {
-    printf("Event manager queuing event\n");
     _eventQueue.push(event);
 }
 
@@ -18,22 +17,22 @@ void EventManager::process(std::shared_ptr<Event> event)
     }
 }
 
-void EventManager::subscribe(EventType type, EventHandler *handler)
+void EventManager::subscribe(EventType type, std::shared_ptr<EventHandler> handler)
 {
+    printf("%i is being subscribe to.", type);
+
     auto seh = _handlers.find(type);
 
     if (seh == _handlers.end())
     {
-        std::vector<EventHandler *> vec;
-        vec.push_back(handler);
-        _handlers[type] = vec;
+        _handlers[type].push_back(handler);
         return;
     }
 
     (*seh).second.push_back(handler);
 }
 
-void EventManager::unsubscribe(EventType type, EventHandler *handler)
+void EventManager::unsubscribe(EventType type, std::shared_ptr<EventHandler> handler)
 {
     auto seh = _handlers.find(type);
 
@@ -58,7 +57,12 @@ void EventManager::unsubscribe(EventType type, EventHandler *handler)
 
 void EventManager::dispatch()
 {
-    printf("Event manager starting to dipatch events : %i events to dispatch\n", _eventQueue.size());
+    printf("%i", _handlers.size());
+
+    if (_eventQueue.size() > 0)
+    {
+        printf("Event manager starting to dipatch events : %i events to dispatch\n", _eventQueue.size());
+    }
 
     for (int i = 0; i < _eventQueue.size(); i++)
     {
