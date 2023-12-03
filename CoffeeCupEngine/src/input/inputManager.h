@@ -15,16 +15,22 @@ class InputContext;
 class InputManager : public EventHandler
 {
 private:
+    static std::shared_ptr<InputManager> _instance;
     InputContextChain _contextChain; // Can be iterated and access with context name
     CommandFactory _commandFactory;  // Used to map strings to subclassed commands for input mapping
 
 public:
     InputManager() = default;
 
+    InputManager(const InputManager &instance) = delete;
+
     static std::shared_ptr<InputManager> instance()
     {
-        static std::shared_ptr<InputManager> instance = std::make_shared<InputManager>();
-        return instance;
+        if (_instance == nullptr)
+        {
+            _instance = std::make_shared<InputManager>();
+        }
+        return _instance;
     }
 
     void init(const std::string inputMappingFile);

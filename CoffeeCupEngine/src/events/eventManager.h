@@ -18,6 +18,10 @@ private:
     std::unordered_map<EventType, SingleEventHandlers> _handlers;
 
 public:
+    EventManager() = default;
+
+    EventManager(const EventManager &instance) = delete;
+
     static std::shared_ptr<EventManager> instance()
     {
         if (_instance == nullptr)

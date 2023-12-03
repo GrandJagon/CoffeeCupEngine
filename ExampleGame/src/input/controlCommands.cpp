@@ -2,7 +2,7 @@
 
 void UpCommand::execute(void *object)
 {
-    std::cout << "Up" << std::endl;
+    printf("ControlCommandUp called");
 };
 
 void UpCommand::check(Event inputEvent){
@@ -11,7 +11,7 @@ void UpCommand::check(Event inputEvent){
 
 void DownCommand::execute(void *object)
 {
-    std::cout << "Down" << std::endl;
+    printf("ControlCommandDown called");
 }
 
 void DownCommand::check(Event inputEvent){
@@ -20,7 +20,7 @@ void DownCommand::check(Event inputEvent){
 
 void RightCommand::execute(void *object)
 {
-    std::cout << "Right" << std::endl;
+    printf("ControlCommandRight called");
 }
 
 void RightCommand::check(Event inputEvent){
@@ -29,7 +29,7 @@ void RightCommand::check(Event inputEvent){
 
 void LeftCommand::execute(void *object)
 {
-    std::cout << "Left" << std::endl;
+    printf("ControlCommandLeft called");
 };
 
 void LeftCommand::check(Event inputEvent){
@@ -38,7 +38,7 @@ void LeftCommand::check(Event inputEvent){
 
 void JumpCommand::execute(void *object)
 {
-    std::cout << "Left" << std::endl;
+    printf("ControlCommandJump called");
 };
 
 void JumpCommand::check(Event inputEvent){

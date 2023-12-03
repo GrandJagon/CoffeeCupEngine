@@ -5,7 +5,6 @@
 void EventManager::queue(std::shared_ptr<Event> event)
 {
     _eventQueue.push(event);
-    printf("EventManager.queue() -> Event pushed to the queue, queue size now : %lli\n", _eventQueue.size());
 }
 
 std::size_t EventManager::getQueueSize()
@@ -64,7 +63,6 @@ void EventManager::dispatch()
 {
     while (!_eventQueue.empty())
     {
-        printf("Dispatching one event from queue\n");
         std::shared_ptr<Event> event = _eventQueue.front();
         process(event);
         _eventQueue.pop();

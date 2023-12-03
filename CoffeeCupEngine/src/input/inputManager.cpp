@@ -3,6 +3,8 @@
 
 #include "utils/iniParser.h"
 
+std::shared_ptr<InputManager> InputManager::_instance = nullptr;
+
 void InputManager::init(const std::string inputMappingFile)
 {
     loadInputMapping(inputMappingFile);
@@ -32,5 +34,5 @@ const void InputManager::loadInputMapping(const std::string filePath)
 
 void InputManager::onEvent(const std::shared_ptr<Event> event)
 {
-    printf("Event dispatched to inputManager.");
+    printf("Event dispatched to inputManager. Type -> %i\n", event->getType());
 }
