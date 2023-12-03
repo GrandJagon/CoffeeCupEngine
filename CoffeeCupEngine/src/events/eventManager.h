@@ -13,13 +13,17 @@ typedef std::vector<std::shared_ptr<EventHandler>> SingleEventHandlers;
 class EventManager
 {
 private:
+    static std::shared_ptr<EventManager> _instance;
     std::queue<std::shared_ptr<Event>> _eventQueue;
     std::unordered_map<EventType, SingleEventHandlers> _handlers;
 
 public:
     static std::shared_ptr<EventManager> instance()
     {
-        static std::shared_ptr<EventManager> _instance = std::make_shared<EventManager>();
+        if (_instance == nullptr)
+        {
+            _instance = std::make_shared<EventManager>();
+        }
         return _instance;
     }
 
@@ -35,4 +39,6 @@ public:
 
     // Dispatches all events from the queue
     void dispatch();
+
+    std::size_t getQueueSize();
 };

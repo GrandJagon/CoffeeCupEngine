@@ -41,7 +41,7 @@ void ExampleGame::run()
     {
 
         _inputHandler->instance()->pollInputs();
-        _eventManager->instance()->dispatch();
+        EventManager::instance()->dispatch();
 
         Renderer::instance()->setMVP(_camera->getVPM());
 
@@ -60,6 +60,7 @@ void ExampleGame::run()
         Renderer::instance()->endFrame();
         _window->endFrame();
     };
+
     printf("quitting game loop");
     _window->destroy();
     SDL_Quit();

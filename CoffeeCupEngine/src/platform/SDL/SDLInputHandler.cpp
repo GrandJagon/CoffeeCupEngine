@@ -11,11 +11,14 @@
 #include <chrono>
 #include <memory>
 
+std::shared_ptr<EventManager> EventManager::_instance = nullptr;
+
 void SDLInputHandler::pollInputs()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event) > 0)
     {
+        printf("Polling single input");
         switch (event.type)
         {
         case SDL_KEYDOWN:
