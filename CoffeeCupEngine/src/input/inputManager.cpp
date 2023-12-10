@@ -18,7 +18,10 @@ const void InputManager::loadInputMapping(const std::string filePath)
     for (unsigned int i = 0; i < iniFile.sections.size(); i++)
     {
         auto newContext = std::make_shared<InputContext>();
+        printf("INI section name is %s\n", iniFile.sections[i].title.c_str());
         newContext->setName(iniFile.sections[i].title);
+
+        printf("New inputContext created with name : %s\n", newContext->getName().c_str());
 
         for (unsigned int j = 0; j < iniFile.sections[i].entries.size(); j++)
         {
@@ -34,5 +37,11 @@ const void InputManager::loadInputMapping(const std::string filePath)
 
 void InputManager::onEvent(const std::shared_ptr<Event> event)
 {
-    printf("Event dispatched to inputManager. Type -> %i\n", event->getType());
+    _contextChain.processInput(event);
+}
+
+void InputManager::setContextStatus(std::string contextName, bool status)
+{
+    std::shared_ptr<InputContext> context = _contextChain.getContext(contextName);
+    context->setStatus(status);
 }

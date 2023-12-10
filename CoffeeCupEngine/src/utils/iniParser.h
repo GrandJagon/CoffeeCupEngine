@@ -41,6 +41,7 @@ namespace INIParser
 
         while (std::getline(fileStream, line))
         {
+            printf("INI line : %s\n", line.c_str());
             if (line[0] == '#' || line.empty()) // comment
             {
                 continue;
@@ -52,7 +53,8 @@ namespace INIParser
 
                 section.title = line.substr(1, (line.length() - 2));
                 file.sections.push_back(section);
-                ;
+
+                printf("INI file section title : %s\n", section.title.c_str());
 
                 continue;
             };

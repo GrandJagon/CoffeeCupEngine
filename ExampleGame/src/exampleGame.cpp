@@ -37,6 +37,8 @@ void ExampleGame::run()
 
     Renderer::instance()->setMVP(_camera->getVPM());
 
+    InputManager::instance()->setContextStatus("GameContext", true); // For testing purpose
+
     while (running)
     {
 

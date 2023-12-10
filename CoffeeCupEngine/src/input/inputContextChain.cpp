@@ -13,12 +13,15 @@ std::shared_ptr<InputContext> InputContextChain::getContext(std::string contextN
 
 void InputContextChain::processInput(std::shared_ptr<Event> event)
 {
+    printf("InputContextChain starting to process event of type %d\n", event->getType());
+
     InputContext *context = dynamic_cast<InputContext *>(head);
 
     while (context != nullptr)
     {
         if (context->isActive())
         {
+            printf("Sending event for processing to context %s as it is found active", context->getName().c_str());
             context->processInput(event);
 
             if (context->isBlocking())
