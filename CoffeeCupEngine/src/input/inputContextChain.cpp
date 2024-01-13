@@ -4,6 +4,7 @@
 void InputContextChain::addContext(std::shared_ptr<InputContext> context, std::string name)
 {
     _contextMap.insert({name, context});
+    add(context); // Adding the context to the LinkedList in order for it to be accssed during traversal
 }
 
 std::shared_ptr<InputContext> InputContextChain::getContext(std::string contextName)
@@ -13,15 +14,14 @@ std::shared_ptr<InputContext> InputContextChain::getContext(std::string contextN
 
 void InputContextChain::processInput(std::shared_ptr<Event> event)
 {
-    printf("InputContextChain starting to process event of type %d\n", event->getType());
+    printf("InputContextChain.processInput(): event of type %d\n", event->getType());
 
-    InputContext *context = dynamic_cast<InputContext *>(head);
+    std::shared_ptr<InputContext> context = std::static_pointer_cast<InputContext>(head);
 
     while (context != nullptr)
     {
         if (context->isActive())
         {
-            printf("Sending event for processing to context %s as it is found active", context->getName().c_str());
             context->processInput(event);
 
             if (context->isBlocking())
@@ -29,6 +29,6 @@ void InputContextChain::processInput(std::shared_ptr<Event> event)
                 return;
             }
         }
-        context = dynamic_cast<InputContext *>(context->next);
+        context = std::static_pointer_cast<InputContext>(context->next);
     }
 };

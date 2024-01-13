@@ -3,7 +3,7 @@
 class Node
 {
 public:
-    Node *next = nullptr;
+    std::shared_ptr<Node> next = nullptr;
     virtual ~Node() = default;
 };
 
@@ -12,29 +12,31 @@ class LinkedList
 public:
     virtual ~LinkedList() = default;
 
-    Node *head = nullptr;
+    std::shared_ptr<Node> head = nullptr;
 
-    void add(Node *newNode)
+    void add(std::shared_ptr<Node> newNode)
     {
         if (head == nullptr)
         {
+            printf("LinkedList.add() : Adding new node as head");
             head = newNode;
             return;
         };
 
+        printf("LinkedList.add() : Adding new node");
         newNode->next = head;
         head = newNode;
     };
 
-    void insertAfterNode(Node *node, Node *newNode)
+    void insertAfterNode(std::shared_ptr<Node> node, std::shared_ptr<Node> newNode)
     {
         newNode->next = node->next;
         node->next = newNode;
     };
 
-    void remove(Node *node)
+    void remove(std::shared_ptr<Node> node)
     {
-        Node *i = node->next;
+        std::shared_ptr<Node> i = node->next;
 
         while (i != nullptr)
         {
